@@ -12,10 +12,9 @@ class TCGCard extends Model
 
     /**
      * $this->atributes['id'] - int - Product primary key
-     * $this->atributes['name'] - string - Product name
+    * $this->atributes['name'] - string - Product name
      * $this->atributes['description'] - string - Product description
      * $this->atributes['franchise'] - string('Pokemon', 'Yu-Gi-Oh!', 'Magic: The Gathering') - Product franchise
-     * $this->atributes['collection'] - string - Product collection
      * $this->atributes['price'] - int - Product price
      * $this->atributes['PSAgrade'] - string - Product PSAgrade
      * $this->atributes['image'] - string - Card image
@@ -29,7 +28,6 @@ class TCGCard extends Model
         'name',
         'description',
         'franchise',
-        'collection',
         'price',
         'PSAgrade',
         'image',
@@ -73,16 +71,6 @@ class TCGCard extends Model
     public function setFranchise(string $franchise): void
     {
         $this->attributes['franchise'] = $franchise;
-    }
-
-    public function getCollection(): string
-    {
-        return $this->attributes['collection'];
-    }
-
-    public function setCollection(string $collection): void
-    {
-        $this->attributes['collection'] = $collection;
     }
 
     public function getPrice(): int
