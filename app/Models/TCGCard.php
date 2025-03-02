@@ -1,9 +1,12 @@
 <?php
 
+// AUTHOR: Manuel Villegas Michel
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Date;
 
 class TCGCard extends Model
@@ -12,7 +15,7 @@ class TCGCard extends Model
 
     /**
      * $this->atributes['id'] - int - Product primary key
-    * $this->atributes['name'] - string - Product name
+     * $this->atributes['name'] - string - Product name
      * $this->atributes['description'] - string - Product description
      * $this->atributes['franchise'] - string('Pokemon', 'Yu-Gi-Oh!', 'Magic: The Gathering') - Product franchise
      * $this->atributes['price'] - int - Product price
@@ -23,6 +26,7 @@ class TCGCard extends Model
      * $this->atributes['pullRate'] - float - Product pullRate
      * $this->atributes['language'] - string - Product language
      * $this->atributes['stock'] - int - Product stock
+     * $this->atributes['tcgPacks'] - array - Product tcgPacks
      */
     protected $fillable = [
         'name',
@@ -37,6 +41,11 @@ class TCGCard extends Model
         'language',
         'stock',
     ];
+
+    public function tcgPacks(): BelongsToMany
+    {
+        return $this->belongsToMany(TCGPack::class);
+    }
 
     public function getId(): int
     {
@@ -151,5 +160,15 @@ class TCGCard extends Model
     public function setStock(int $stock): void
     {
         $this->attributes['stock'] = $stock;
+    }
+
+    public function getTcgPacks(): array
+    {
+        return $this->attributes['tcgPacks'];
+    }
+
+    public function setTcgPacks(array $tcgPacks): void
+    {
+        $this->attributes['tcgPacks'] = $tcgPacks;
     }
 }

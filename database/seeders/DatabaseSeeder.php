@@ -13,11 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        TCGCard::factory()
+        $cards = TCGCard::factory()
             ->count(50)
             ->create();
-        TCGPack::factory()
+        $packs = TCGPack::factory()
             ->count(5)
             ->create();
+
+        foreach ($cards as $card) {
+            $card->tcgPacks()->attach($packs->random(3)->pluck('id'));
+        }
     }
 }
