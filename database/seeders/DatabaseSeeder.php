@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
 use App\Models\TCGCard;
 use App\Models\TCGPack;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $packs = TCGPack::factory()
             ->count(5)
             ->create();
+
+        Order::factory(10)->create();
 
         foreach ($cards as $card) {
             $card->tcgPacks()->attach($packs->random(3)->pluck('id'));
