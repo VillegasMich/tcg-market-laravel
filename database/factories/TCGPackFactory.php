@@ -1,5 +1,7 @@
 <?php
 
+// AUTHOR: Manuel Villegas Michel
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
