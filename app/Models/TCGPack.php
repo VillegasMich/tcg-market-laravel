@@ -13,10 +13,12 @@ class TCGPack extends Model
     use HasFactory;
 
     /**
-     * $this->atributes['id'] - int - Product primary key
-     * $this->atributes['name'] - string - Collection name
-     * $this->atributes['image'] - string - Collection image
-     * $this->atributes['tcgCards'] - array - Collection of cards
+     * $this->attributes['id'] - int - Product primary key
+     * $this->attributes['name'] - string - Collection name
+     * $this->attributes['image'] - string - Collection image
+     * $this->attributes['tcgCards'] - array - Collection of cards
+     * $this->attributes['created_at'] - timestamp - date of creation
+     * $this->attributes['updated_at'] - timestamp - date of last update
      */
     public function tcgCards(): BelongsToMany
     {
@@ -61,5 +63,15 @@ class TCGPack extends Model
     public function setTcgCards(array $tcgCards): void
     {
         $this->attributes['tcgCards'] = $tcgCards;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function getUpdatedAt(): string
+    {
+        return $this->attributes['updated_at'];
     }
 }

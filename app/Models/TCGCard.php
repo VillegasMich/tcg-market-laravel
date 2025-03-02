@@ -14,19 +14,21 @@ class TCGCard extends Model
     use HasFactory;
 
     /**
-     * $this->atributes['id'] - int - Product primary key
-     * $this->atributes['name'] - string - Product name
-     * $this->atributes['description'] - string - Product description
-     * $this->atributes['franchise'] - string('Pokemon', 'Yu-Gi-Oh!', 'Magic: The Gathering') - Product franchise
-     * $this->atributes['price'] - int - Product price
-     * $this->atributes['PSAgrade'] - string - Product PSAgrade
-     * $this->atributes['image'] - string - Card image
-     * $this->atributes['launchDate'] - date - Product launchDate
-     * $this->atributes['rarity'] - string - Product rarity
-     * $this->atributes['pullRate'] - float - Product pullRate
-     * $this->atributes['language'] - string - Product language
-     * $this->atributes['stock'] - int - Product stock
-     * $this->atributes['tcgPacks'] - array - Product tcgPacks
+     * $this->attributes['id'] - int - Product primary key
+     * $this->attributes['name'] - string - Product name
+     * $this->attributes['description'] - string - Product description
+     * $this->attributes['franchise'] - string('Pokemon', 'Yu-Gi-Oh!', 'Magic: The Gathering') - Product franchise
+     * $this->attributes['price'] - int - Product price
+     * $this->attributes['PSAgrade'] - string - Product PSAgrade
+     * $this->attributes['image'] - string - Card image
+     * $this->attributes['launchDate'] - date - Product launchDate
+     * $this->attributes['rarity'] - string - Product rarity
+     * $this->attributes['pullRate'] - float - Product pullRate
+     * $this->attributes['language'] - string - Product language
+     * $this->attributes['stock'] - int - Product stock
+     * $this->attributes['tcgPacks'] - array - Product tcgPacks
+     * $this->attributes['created_at'] - timestamp - date of creation
+     * $this->attributes['updated_at'] - timestamp - date of last update
      */
     protected $fillable = [
         'name',
@@ -170,5 +172,15 @@ class TCGCard extends Model
     public function setTcgPacks(array $tcgPacks): void
     {
         $this->attributes['tcgPacks'] = $tcgPacks;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function getUpdatedAt(): string
+    {
+        return $this->attributes['updated_at'];
     }
 }
