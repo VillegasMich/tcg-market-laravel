@@ -13,7 +13,6 @@ class WishList extends Model
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
      */
-
     public function getId(): int
     {
         return $this->attributes['id'];
