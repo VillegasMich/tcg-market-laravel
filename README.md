@@ -46,7 +46,6 @@ Make sure you have the following installed on your system:
 
    ```bash
    composer install
-   npm install  # If using Laravel Mix
    ```
 
 5. **Generate application key**
