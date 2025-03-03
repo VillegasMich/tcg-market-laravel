@@ -20,6 +20,8 @@ class TCGCardController extends Controller
         $viewData['subtitle'] = 'List of cards';
         $viewData['tcgCards'] = TCGCard::all();
 
+        echo json_encode($viewData['tcgCards']);
+
         return view('tcgCards.index')->with('viewData', $viewData);
     }
 
@@ -33,6 +35,8 @@ class TCGCardController extends Controller
         $viewData['title'] = $tcgCard['name'].' - Market';
         $viewData['subtitle'] = $tcgCard['name'].' - Card information';
         $viewData['tcgCard'] = $tcgCard;
+
+        echo json_encode($viewData['tcgCard']);
 
         return view('tcgCards.show')->with('viewData', $viewData);
     }

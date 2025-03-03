@@ -20,6 +20,8 @@ class TCGPackController extends Controller
         $viewData['subtitle'] = 'List of packs';
         $viewData['tcgPacks'] = TCGPack::all();
 
+        echo json_encode($viewData['tcgPacks']);
+
         return view('tcgPacks.index')->with('viewData', $viewData);
     }
 
@@ -32,7 +34,9 @@ class TCGPackController extends Controller
         $tcgPack = TCGPack::findOrFail($id);
         $viewData['title'] = $tcgPack['name'].' - Market';
         $viewData['subtitle'] = $tcgPack['name'].' - Pack information';
-        $viewData['tcgCard'] = $tcgPack;
+        $viewData['tcgPack'] = $tcgPack;
+
+        echo json_encode($viewData['tcgPack']);
 
         return view('tcgCards.show')->with('viewData', $viewData);
     }
