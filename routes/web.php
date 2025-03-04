@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 /**
+ * Home routes
+ */
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
+
+/**
  * TCGCards routes
  */
 Route::get('/tcgcards', 'App\Http\Controllers\TCGCardController@index')->name('tcgCards.index');
@@ -27,6 +32,7 @@ Route::delete('/tcgpacks/{id}', 'App\Http\Controllers\TCGPackController@delete')
 /**
  * Order routes
  */
+Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('order.index');
 Route::get('/orders/create', 'App\Http\Controllers\OrderController@create')->name('order.create');
 Route::get('/orders/update/{id}', 'App\Http\Controllers\OrderController@update')->name('order.update');
 Route::get('/orders/{id}', 'App\Http\Controllers\OrderController@show')->name('order.show');
