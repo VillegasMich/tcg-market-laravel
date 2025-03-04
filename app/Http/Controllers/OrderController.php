@@ -1,4 +1,5 @@
 <?php
+// Author: Miguel Vasquez Bojanini.
 
 namespace App\Http\Controllers;
 
@@ -10,6 +11,21 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /**
+     * Render index view.
+     */
+    public function index(): View
+    {
+        $orders = Order::all();
+
+        $viewData = [
+            'title' => 'Orders',
+            'orders' => $orders,
+        ];
+
+        return view('order.index')->with('viewData', $viewData);
+    }
+
     /**
      * Render create view.
      */
