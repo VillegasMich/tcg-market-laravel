@@ -74,7 +74,7 @@ class OrderController extends Controller
 
         $viewData = [
             'order' => $order,
-            'title' => 'Order',
+            'title' => 'Update order',
         ];
 
         return view('order.update')->with('viewData', $viewData);

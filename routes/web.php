@@ -30,7 +30,7 @@ Route::delete('/tcgpacks/{id}', 'App\Http\Controllers\TCGPackController@delete')
  */
 
 Route::get('/orders/create', 'App\Http\Controllers\OrderController@create')->name('order.create');
-Route::get('/orders/update', 'App\Http\Controllers\OrderController@update')->name('order.update');
+Route::get('/orders/update/{id}', 'App\Http\Controllers\OrderController@update')->name('order.update');
 Route::get('/orders/{id}', 'App\Http\Controllers\OrderController@show')->name('order.show');
 Route::post('/orders/create', 'App\Http\Controllers\OrderController@saveCreate')->name('order.save-create');
 Route::put('/orders/{id}', 'App\Http\Controllers\OrderController@saveUpdate')->name('order.save-update');
