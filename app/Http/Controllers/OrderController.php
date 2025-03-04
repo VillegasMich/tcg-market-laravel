@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\User;
 use App\Validators\OrderValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +10,6 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-
     /**
      * Render create view.
      */
@@ -64,7 +62,7 @@ class OrderController extends Controller
 
         return redirect()->route('user.index');
     }
-    
+
     /**
      * Render Update view.
      */
@@ -83,12 +81,12 @@ class OrderController extends Controller
     /**
      * Update a specific Order.
      */
-    public function saveUpdate(Request $request, int $id): View 
+    public function saveUpdate(Request $request, int $id): View
     {
         $request->validate(OrderValidator::$rules);
         $order = Order::findOrFail($id);
         $order->update($request->only(['total', 'status', 'paymentMethod']));
-        
+
         $viewData = [
             'title' => 'Successful update',
         ];
