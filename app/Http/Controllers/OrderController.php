@@ -62,7 +62,7 @@ class OrderController extends Controller
     {
         Order::destroy($id);
 
-        return redirect()->route('order.list');
+        return redirect()->route('user.index');
     }
     
     /**
