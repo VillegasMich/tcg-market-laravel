@@ -4,6 +4,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -164,14 +165,14 @@ class TCGCard extends Model
         $this->attributes['stock'] = $stock;
     }
 
-    public function getTcgPacks(): array
+    public function getTcgPacks(): Collection
     {
-        return $this->attributes['tcgPacks'];
+        return $this->tcgPacks;
     }
 
     public function setTcgPacks(array $tcgPacks): void
     {
-        $this->attributes['tcgPacks'] = $tcgPacks;
+        $this->tcgPacks()->sync($tcgPacks);
     }
 
     public function getCreatedAt(): string

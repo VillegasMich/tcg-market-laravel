@@ -15,14 +15,14 @@ class TCGPackController extends Controller
      */
     public function index(): View
     {
-        $viewData = [];
-        $viewData['title'] = 'TCGCards - Market';
-        $viewData['subtitle'] = 'List of packs';
-        $viewData['tcgPacks'] = TCGPack::all();
+        $tcgPacks = TCGPack::all();
+        $viewData = [
+            'title' => 'TCGPacks - Market',
+            'subtitle' => 'List of packs',
+            'tcgPacks' => $tcgPacks,
+        ];
 
-        echo json_encode($viewData['tcgPacks']);
-
-        return view('tcgPacks.index')->with('viewData', $viewData);
+        return view('tcgPack.index')->with('viewData', $viewData);
     }
 
     /**
@@ -30,15 +30,14 @@ class TCGPackController extends Controller
      */
     public function show(string $id): View|RedirectResponse
     {
-        $viewData = [];
         $tcgPack = TCGPack::findOrFail($id);
-        $viewData['title'] = $tcgPack['name'].' - Market';
-        $viewData['subtitle'] = $tcgPack['name'].' - Pack information';
-        $viewData['tcgPack'] = $tcgPack;
+        $viewData = [
+            'title' => $tcgPack['name'].' - Market',
+            'subtitle' => $tcgPack['name'].' - Pack information',
+            'tcgPack' => $tcgPack,
+        ];
 
-        echo json_encode($viewData['tcgPack']);
-
-        return view('tcgCards.show')->with('viewData', $viewData);
+        return view('tcgPack.show')->with('viewData', $viewData);
     }
 
     /**
@@ -48,7 +47,7 @@ class TCGPackController extends Controller
     {
         $tcgPack = TCGPack::destroy($id);
 
-        return redirect()->route('tcgCards.index');
+        return redirect()->route('tcgPack.index');
     }
 
     /**
@@ -59,7 +58,7 @@ class TCGPackController extends Controller
         $viewData = [];
         $viewData['title'] = 'Create a new pack';
 
-        return view('tcgPacks.create')->with('viewData', $viewData);
+        return view('tcgPack.create')->with('viewData', $viewData);
     }
 
     /**
@@ -67,9 +66,11 @@ class TCGPackController extends Controller
      */
     public function update(string $id): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Update a pack';
-        $viewData['tcgPack'] = TCGPack::findOrFail($id);
+        $tcgPack = TCGPack::findOrFail($id);
+        $viewData = [
+            'title' => 'Update a pack',
+            'tcgPack' => $tcgPack,
+        ];
 
         return view('tcgPack.update')->with('viewData', $viewData);
     }
@@ -79,13 +80,13 @@ class TCGPackController extends Controller
      */
     public function saveCreate(Request $request): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Successful Creation';
-
+        $viewData = [
+            'title' => 'Successful Creation',
+        ];
         $request->validate(TCGPackValidator::$rules);
         TCGPack::create($request->only(['name', 'image']));
 
-        return view('tcgPacks.success')->with('viewData', $viewData);
+        return view('tcgPack.success')->with('viewData', $viewData);
     }
 
     /**
@@ -93,8 +94,9 @@ class TCGPackController extends Controller
      */
     public function saveUpdate(Request $request, string $id): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Successful Update';
+        $viewData = [
+            'title' => 'Successful Update',
+        ];
         $request->validate(TCGPackValidator::$rules);
         $tcgCard = TCGPack::findOrFail($id);
         $tcgCard->update($request->only(['name', 'image']));

@@ -1,4 +1,5 @@
 <?php
+
 // Author: Miguel Vasquez Bojanini.
 
 namespace App\Models;

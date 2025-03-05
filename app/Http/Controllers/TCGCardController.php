@@ -15,14 +15,14 @@ class TCGCardController extends Controller
      */
     public function index(): View
     {
-        $viewData = [];
-        $viewData['title'] = 'TCGCards - Market';
-        $viewData['subtitle'] = 'List of cards';
-        $viewData['tcgCards'] = TCGCard::all();
+        $tcgCards = TCGCard::all();
+        $viewData = [
+            'title' => 'TCGCards - Market',
+            'subtitle' => 'List of cards',
+            'tcgCards' => $tcgCards,
+        ];
 
-        echo json_encode($viewData['tcgCards']);
-
-        return view('tcgCards.index')->with('viewData', $viewData);
+        return view('tcgCard.index')->with('viewData', $viewData);
     }
 
     /**
@@ -30,15 +30,12 @@ class TCGCardController extends Controller
      */
     public function show(string $id): View|RedirectResponse
     {
-        $viewData = [];
-        $tcgCard = TCGCard::findOrFail($id);
-        $viewData['title'] = $tcgCard['name'].' - Market';
-        $viewData['subtitle'] = $tcgCard['name'].' - Card information';
-        $viewData['tcgCard'] = $tcgCard;
+        $tcgCard = TCGCard::with('tcgPacks')->findOrFail($id);
+        $viewData = [
+            'tcgCard' => $tcgCard,
+        ];
 
-        echo json_encode($viewData['tcgCard']);
-
-        return view('tcgCards.show')->with('viewData', $viewData);
+        return view('tcgCard.show')->with('viewData', $viewData);
     }
 
     /**
@@ -48,7 +45,7 @@ class TCGCardController extends Controller
     {
         $tcgCard = TCGCard::destroy($id);
 
-        return redirect()->route('tcgCards.index');
+        return redirect()->route('tcgCard.index');
     }
 
     /**
@@ -56,10 +53,11 @@ class TCGCardController extends Controller
      */
     public function create(): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Create a new card';
+        $viewData = [
+            'title' => 'Create a new card',
+        ];
 
-        return view('tcgCards.create')->with('viewData', $viewData);
+        return view('tcgCard.create')->with('viewData', $viewData);
     }
 
     /**
@@ -67,11 +65,13 @@ class TCGCardController extends Controller
      */
     public function update(string $id): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Update a card';
-        $viewData['tcgCard'] = TCGCard::findOrFail($id);
+        $tcgCard = TCGCard::findOrFail($id);
+        $viewData = [
+            'title' => 'Update a card',
+            'tcgCard' => $tcgCard,
+        ];
 
-        return view('tcgCards.update')->with('viewData', $viewData);
+        return view('tcgCard.update')->with('viewData', $viewData);
     }
 
     /**
@@ -79,13 +79,13 @@ class TCGCardController extends Controller
      */
     public function saveCreate(Request $request): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Successful Creation';
-
+        $viewData = [
+            'title' => 'Successful Creation',
+        ];
         $request->validate(TCGCardValidator::$rules);
         TCGCard::create($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'image', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
 
-        return view('tcgCards.success')->with('viewData', $viewData);
+        return view('tcgCard.success')->with('viewData', $viewData);
     }
 
     /**
@@ -93,12 +93,13 @@ class TCGCardController extends Controller
      */
     public function saveUpdate(Request $request, string $id): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Successful Update';
+        $viewData = [
+            'title' => 'Successful Update',
+        ];
         $request->validate(TCGCardValidator::$rules);
         $tcgCard = TCGCard::findOrFail($id);
         $tcgCard->update($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'image', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
 
-        return view('tcgCards.success')->with('viewData', $viewData);
+        return view('tcgCard.success')->with('viewData', $viewData);
     }
 }
