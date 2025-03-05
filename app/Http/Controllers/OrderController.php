@@ -1,4 +1,5 @@
 <?php
+
 // Author: Miguel Vasquez Bojanini.
 
 namespace App\Http\Controllers;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     /**
-     * Render index view.
+     * Get all orders.
      */
     public function index(): View
     {
@@ -27,7 +28,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Render create view.
+     * Create view.
      */
     public function create(): View
     {
@@ -39,7 +40,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Create a Order.
+     * Create an Order.
      */
     public function saveCreate(Request $request): View
     {
@@ -80,7 +81,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Render Update view.
+     * Update view.
      */
     public function update(int $id): View
     {

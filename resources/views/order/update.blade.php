@@ -1,3 +1,4 @@
+{{-- Author: Miguel Vasquez Bojanini. --}}
 @extends('layout.app')
 @section('title', $viewData['title'])
 
