@@ -1,5 +1,7 @@
 <?php
 
+// Author: Miguel Vasquez Bojanini.
+
 namespace Database\Factories;
 
 use App\Models\User;

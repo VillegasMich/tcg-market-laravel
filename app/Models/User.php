@@ -1,5 +1,7 @@
 <?php
 
+// Modified by Miguel Vasquez Bojanini
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -34,6 +36,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     *  Orders from a user.
+     */
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
