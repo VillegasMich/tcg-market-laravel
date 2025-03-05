@@ -42,4 +42,3 @@ Route::put('/orders/{id}', 'App\Http\Controllers\OrderController@saveUpdate')->n
 Route::delete('/orders/{id}', 'App\Http\Controllers\OrderController@delete')->name('order.delete');
 
 Auth::routes();
-
