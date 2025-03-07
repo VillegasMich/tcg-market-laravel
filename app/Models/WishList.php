@@ -21,7 +21,6 @@ class WishList extends Model
      * this->TCGCards - TCGCard[] - associated cards
      * this->user - User - associated user
      */
-
     public function TCGCards(): HasMany
     {
         return $this->hasMany(TCGCard::class);
@@ -41,8 +40,6 @@ class WishList extends Model
     {
         return $this->attributes['name'];
     }
-
-
 
     public function getCreatedAt(): string
     {
@@ -83,6 +80,4 @@ class WishList extends Model
     {
         $this->TCGCards->add($TCGCard);
     }
-
-
 }

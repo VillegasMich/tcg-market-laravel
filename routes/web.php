@@ -60,4 +60,3 @@ Route::delete('/wishLists/{id}', 'App\Http\Controllers\WishListsController@delet
 Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListsController@show')->name('wishList.show');
 
 Auth::routes();
-
