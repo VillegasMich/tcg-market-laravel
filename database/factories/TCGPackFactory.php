@@ -11,7 +11,7 @@ class TCGPackFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->randomElement(['Sword & Shield', 'Vivid Voltage', 'Mystery Island']),
+            'name' => $this->faker->randomElement(['Shrouded Fable']),
             'image' => 'pokemon_tcg_pack_default.png',
         ];
     }

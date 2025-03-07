@@ -19,15 +19,15 @@ class DatabaseSeeder extends Seeder
         $cards = TCGCard::factory()
             ->count(50)
             ->create();
-        $packs = TCGPack::factory()
-            ->count(5)
+        $pack = TCGPack::factory()
+            ->count(1)
             ->create();
 
         Order::factory(10)->create();
         Item::factory(20)->create();
         WishList::factory(10)->create();
         foreach ($cards as $card) {
-            $card->tcgPacks()->attach($packs->random(3)->pluck('id'));
+            $card->tcgPacks()->attach($pack->pluck('id'));
         }
     }
 }

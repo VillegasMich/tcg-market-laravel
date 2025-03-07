@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Packs</a>
+                    <a class="nav-link" href="{{ route('tcgPack.index') }}">Packs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cards</a>
+                    <a class="nav-link" href="{{ route('tcgCard.index') }}">Cards</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('order.index') }}">Orders</a>
@@ -20,6 +20,28 @@
                     <a class="nav-link">Users</a>
                 </li>
             </ul>
+            <div class="d-flex navbar-nav mb-2 mb-lg-0 justify-content-end">
+                <!-- Authentication Links -->
+                @guest
+                    @if (Route::has('login'))
+                        <div class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </div>
+                    @endif
+
+                    @if (Route::has('register'))
+                        <div class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </div>
+                    @endif
+                @else
+                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                        <a role="button" class="nav-link active"
+                            onclick="document.getElementById('logout').submit();">Logout</a>
+                        @csrf
+                    </form>
+                @endguest
+            </div>
         </div>
     </div>
 </nav>
