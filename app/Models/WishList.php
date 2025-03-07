@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WishList extends Model
 {
@@ -12,7 +13,9 @@ class WishList extends Model
      * $this->attributes['name'] - string - contains the wishList name
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
+     * $this->user - User - The user that owns this wishlist
      */
+
     public function getId(): int
     {
         return $this->attributes['id'];
