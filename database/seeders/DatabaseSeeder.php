@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Item;
 use App\Models\Order;
 use App\Models\TCGCard;
 use App\Models\TCGPack;
+use App\Models\WishList;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +24,8 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Order::factory(10)->create();
-
+        Item::factory(20)->create();
+        WishList::factory(10)->create();
         foreach ($cards as $card) {
             $card->tcgPacks()->attach($packs->random(3)->pluck('id'));
         }
