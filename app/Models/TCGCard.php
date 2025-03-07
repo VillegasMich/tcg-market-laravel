@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Date;
 
 class TCGCard extends Model
@@ -27,9 +28,10 @@ class TCGCard extends Model
      * $this->attributes['pullRate'] - float - Product pullRate
      * $this->attributes['language'] - string - Product language
      * $this->attributes['stock'] - int - Product stock
-     * $this->attributes['tcgPacks'] - array - Product tcgPacks
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
+     * $this->tcgPacks - TCGPack[] - Product tcgPacks
+     * $this->attributes['wish_list_id'] - int - WishList primary key
      */
     protected $fillable = [
         'name',
@@ -48,6 +50,11 @@ class TCGCard extends Model
     public function tcgPacks(): BelongsToMany
     {
         return $this->belongsToMany(TCGPack::class);
+    }
+
+    public function wishLists(): BelongsTo
+    {
+        return $this->belongsTo(WishList::class, 'wish_list_id');
     }
 
     public function getId(): int
@@ -183,5 +190,10 @@ class TCGCard extends Model
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
+    }
+
+    public function getWishListId(): int
+    {
+        return $this->attributes['wish_list_id'];
     }
 }

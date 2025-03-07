@@ -41,4 +41,23 @@ Route::post('/orders/create', 'App\Http\Controllers\OrderController@saveCreate')
 Route::put('/orders/{id}', 'App\Http\Controllers\OrderController@saveUpdate')->name('order.save-update');
 Route::delete('/orders/{id}', 'App\Http\Controllers\OrderController@delete')->name('order.delete');
 
+/**
+ * Item routes
+ */
+Route::get('/items', 'App\Http\Controllers\ItemController@index')->name('item.index');
+Route::get('/items/create', 'App\Http\Controllers\ItemController@create')->name('item.create');
+Route::post('/items', 'App\Http\Controllers\ItemController@save')->name('item.save');
+Route::delete('/items/{id}', 'App\Http\Controllers\ItemController@delete')->name('item.delete');
+Route::get('/items/{id}', 'App\Http\Controllers\ItemController@show')->name('item.show');
+
+/**
+ * WishList routes
+ */
+Route::get('/wishLists', 'App\Http\Controllers\WishListsController@index')->name('wishList.index');
+Route::get('/wishLists/create', 'App\Http\Controllers\WishListsController@create')->name('wishList.create');
+Route::post('/wishLists', 'App\Http\Controllers\WishListsController@save')->name('wishList.save');
+Route::delete('/wishLists/{id}', 'App\Http\Controllers\WishListsController@delete')->name('wishList.delete');
+Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListsController@show')->name('wishList.show');
+
 Auth::routes();
+
