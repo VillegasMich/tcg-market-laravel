@@ -66,4 +66,25 @@ class Item extends Model
     {
         return $this->attributes['updated_at'];
     }
+
+    public function getTCGCard(): TCGCard
+    {
+        return $this->TCGCard;
+    }
+
+    public function getOrder(): Order
+    {
+        return $this->order;
+    }
+
+    public function setOrder(Order $order): void
+    {
+        $this->order = $order;
+    }
+
+    public function setTCGCard(TCGCard $TCGCard): void
+    {
+        $this->TCGCard = $TCGCard;
+    }
+
 }
