@@ -4,6 +4,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,8 +23,8 @@ class Order extends Model
      * $this->attributes['status'] - string - Represents the status of the order.
      * $this->attributes['createdAt'] - Date - Represents the date the database entry was created.
      * $this->attributes['updatedAt'] - Date - Represents the date the database entry was updated.
-     * $this->attributes['customer'] - Customer - The customer this order is related to.
-     * $this->attributes['items'] - Item[] - Items related to this Order.
+     * $this->attributes['user'] - User - The user this order is related to. //TODO:
+     * $this->attributes['items'] - Item[] - Items related to this Order. // TODO:
      */
     protected $fillable = [
         'total',
@@ -84,4 +85,27 @@ class Order extends Model
     {
         return $this->attributes['updated_at'];
     }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
+    }
+
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function setItems(Collection $items): void
+    {
+        $this->items = $items;
+    }
+
+
+
 }
