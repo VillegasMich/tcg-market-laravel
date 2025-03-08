@@ -21,7 +21,7 @@ class OrderFactory extends Factory
     {
         return [
             'total' => fake()->numberBetween($min = 1, $max = 10),
-            'status' => fake()->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'failed', 'hold']),
+            'status' => fake()->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'failed', 'on hold']),
             'paymentMethod' => fake()->randomElement(['cash', 'card']),
             'user_id' => User::factory(),
         ];

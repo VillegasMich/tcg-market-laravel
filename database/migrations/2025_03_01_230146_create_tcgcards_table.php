@@ -1,7 +1,7 @@
 <?php
 
 // AUTHOR: Manuel Villegas Michel
-
+use App\Models\WishList;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('language');
             $table->integer('stock');
             $table->timestamps();
-
+            $table->foreignIdFor(WishList::class);
         });
     }
 

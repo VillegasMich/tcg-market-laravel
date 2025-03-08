@@ -7,7 +7,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Date;
 
 class TCGCard extends Model
@@ -18,7 +20,7 @@ class TCGCard extends Model
      * $this->attributes['id'] - int - Product primary key
      * $this->attributes['name'] - string - Product name
      * $this->attributes['description'] - string - Product description
-     * $this->attributes['franchise'] - string('Pokemon', 'Yu-Gi-Oh!', 'Magic: The Gathering') - Product franchise
+     * $this->attributes['franchise'] - string - Product franchise
      * $this->attributes['price'] - int - Product price
      * $this->attributes['PSAgrade'] - string - Product PSAgrade
      * $this->attributes['image'] - string - Card image
@@ -27,9 +29,11 @@ class TCGCard extends Model
      * $this->attributes['pullRate'] - float - Product pullRate
      * $this->attributes['language'] - string - Product language
      * $this->attributes['stock'] - int - Product stock
-     * $this->attributes['tcgPacks'] - array - Product tcgPacks
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
+     * $this->attributes['tcgPacks'] - TCGPack[] - Product tcgPacks
+     * $this->attributes['wishList'] - WishList - WishList primary key
+     * $this->attributes['Items'] - Item[] - Items related to this TCGCard
      */
     protected $fillable = [
         'name',
@@ -48,6 +52,16 @@ class TCGCard extends Model
     public function tcgPacks(): BelongsToMany
     {
         return $this->belongsToMany(TCGPack::class);
+    }
+
+    public function wishList(): BelongsTo
+    {
+        return $this->belongsTo(WishList::class);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
     }
 
     public function getId(): int
@@ -170,7 +184,7 @@ class TCGCard extends Model
         return $this->tcgPacks;
     }
 
-    public function setTcgPacks(array $tcgPacks): void
+    public function setTcgPacks(Collection $tcgPacks): void
     {
         $this->tcgPacks()->sync($tcgPacks);
     }
@@ -183,5 +197,25 @@ class TCGCard extends Model
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
+    }
+
+    public function getWishList(): WishList
+    {
+        return $this->wishList();
+    }
+
+    public function setWishList(WishList $wishList): void
+    {
+        $this->wishList = $wishList;
+    }
+
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function setItems(Collection $items): void
+    {
+        $this->items = $items;
     }
 }

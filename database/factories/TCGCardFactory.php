@@ -4,6 +4,7 @@
 
 namespace Database\Factories;
 
+use App\Models\WishList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TCGCardFactory extends Factory
@@ -18,7 +19,8 @@ class TCGCardFactory extends Factory
             'PSAgrade' => $this->faker->randomElement(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
             'image' => 'pokemon_card_backside.png',
             'launchDate' => $this->faker->date(),
-            'rarity' => $this->faker->randomElement(['Amazing Rare',
+            'rarity' => $this->faker->randomElement([
+                'Amazing Rare',
                 'Common',
                 'LEGEND',
                 'Promo',
@@ -40,10 +42,12 @@ class TCGCardFactory extends Factory
                 'Rare Shiny',
                 'Rare Shiny GX',
                 'Rare Ultra',
-                'Uncommon']),
+                'Uncommon',
+            ]),
             'pullRate' => $this->faker->randomFloat(2, 0, 1),
             'language' => $this->faker->randomElement(['english', 'spanish', 'french', 'german']),
             'stock' => $this->faker->randomNumber(),
+            'wish_list_id' => WishList::factory(),
         ];
     }
 }

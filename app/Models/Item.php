@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
+    use HasFactory;
+
     /**
      * Item ATTRIBUTES
      * $this->attributes['id'] - int - contains the product primary key (id)
@@ -13,8 +17,20 @@ class Item extends Model
      * $this->attributes['subtotal'] - int - contains the item subtotal
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
+     * $this->TCGCard - TCGCard - associated TCGCard
+     * $this->order - Order -  associated Order
      */
     protected $fillable = ['quantity', 'subtotal'];
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function TCGCard(): BelongsTo
+    {
+        return $this->belongsTo(TCGCard::class);
+    }
 
     public function getId(): int
     {
@@ -49,5 +65,25 @@ class Item extends Model
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
+    }
+
+    public function getTCGCard(): TCGCard
+    {
+        return $this->TCGCard;
+    }
+
+    public function getOrder(): Order
+    {
+        return $this->order;
+    }
+
+    public function setOrder(Order $order): void
+    {
+        $this->order = $order;
+    }
+
+    public function setTCGCard(TCGCard $TCGCard): void
+    {
+        $this->TCGCard = $TCGCard;
     }
 }
