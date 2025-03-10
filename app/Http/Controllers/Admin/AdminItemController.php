@@ -13,8 +13,9 @@ class AdminItemController extends Controller
         $items = Item::paginate(10);
         $viewData = [
             'subtitle1' => 'Items',
-            'items' => $items
+            'items' => $items,
         ];
+
         return view('admin.item.index')->with('viewData', $viewData);
     }
 }

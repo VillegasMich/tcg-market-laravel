@@ -13,8 +13,9 @@ class AdminUserController extends Controller
         $users = User::paginate(10);
         $viewData = [
             'subtitle1' => 'Users',
-            'users' => $users
+            'users' => $users,
         ];
+
         return view('admin.user.index')->with('viewData', $viewData);
     }
 }

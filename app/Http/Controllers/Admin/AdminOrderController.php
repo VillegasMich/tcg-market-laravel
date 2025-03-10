@@ -13,8 +13,9 @@ class AdminOrderController extends Controller
         $orders = Order::paginate(10);
         $viewData = [
             'subtitle1' => 'Orders',
-            'orders' => $orders
+            'orders' => $orders,
         ];
+
         return view('admin.order.index')->with('viewData', $viewData);
     }
 }

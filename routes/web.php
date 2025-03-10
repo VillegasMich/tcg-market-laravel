@@ -12,23 +12,13 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index')
  * TCGCards routes
  */
 Route::get('/tcgcards', 'App\Http\Controllers\TCGCardController@index')->name('tcgCard.index');
-Route::get('/tcgcards/create', 'App\Http\Controllers\TCGCardController@create')->name('tcgCard.create');
-Route::get('/tcgcards/update', 'App\Http\Controllers\TCGCardController@update')->name('tcgCard.update');
-Route::post('/tcgcards/save-create', 'App\Http\Controllers\TCGCardController@saveCreate')->name('tcgCard.save-create');
-Route::post('/tcgcards/save-update', 'App\Http\Controllers\TCGCardController@saveUpdate')->name('tcgCard.save-update');
 Route::get('/tcgcards/{id}', 'App\Http\Controllers\TCGCardController@show')->name('tcgCard.show');
-Route::delete('/tcgcards/{id}', 'App\Http\Controllers\TCGCardController@delete')->name('tcgCard.delete');
 
 /**
  * TCGPacks routes
  */
 Route::get('/tcgpacks', 'App\Http\Controllers\TCGPackController@index')->name('tcgPack.index');
-Route::get('/tcgpacks/create', 'App\Http\Controllers\TCGPackController@create')->name('tcgPack.create');
-Route::get('/tcgpacks/update', 'App\Http\Controllers\TCGPackController@update')->name('tcgPack.update');
-Route::post('/tcgpacks/save-create', 'App\Http\Controllers\TCGPackController@saveCreate')->name('tcgPack.save-create');
-Route::post('/tcgpacks/save-update', 'App\Http\Controllers\TCGPackController@saveUpdate')->name('tcgPack.save-update');
 Route::get('/tcgpacks/{id}', 'App\Http\Controllers\TCGPackController@show')->name('tcgPack.show');
-Route::delete('/tcgpacks/{id}', 'App\Http\Controllers\TCGPackController@delete')->name('tcgPack.delete');
 
 /**
  * Order routes
@@ -63,12 +53,24 @@ Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListsController@show')->
  * Admin routes
  */
 Route::get('/admin', 'App\Http\Controllers\Admin\AdminHomeController@index')->name('admin.index');
+
 Route::get('/admin/tcgcards', 'App\Http\Controllers\Admin\AdminTCGCardController@index')->name('admin.tcgCard.index');
+Route::get('/admin/tcgcards/create', 'App\Http\Controllers\Admin\AdminTCGCardController@create')->name('admin.tcgCard.create');
+Route::get('/admin/tcgcards/update/{id}', 'App\Http\Controllers\Admin\AdminTCGCardController@update')->name('admin.tcgCard.update');
+Route::post('/admin/tcgcards/save-create', 'App\Http\Controllers\Admin\AdminTCGCardController@saveCreate')->name('admin.tcgCard.save-create');
+Route::put('/admin/tcgcards/save-update', 'App\Http\Controllers\Admin\AdminTCGCardController@saveUpdate')->name('admin.tcgCard.save-update');
+Route::delete('/admin/tcgcards/{id}', 'App\Http\Controllers\Admin\AdminTCGCardController@delete')->name('admin.tcgCard.delete');
+
 Route::get('/admin/tcgpacks', 'App\Http\Controllers\Admin\AdminTCGPackController@index')->name('admin.tcgPack.index');
+Route::get('/admin/tcgpacks/create', 'App\Http\Controllers\Admin\AdminTCGPackController@create')->name('admin.tcgPack.create');
+Route::get('/admin/tcgpacks/update/{id}', 'App\Http\Controllers\Admin\AdminTCGPackController@update')->name('admin.tcgPack.update');
+Route::post('/admin/tcgpacks/save-create', 'App\Http\Controllers\Admin\AdminTCGPackController@saveCreate')->name('admin.tcgPack.save-create');
+Route::put('/admin/tcgpacks/save-update', 'App\Http\Controllers\Admin\AdminTCGPackController@saveUpdate')->name('admin.tcgPack.save-update');
+Route::delete('/admin/tcgpacks/{id}', 'App\Http\Controllers\Admin\AdminTCGPackController@delete')->name('admin.tcgPack.delete');
+
 Route::get('/admin/items', 'App\Http\Controllers\Admin\AdminItemController@index')->name('admin.item.index');
 Route::get('/admin/orders', 'App\Http\Controllers\Admin\AdminOrderController@index')->name('admin.order.index');
 Route::get('/admin/wishLists', 'App\Http\Controllers\Admin\AdminWishListController@index')->name('admin.wishList.index');
 Route::get('/admin/users', 'App\Http\Controllers\Admin\AdminUserController@index')->name('admin.user.index');
-
 
 Auth::routes();

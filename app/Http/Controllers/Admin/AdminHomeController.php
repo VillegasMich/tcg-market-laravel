@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\TCGCard;
 use App\Http\Controllers\Controller;
+use App\Models\TCGCard;
 use Illuminate\Contracts\View\View;
 
 class AdminHomeController extends Controller
@@ -15,8 +15,9 @@ class AdminHomeController extends Controller
             'title' => 'ADMIN HOME PAGE',
             'subtitle1' => 'TCG Cards',
             'subtitle2' => 'TCG Packs',
-            'tcgCards' => $tcgCards
+            'tcgCards' => $tcgCards,
         ];
+
         return view('admin.index')->with('viewData', $viewData);
     }
 }
