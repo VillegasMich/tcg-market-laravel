@@ -63,6 +63,12 @@ Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListsController@show')->
  * Admin routes
  */
 Route::get('/admin', 'App\Http\Controllers\Admin\AdminHomeController@index')->name('admin.index');
+Route::get('/admin/tcgcards', 'App\Http\Controllers\Admin\AdminTCGCardController@index')->name('admin.tcgCard.index');
+Route::get('/admin/tcgpacks', 'App\Http\Controllers\Admin\AdminTCGPackController@index')->name('admin.tcgPack.index');
+Route::get('/admin/items', 'App\Http\Controllers\Admin\AdminItemController@index')->name('admin.item.index');
+Route::get('/admin/orders', 'App\Http\Controllers\Admin\AdminOrderController@index')->name('admin.order.index');
+Route::get('/admin/wishLists', 'App\Http\Controllers\Admin\AdminWishListController@index')->name('admin.wishList.index');
+Route::get('/admin/users', 'App\Http\Controllers\Admin\AdminUserController@index')->name('admin.user.index');
 
 
 Auth::routes();
