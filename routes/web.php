@@ -59,4 +59,10 @@ Route::post('/wishLists', 'App\Http\Controllers\WishListsController@save')->name
 Route::delete('/wishLists/{id}', 'App\Http\Controllers\WishListsController@delete')->name('wishList.delete');
 Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListsController@show')->name('wishList.show');
 
+/**
+ * Admin routes
+ */
+Route::get('/admin', 'App\Http\Controllers\Admin\AdminHomeController@index')->name('admin.index');
+
+
 Auth::routes();
