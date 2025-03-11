@@ -53,14 +53,18 @@ Make sure you have the following installed on your system:
    ```bash
    php artisan key:generate
    ```
-
-6. **Run migrations and seeders (if applicable)**
+6. **Create Storage link**
+    ```bash
+    php artisan storage:link
+    ```
+    
+7. **Run migrations and seeders (if applicable)**
 
    ```bash
    php artisan migrate --seed
    ```
 
-7. **Start the Laravel server**
+8. **Start the Laravel server**
 
    ```bash
    php artisan serve
