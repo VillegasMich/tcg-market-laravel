@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class WishList extends Model
 {
@@ -21,9 +21,9 @@ class WishList extends Model
      * this->TCGCards - TCGCard[] - associated cards
      * this->user - User - associated user
      */
-    public function TCGCards(): HasMany
+    public function TCGCards(): BelongsToMany
     {
-        return $this->hasMany(TCGCard::class);
+        return $this->belongsToMany(TCGCard::class);
     }
 
     public function user(): BelongsTo

@@ -12,10 +12,10 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('t_c_g_packs', function (Blueprint $table) {
+        Schema::create('t_c_g_card_wish_list', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('image')->default('pokemon_tcg_pack_default.png');
+            $table->integer('t_c_g_card_id')->unsigned(); // NOTE: Mandatory syntax
+            $table->integer('wish_list_id')->unsigned(); // NOTE: Mandatory syntax
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('t_c_g_packs');
+        Schema::dropIfExists('t_c_g_card_wish_list');
     }
 };

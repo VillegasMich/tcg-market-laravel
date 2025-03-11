@@ -7,7 +7,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Date;
@@ -41,7 +40,6 @@ class TCGCard extends Model
         'franchise',
         'price',
         'PSAgrade',
-        'image',
         'launchDate',
         'rarity',
         'pullRate',
@@ -54,9 +52,9 @@ class TCGCard extends Model
         return $this->belongsToMany(TCGPack::class);
     }
 
-    public function wishList(): BelongsTo
+    public function wishList(): BelongsToMany
     {
-        return $this->belongsTo(WishList::class);
+        return $this->belongsToMany(WishList::class);
     }
 
     public function items(): HasMany
