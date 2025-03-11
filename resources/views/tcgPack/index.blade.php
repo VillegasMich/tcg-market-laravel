@@ -15,12 +15,16 @@
         </p>
       </div>
       <div class="flex justify-center items-center w-full h-fit mt-5">
-        <form class="w-[70%] flex" action="">
+        <form class="w-[70%] flex" action="{{ route('tcgPack.index') }}" method="GET">
           <div class="w-8 flex justify-center items-center mr-1">
             <i class="fa-solid fa-magnifying-glass fa-lg text-gray-700"></i>
           </div>
           <input class="flex-grow border border-gray-300 text-gray-400 rounded-l-md p-1.5 pl-2" type="text"
+<<<<<<< HEAD
             name="tcgPack" placeholder="Prismatic evolutions" id="">
+=======
+            name="keyword" placeholder="Prismatic evolutions" id="">
+>>>>>>> aa1e420ff699d358969f904fc6e5cb191584b6f3
           <button
             class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors ease-out">
             <i class="fa-solid fa-arrow-right fa-lg"></i>
@@ -36,7 +40,11 @@
               <div class="w-full">
                 <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
                   <small class="text-sm text-gray-500">{{ $tcgPack->getFranchise() }}</small>
+<<<<<<< HEAD
                   <a class="flex justify-center w-full" href="{{ route('tcgPack.show', ['id' => $tcgPack->getId()]) }}">
+=======
+                  <a class="flex justify-center w-full" href="#">
+>>>>>>> aa1e420ff699d358969f904fc6e5cb191584b6f3
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     <p class="text-base text-gray-800 font-semibold">{{ $tcgPack->getName() }}</p>
                   </a>

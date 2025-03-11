@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TCGCard;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TCGCardController extends Controller
@@ -11,9 +12,13 @@ class TCGCardController extends Controller
     /**
      * Get all TCGCards
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $tcgCards = TCGCard::paginate(8);
+        if ($request->query('keyword')) {
+            $tcgCards = TCGCard::where('name', 'LIKE', '%' . $request->query('keyword') . '%')->paginate(16);
+        } else {
+            $tcgCards = TCGCard::paginate(16);
+        }
         $viewData = [
             'title' => 'TCGCards - Market',
             'subtitle' => 'List of cards',

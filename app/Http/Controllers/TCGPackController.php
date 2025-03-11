@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TCGPack;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TCGPackController extends Controller
@@ -11,9 +12,13 @@ class TCGPackController extends Controller
     /**
      * Get all TCGPacks
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $tcgPacks = TCGPack::paginate(8);
+        if ($request->query('keyword')) {
+            $tcgPacks = TCGPack::where('name', 'LIKE', '%' . $request->query('keyword') . '%')->paginate(16);
+        } else {
+            $tcgPacks = TCGPack::paginate(16);
+        }
         $viewData = [
             'title' => 'TCGPacks - Market',
             'subtitle' => 'List of packs',

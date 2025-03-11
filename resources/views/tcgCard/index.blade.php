@@ -14,14 +14,15 @@
         </p>
       </div>
       <div class="flex justify-center items-center w-full h-fit mt-5">
-        <form class="w-[70%] flex" action="">
+        <form class="w-[70%] flex" action="{{ route('tcgCard.index') }}" method="GET">
           <div class="w-8 flex justify-center items-center mr-1">
             <i class="fa-solid fa-magnifying-glass fa-lg text-gray-700"></i>
           </div>
           <input class="flex-grow border border-gray-300 text-gray-400 rounded-l-md p-1.5 pl-2" type="text"
-            name="tcgPack" placeholder="Charizard ex" id="">
+            name="keyword" placeholder="Charizard ex" id="">
           <button
-            class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors ease-out">
+            class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors ease-out"
+            type='submit'>
             <i class="fa-solid fa-arrow-right fa-lg"></i>
           </button>
         </form>
