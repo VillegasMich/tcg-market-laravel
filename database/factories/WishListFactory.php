@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WishListFactory extends Factory
@@ -11,7 +10,6 @@ class WishListFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'user_id' => User::factory(),
         ];
     }
 }

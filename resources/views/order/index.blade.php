@@ -2,7 +2,7 @@
 @extends('layout.app')
 @section('title', $viewData['title'])
 @section('content')
-  <section class="flex-grow flex justify-center w-full">
+  <section class="flex-grow flex justify-center w-full pt-6">
     <div class="flex w-3/5 flex-col">
       <div class="w-full h-fit p-5 mt-2">
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">

@@ -127,7 +127,7 @@ class TCGCard extends Model
         $this->attributes['image'] = $image;
     }
 
-    public function getLaunchDate(): Date
+    public function getLaunchDate(): string
     {
         return $this->attributes['launchDate'];
     }
