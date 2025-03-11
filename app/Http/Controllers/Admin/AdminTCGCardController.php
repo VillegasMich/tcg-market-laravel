@@ -8,6 +8,7 @@ use App\Validators\TCGCardValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminTCGCardController extends Controller
 {
@@ -70,7 +71,17 @@ class AdminTCGCardController extends Controller
             'subtitle1' => 'Successful Creation',
         ];
         $request->validate(TCGCardValidator::$rules);
-        TCGCard::create($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'image', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        $newTCGCard = TCGCard::create($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+
+        if ($request->hasFile('image')) {
+            $imageName = $newTCGCard->getId().".".$request->file('image')->extension();
+            Storage::disk('public')->put(
+                $imageName,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+            $newTCGCard->setImage($imageName);
+            $newTCGCard->save();
+        }
 
         return view('admin.tcgCard.success')->with('viewData', $viewData);
     }

@@ -40,7 +40,6 @@ class TCGCard extends Model
         'franchise',
         'price',
         'PSAgrade',
-        'image',
         'launchDate',
         'rarity',
         'pullRate',

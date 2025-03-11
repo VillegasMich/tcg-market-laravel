@@ -8,6 +8,7 @@ use App\Validators\TCGPackValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminTCGPackController extends Controller
 {
@@ -70,7 +71,17 @@ class AdminTCGPackController extends Controller
             'subtitle1' => 'Successful Creation',
         ];
         $request->validate(TCGPackValidator::$rules);
-        TCGPack::create($request->only(['name', 'image']));
+        $newTCGPack = TCGPack::create($request->only(['name', 'image']));
+
+        if ($request->hasFile('image')) {
+            $imageName = $newTCGPack->getId().".".$request->file('image')->extension();
+            Storage::disk('public')->put(
+                $imageName,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+            $newTCGPack->setImage($imageName);
+            $newTCGPack->save();
+        }
 
         return view('admin.tcgPack.success')->with('viewData', $viewData);
     }
