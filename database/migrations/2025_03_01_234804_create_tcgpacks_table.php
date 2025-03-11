@@ -16,6 +16,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->string('image')->default('pokemon_tcg_pack_default.png');
+            $table->string('franchise');
             $table->timestamps();
         });
     }

@@ -17,7 +17,8 @@ class TCGPack extends Model
      * $this->attributes['id'] - int - Product primary key
      * $this->attributes['name'] - string - Collection name
      * $this->attributes['image'] - string - Collection image
-     * $this->attributes['tcgCards'] - array - Collection of cards
+     * $this->attributes['franchise'] - string - Franchise of the pack
+     * $this->tcgCards - array - Collection of cards
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
      */
@@ -29,6 +30,7 @@ class TCGPack extends Model
     protected $fillable = [
         'name',
         'image',
+        'franchise'
     ];
 
     public function getId(): int
@@ -64,6 +66,16 @@ class TCGPack extends Model
     public function setTcgCards(Collection $tcgCards): void
     {
         $this->tcgCards()->sync($tcgCards);
+    }
+
+    public function getFranchise(): string
+    {
+        return $this->attributes['franchise'];
+    }
+
+    public function setFranchise(string $franchise): void
+    {
+        $this->attributes['franchise'] = $franchise;
     }
 
     public function getCreatedAt(): string

@@ -29,6 +29,7 @@ class TCGPackFactory extends Factory
                 'Scarlet & Violet',
             ]),
             'image' => 'pokemon_tcg_pack_default.png',
+            'franchise' => 'Pokemon',
         ];
     }
 }

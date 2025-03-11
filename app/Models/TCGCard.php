@@ -199,7 +199,7 @@ class TCGCard extends Model
 
     public function getWishList(): WishList
     {
-        return $this->wishList();
+        return $this->wishList;
     }
 
     public function setWishList(WishList $wishList): void
