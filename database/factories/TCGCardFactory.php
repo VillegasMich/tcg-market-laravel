@@ -4,7 +4,6 @@
 
 namespace Database\Factories;
 
-use App\Models\WishList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TCGCardFactory extends Factory
@@ -47,7 +46,6 @@ class TCGCardFactory extends Factory
             'pullRate' => $this->faker->randomFloat(2, 0, 1),
             'language' => $this->faker->randomElement(['english', 'spanish', 'french', 'german']),
             'stock' => $this->faker->randomNumber(),
-            'wish_list_id' => WishList::factory(),
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\TCGCard;
 use App\Models\TCGPack;
+use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Database\Seeder;
 
@@ -16,16 +17,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $cards = TCGCard::factory()
-            ->count(50)
-            ->create();
+        User::factory(3)->create();
+
         $pack = TCGPack::factory()
             ->count(1)
             ->create();
 
-        Order::factory(10)->create();
-        Item::factory(20)->create();
-        WishList::factory(10)->create();
+        $cards = TCGCard::all();
+
+        // Order::factory(10)->create();
+        // Item::factory(20)->create();
+        // WishList::factory(10)->create();
         foreach ($cards as $card) {
             $card->tcgPacks()->attach($pack->pluck('id'));
         }

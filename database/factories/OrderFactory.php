@@ -4,6 +4,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Item;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +25,18 @@ class OrderFactory extends Factory
             'total' => fake()->numberBetween($min = 1, $max = 10),
             'status' => fake()->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'failed', 'on hold']),
             'paymentMethod' => fake()->randomElement(['cash', 'card']),
-            'user_id' => User::factory(),
         ];
+    }
+
+    /**
+     * Configures the factory to execute the command after creating one User.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Order $order) {
+            Item::factory()->count(rand(1, 3))->create([
+                'order_id' => $order->getId(),
+            ]);
+        });
     }
 }
