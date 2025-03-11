@@ -35,7 +35,7 @@
               <div class="w-full">
                 <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
                   <small class="text-sm text-gray-500">{{ $tcgCard->getFranchise() }}</small>
-                  <a class="flex justify-center w-full" href="#">
+                  <a class="flex justify-center w-full" href="{{ route('tcgCard.show', ['id' => $tcgCard->getId()]) }}">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     <p class="text-base text-gray-800 font-semibold">{{ $tcgCard->getName() }}</p>
                   </a>
