@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\ImageStorage;
 use App\Models\TCGCard;
 use App\Validators\TCGCardValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminTCGCardController extends Controller
 {
@@ -71,17 +71,10 @@ class AdminTCGCardController extends Controller
             'subtitle1' => 'Successful Creation',
         ];
         $request->validate(TCGCardValidator::$rules);
-        $newTCGCard = TCGCard::create($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
 
-        if ($request->hasFile('image')) {
-            $imageName = $newTCGCard->getId().".".$request->file('image')->extension();
-            Storage::disk('public')->put(
-                $imageName,
-                file_get_contents($request->file('image')->getRealPath())
-            );
-            $newTCGCard->setImage($imageName);
-            $newTCGCard->save();
-        }
+        $storeInterface = app(ImageStorage::class);
+        $storeInterface->store($newTcgCard->getId(), $request);
 
         return view('admin.tcgCard.success')->with('viewData', $viewData);
     }
@@ -96,7 +89,11 @@ class AdminTCGCardController extends Controller
         ];
         $request->validate(TCGCardValidator::$rules);
         $tcgCard = TCGCard::findOrFail($id);
-        $tcgCard->update($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'image', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        $tcgCard->update($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+
+        $storeInterface = app(ImageStorage::class);
+        $storeInterface->store($tcgCard->getId(), $request);
+
 
         return view('admin.tcgCard.success')->with('viewData', $viewData);
     }

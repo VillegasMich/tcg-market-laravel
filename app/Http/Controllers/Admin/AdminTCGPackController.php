@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\ImageStorage;
 use App\Models\TCGPack;
 use App\Validators\TCGPackValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminTCGPackController extends Controller
 {
@@ -71,17 +71,10 @@ class AdminTCGPackController extends Controller
             'subtitle1' => 'Successful Creation',
         ];
         $request->validate(TCGPackValidator::$rules);
-        $newTCGPack = TCGPack::create($request->only(['name', 'image']));
+        $newTcgPack = TCGPack::create($request->only(['name', 'franchise']));
 
-        if ($request->hasFile('image')) {
-            $imageName = $newTCGPack->getId().".".$request->file('image')->extension();
-            Storage::disk('public')->put(
-                $imageName,
-                file_get_contents($request->file('image')->getRealPath())
-            );
-            $newTCGPack->setImage($imageName);
-            $newTCGPack->save();
-        }
+        $storeInterface = app(ImageStorage::class);
+        $storeInterface->store($newTcgPack->getId(), $request);
 
         return view('admin.tcgPack.success')->with('viewData', $viewData);
     }
@@ -95,9 +88,11 @@ class AdminTCGPackController extends Controller
             'subtitle1' => 'Successful Update',
         ];
         $request->validate(TCGPackValidator::$rules);
-        $tcgCard = TCGPack::findOrFail($id);
-        $tcgCard->update($request->only(['name', 'image']));
+        $tcgPack = TCGPack::findOrFail($id);
+        $tcgPack->update($request->only(['name', 'franchise']));
 
+        $storeInterface = app(ImageStorage::class);
+        $storeInterface->store(tcgPack->getId(), $request);
         return view('admin.tcgPack.success')->with('viewData', $viewData);
     }
 }
