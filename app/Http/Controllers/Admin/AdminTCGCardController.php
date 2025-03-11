@@ -65,18 +65,18 @@ class AdminTCGCardController extends Controller
     /**
      * Save a new created TCGCard
      */
-    public function saveCreate(Request $request): View
+    public function saveCreate(Request $request): RedirectResponse
     {
         $viewData = [
             'subtitle1' => 'Successful Creation',
         ];
-        $request->validate(TCGCardValidator::$rules);
-        $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        // $request->validate(TCGCardValidator::$rules);
+        $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise',  'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
 
         $storeInterface = app(ImageStorage::class);
         $storeInterface->store($newTcgCard->getId(), $request);
 
-        return view('admin.tcgCard.success')->with('viewData', $viewData);
+        return back();
     }
 
     /**
