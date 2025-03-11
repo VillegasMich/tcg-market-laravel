@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Order;
+use App\Models\User;
+use App\Models\WishList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -33,6 +36,19 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Configures the factory to execute the command after creating one User.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            Order::factory()->count(rand(1, 3))->create([
+                'user_id' => $user->getId(),
+            ]);
+            WishList::factory(1)->create(['user_id' => $user->getId()]);
+        });
     }
 
     /**

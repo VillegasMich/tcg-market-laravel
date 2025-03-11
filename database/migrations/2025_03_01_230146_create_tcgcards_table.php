@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('language');
             $table->integer('stock');
             $table->timestamps();
-            $table->foreignIdFor(WishList::class);
+            $table->foreignIdFor(WishList::class)->nullable(true)->default(null);
         });
     }
 
