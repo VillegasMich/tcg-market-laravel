@@ -13,7 +13,7 @@ class TCGPackController extends Controller
      */
     public function index(): View
     {
-        $tcgPacks = TCGPack::all();
+        $tcgPacks = TCGPack::paginate(8);
         $viewData = [
             'title' => 'TCGPacks - Market',
             'subtitle' => 'List of packs',

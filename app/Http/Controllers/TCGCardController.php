@@ -13,7 +13,7 @@ class TCGCardController extends Controller
      */
     public function index(): View
     {
-        $tcgCards = TCGCard::all();
+        $tcgCards = TCGCard::paginate(8);
         $viewData = [
             'title' => 'TCGCards - Market',
             'subtitle' => 'List of cards',

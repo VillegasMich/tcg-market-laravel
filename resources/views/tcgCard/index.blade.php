@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('subtitle', $viewData['subtitle'])
 @section('content')
-  <div class="flex-grow flex justify-center w-full">
+  <div class="flex-grow flex flex-col justify-center w-full">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
       <div class="w-full h-fit p-5 mt-2 ">
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
@@ -20,7 +20,8 @@
           </div>
           <input class="flex-grow border border-gray-300 text-gray-400 rounded-l-md p-1.5 pl-2" type="text"
             name="tcgPack" placeholder="Charizard ex" id="">
-          <button class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors ease-out">
+          <button
+            class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors ease-out">
             <i class="fa-solid fa-arrow-right fa-lg"></i>
           </button>
         </form>
@@ -33,7 +34,7 @@
             <div class="mt-4 flex justify-between">
               <div class="w-full">
                 <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
-                  <small class="text-sm text-gray-500">{{$tcgCard->getFranchise()}}</small>
+                  <small class="text-sm text-gray-500">{{ $tcgCard->getFranchise() }}</small>
                   <a class="flex justify-center w-full" href="#">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     <p class="text-base text-gray-800 font-semibold">{{ $tcgCard->getName() }}</p>
@@ -43,6 +44,9 @@
             </div>
           </div>
         @endforeach
+      </div>
+      <div class="mt-5 px-10 mb-5">
+        {{ $viewData['tcgCards']->links() }}
       </div>
     </div>
   </div>

@@ -45,6 +45,9 @@
           </div>
         @endforeach
       </div>
+      <div class="mt-5 px-10 mb-5">
+        {{ $viewData['tcgPacks']->links() }}
+      </div>
     </div>
   </div>
 @endsection
