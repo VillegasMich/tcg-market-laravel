@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ImageStorage;
 use App\Models\TCGCard;
+use App\Models\TCGPack;
 use App\Validators\TCGCardValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -31,7 +32,11 @@ class AdminTCGCardController extends Controller
      */
     public function delete(string $id): RedirectResponse
     {
-        $tcgCard = TCGCard::destroy($id);
+        $tcgCard = TCGCard::findOrFail($id);
+        foreach ($tcgCard->getTcgPacks() as $pack) {
+            $pack->tcgCards()->detach($id);
+        }
+        $tcgCard->delete();
 
         return redirect()->route('admin.tcgCard.index');
     }
@@ -41,8 +46,10 @@ class AdminTCGCardController extends Controller
      */
     public function create(): View
     {
+        $collections = TCGPack::all();
         $viewData = [
             'subtitle1' => 'Create a new card',
+            'collections' => $collections,
         ];
 
         return view('admin.tcgCard.create')->with('viewData', $viewData);
@@ -67,11 +74,9 @@ class AdminTCGCardController extends Controller
      */
     public function saveCreate(Request $request): RedirectResponse
     {
-        $viewData = [
-            'subtitle1' => 'Successful Creation',
-        ];
-        $request->validate(TCGCardValidator::$rules);
+        $validatedData = $request->validate(TCGCardValidator::$rules);
         $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise',  'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        $newTcgCard->setTcgPacks(TCGPack::findOrFail($request->get('collection')));
 
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
@@ -80,7 +85,7 @@ class AdminTCGCardController extends Controller
             $newTcgCard->save();
         }
 
-        return redirect()->route('admin.tcgCard.index');
+        return back()->with('success', 'Successful Creation');
     }
 
     /**

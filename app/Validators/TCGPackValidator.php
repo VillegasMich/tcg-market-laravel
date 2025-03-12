@@ -6,6 +6,6 @@ class TCGPackValidator
 {
     public static $rules = [
         'name' => 'required|string|max:255',
-        'image' => 'string',
+        'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
     ];
 }

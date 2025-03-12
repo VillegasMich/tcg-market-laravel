@@ -31,7 +31,11 @@ class AdminTCGPackController extends Controller
      */
     public function delete(string $id): RedirectResponse
     {
-        $tcgPack = TCGPack::destroy($id);
+        $tcgPack = TCGPack::findOrFail($id);
+        foreach ($tcgPack->getTcgCards() as $pack) {
+            $pack->tcgPacks()->detach($id);
+        }
+        $tcgPack->delete();
 
         return redirect()->route('tcgPack.index');
     }
@@ -65,18 +69,18 @@ class AdminTCGPackController extends Controller
     /**
      * Save a new created TCGPack
      */
-    public function saveCreate(Request $request): View
+    public function saveCreate(Request $request): RedirectResponse
     {
-        $viewData = [
-            'subtitle1' => 'Successful Creation',
-        ];
-        $request->validate(TCGPackValidator::$rules);
-        $newTcgPack = TCGPack::create($request->only(['name', 'franchise']));
+        $validatedData = $request->validate(TCGPackValidator::$rules);
+        $newTcgPack = TCGPack::create($request->only(['name']));
+        if ($request->hasFile('image')) {
+            $storeInterface = app(ImageStorage::class);
+            $imageName = $storeInterface->store($newTcgPack->getId(), $request);
+            $newTcgPack->setImage($imageName);
+            $newTcgPack->save();
+        }
 
-        $storeInterface = app(ImageStorage::class);
-        $storeInterface->store($newTcgPack->getId(), $request);
-
-        return view('admin.tcgPack.success')->with('viewData', $viewData);
+        return back()->with('success', 'Successful Creation');
     }
 
     /**
