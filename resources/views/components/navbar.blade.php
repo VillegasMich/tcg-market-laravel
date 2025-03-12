@@ -15,7 +15,7 @@
         <x-navbar-link href="#" :active="request()->is('users')">Users</x-navbar-link>
       </li>
       <li class="h-12 flex justify-center items-center">
-        <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('orders')">Cart</x-navbar-link>
+        <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('cart')">Cart</x-navbar-link>
       </li>
     </ul>
     <div class="flex space-x-6 text-lg mr-5">
