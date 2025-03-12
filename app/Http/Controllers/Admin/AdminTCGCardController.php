@@ -70,13 +70,17 @@ class AdminTCGCardController extends Controller
         $viewData = [
             'subtitle1' => 'Successful Creation',
         ];
-        // $request->validate(TCGCardValidator::$rules);
+        $request->validate(TCGCardValidator::$rules);
         $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise',  'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
 
-        $storeInterface = app(ImageStorage::class);
-        $storeInterface->store($newTcgCard->getId(), $request);
+        if ($request->hasFile('image')) {
+            $storeInterface = app(ImageStorage::class);
+            $imageName = $storeInterface->store($newTcgCard->getId(), $request);
+            $newTcgCard->setImage($imageName);
+            $newTcgCard->save();
+        }
 
-        return back();
+        return redirect()->route('admin.tcgCard.index');
     }
 
     /**
@@ -91,8 +95,12 @@ class AdminTCGCardController extends Controller
         $tcgCard = TCGCard::findOrFail($id);
         $tcgCard->update($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
 
-        $storeInterface = app(ImageStorage::class);
-        $storeInterface->store($tcgCard->getId(), $request);
+        if ($request->hasFile('image')) {
+            $storeInterface = app(ImageStorage::class);
+            $imageName = $storeInterface->store($id, $request);
+            $tcgCard->setImage($imageName);
+            $tcgCard->save();
+        }
 
 
         return view('admin.tcgCard.success')->with('viewData', $viewData);
