@@ -12,7 +12,7 @@
           </h1>
           <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
             <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-              ${{ $viewData['tcgCard']->getPrice() }}
+              ${{ number_format($viewData['tcgCard']->getPrice(), 2) }}
             </p>
 
             <div class="flex items-center gap-2 mt-2 sm:mt-0">
@@ -57,7 +57,7 @@
           <p class="text-gray-500 dark:text-gray-400">
           <ul class="list-disc list-inside text-gray-500 dark:text-gray-400">
             <li>PSA: {{ $viewData['tcgCard']->getPSAGrade() }}</li>
-            <li>Price: ${{ $viewData['tcgCard']->getPrice() }}</li>
+            <li>Price: ${{ number_format($viewData['tcgCard']->getPrice(), 2) }}</li>
             <li>Rarity: {{ $viewData['tcgCard']->getRarity() }}</li>
             <li>Launch Date: {{ $viewData['tcgCard']->getLaunchDate() }}</li>
             <li>Created at: {{ $viewData['tcgCard']->getCreatedAt() }}</li>
