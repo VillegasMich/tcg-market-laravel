@@ -1,7 +1,5 @@
 <?php
 
-// AUTHOR: Manuel Villegas Michel
-
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -11,7 +9,37 @@ class TCGCardFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->randomElement([
+                'Bulbasaur',
+                'Ivysaur',
+                'Charmander',
+                'Charizard',
+                'Squirtle',
+                'Blastoise',
+                'Pikachu',
+                'Raichu',
+                'Eevee',
+                'Vaporeon',
+                'Jolteon',
+                'Flareon',
+                'Mewtwo',
+                'Mew',
+                'Gyarados',
+                'Magikarp',
+                'Snorlax',
+                'Gengar',
+                'Arcanine',
+                'Articuno',
+                'Zapdos',
+                'Moltres',
+                'Dragonite',
+                'Tyranitar',
+                'Gardevoir',
+                'Salamence',
+                'Metagross',
+                'Lucario',
+                'Garchomp',
+            ]),
             'description' => $this->faker->text(),
             'franchise' => 'Pokemon',
             'price' => $this->faker->numberBetween($min = 100, $max = 1000000),

@@ -14,11 +14,8 @@ class TCGPackController extends Controller
      */
     public function index(Request $request): View
     {
-        if ($request->query('keyword')) {
-            $tcgPacks = TCGPack::where('name', 'LIKE', '%' . $request->query('keyword') . '%')->paginate(16);
-        } else {
-            $tcgPacks = TCGPack::paginate(16);
-        }
+
+        $tcgPacks = TCGPack::filterAndSort($request)->paginate(16);
         $viewData = [
             'title' => 'TCGPacks - Market',
             'subtitle' => 'List of packs',

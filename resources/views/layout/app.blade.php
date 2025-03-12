@@ -15,6 +15,17 @@
 <body>
   <main class="flex flex-col w-full h-screen"> {{-- Cambiar por clases de Tailwind --}}
     <x-navbar />
+    @if (session('success'))
+      <div id="success-message" class="fixed top-5 right-5 bg-green-500 text-white p-3 rounded-md shadow-lg">
+        {{ session('success') }}
+      </div>
+
+      <script>
+        setTimeout(() => {
+          document.getElementById('success-message').style.display = 'none';
+        }, 3000);
+      </script>
+    @endif
     @yield('content')
   </main>
 </body>

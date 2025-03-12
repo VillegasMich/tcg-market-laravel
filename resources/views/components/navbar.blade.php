@@ -3,10 +3,10 @@
   <div class="w-11/12 flex justify-between items-center h-12" id="navbarSupportedContent">
     <ul class="flex space-x-6 text-lg">
       <li class="h-12 flex justify-center items-center">
-        <x-navbar-link href="{{ route('tcgPack.index') }}" :active="request()->is('tcgpacks')">Packs</x-navbar-link>
+        <x-navbar-link href="{{ route('tcgCard.index') }}" :active="request()->is('tcgcards')">Cards</x-navbar-link>
       </li>
       <li class="h-12 flex justify-center items-center">
-        <x-navbar-link href="{{ route('tcgCard.index') }}" :active="request()->is('tcgcards')">Cards</x-navbar-link>
+        <x-navbar-link href="{{ route('tcgPack.index') }}" :active="request()->is('tcgpacks')">Packs</x-navbar-link>
       </li>
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="{{ route('order.index') }}" :active="request()->is('orders')">Orders</x-navbar-link>
@@ -14,9 +14,11 @@
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="#" :active="request()->is('users')">Users</x-navbar-link>
       </li>
+      <li class="h-12 flex justify-center items-center">
+        <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('orders')">Cart</x-navbar-link>
+      </li>
     </ul>
     <div class="flex space-x-6 text-lg mr-5">
-      <!-- Authentication Links -->
       @guest
         @if (Route::has('login'))
           <div class="nav-item">

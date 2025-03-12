@@ -14,11 +14,7 @@ class TCGCardController extends Controller
      */
     public function index(Request $request): View
     {
-        if ($request->query('keyword')) {
-            $tcgCards = TCGCard::where('name', 'LIKE', '%' . $request->query('keyword') . '%')->paginate(16);
-        } else {
-            $tcgCards = TCGCard::paginate(16);
-        }
+        $tcgCards = TCGCard::filterAndSort($request)->paginate(16);
         $viewData = [
             'title' => 'TCGCards - Market',
             'subtitle' => 'List of cards',
@@ -39,5 +35,21 @@ class TCGCardController extends Controller
         ];
 
         return view('tcgCard.show')->with('viewData', $viewData);
+    }
+
+    /**
+     * Add a TCGCard to the cart
+     */
+    public function addToCart(string $id, Request $request): RedirectResponse
+    {
+        $cartProductData = $request->session()->get('cart_product_data');
+        $tcgCard = TCGCard::findOrFail($id);
+        if (isset($cartProductData[$tcgCard->getId()])) {
+            $cartProductData[$tcgCard->getId()] += 1;
+        } else {
+            $cartProductData[$tcgCard->getId()] = 1;
+        }
+        $request->session()->put('cart_product_data', $cartProductData);
+        return back()->with('success', "{$tcgCard->getName()} has been added to your cart!");
     }
 }

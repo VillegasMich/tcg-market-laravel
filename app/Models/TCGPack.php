@@ -4,10 +4,12 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Http\Request;
 
 class TCGPack extends Model
 {
@@ -86,5 +88,25 @@ class TCGPack extends Model
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
+    }
+
+    public static function filterAndSort(Request $request): Builder
+    {
+        $query = TCGPack::query();
+        if ($request->has('keyword') && !empty($request->keyword)) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+        if ($request->has('sort')) {
+            if ($request->sort === 'price_asc') {
+                $query->orderBy('price', 'asc');
+            } elseif ($request->sort === 'price_desc') {
+                $query->orderBy('price', 'desc');
+            } elseif ($request->sort === 'newest') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($request->sort === 'oldest') {
+                $query->orderBy('created_at', 'asc');
+            }
+        }
+        return $query;
     }
 }
