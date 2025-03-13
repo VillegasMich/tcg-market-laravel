@@ -9,10 +9,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 
 /**
+ * Cart routes
+ */
+Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.index');
+Route::post('/cart/remove-all', 'App\Http\Controllers\CartController@removeAll')->name('cart.remove-all');
+
+/**
  * TCGCards routes
  */
 Route::get('/tcgcards', 'App\Http\Controllers\TCGCardController@index')->name('tcgCard.index');
 Route::get('/tcgcards/{id}', 'App\Http\Controllers\TCGCardController@show')->name('tcgCard.show');
+Route::post('/cart/add/{id}', 'App\Http\Controllers\TCGCardController@addToCart')->name('tcgCard.add-to-cart');
 
 /**
  * TCGPacks routes

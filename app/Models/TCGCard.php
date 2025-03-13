@@ -4,12 +4,14 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Date;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TCGCard extends Model
 {
@@ -199,7 +201,7 @@ class TCGCard extends Model
 
     public function getWishList(): WishList
     {
-        return $this->wishList();
+        return $this->wishList;
     }
 
     public function setWishList(WishList $wishList): void
@@ -215,5 +217,45 @@ class TCGCard extends Model
     public function setItems(Collection $items): void
     {
         $this->items = $items;
+    }
+
+    public static function filterAndSort(Request $request): Builder
+    {
+        $query = self::query();
+
+        if ($request->has('keyword') && !empty($request->keyword)) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        if ($request->has('sort')) {
+            switch ($request->sort) {
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'psa_desc':
+                    $query->orderByRaw("CASE
+                        WHEN PSAgrade = 'undefined' THEN 0
+                        ELSE CAST(PSAgrade AS UNSIGNED)
+                        END DESC");
+                    break;
+                case 'psa_asc':
+                    $query->orderByRaw("CASE
+                        WHEN PSAgrade = 'undefined' THEN 0
+                        ELSE CAST(PSAgrade AS UNSIGNED)
+                        END ASC");
+                    break;
+                case 'newest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+                case 'oldest':
+                    $query->orderBy('created_at', 'asc');
+                    break;
+            }
+        }
+
+        return $query;
     }
 }

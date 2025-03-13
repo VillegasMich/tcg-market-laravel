@@ -4,10 +4,12 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Http\Request;
 
 class TCGPack extends Model
 {
@@ -17,7 +19,8 @@ class TCGPack extends Model
      * $this->attributes['id'] - int - Product primary key
      * $this->attributes['name'] - string - Collection name
      * $this->attributes['image'] - string - Collection image
-     * $this->attributes['tcgCards'] - array - Collection of cards
+     * $this->attributes['franchise'] - string - Franchise of the pack
+     * $this->tcgCards - array - Collection of cards
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
      */
@@ -29,6 +32,7 @@ class TCGPack extends Model
     protected $fillable = [
         'name',
         'image',
+        'franchise'
     ];
 
     public function getId(): int
@@ -66,6 +70,16 @@ class TCGPack extends Model
         $this->tcgCards()->sync($tcgCards);
     }
 
+    public function getFranchise(): string
+    {
+        return $this->attributes['franchise'];
+    }
+
+    public function setFranchise(string $franchise): void
+    {
+        $this->attributes['franchise'] = $franchise;
+    }
+
     public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
@@ -74,5 +88,25 @@ class TCGPack extends Model
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
+    }
+
+    public static function filterAndSort(Request $request): Builder
+    {
+        $query = TCGPack::query();
+        if ($request->has('keyword') && !empty($request->keyword)) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+        if ($request->has('sort')) {
+            if ($request->sort === 'price_asc') {
+                $query->orderBy('price', 'asc');
+            } elseif ($request->sort === 'price_desc') {
+                $query->orderBy('price', 'desc');
+            } elseif ($request->sort === 'newest') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($request->sort === 'oldest') {
+                $query->orderBy('created_at', 'asc');
+            }
+        }
+        return $query;
     }
 }

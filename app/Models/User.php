@@ -22,6 +22,7 @@ class User extends Authenticatable
      * $this->attributes['email'] - string - contains the email registered by the user.
      * $this->attributes['email_verified_at'] - timestamp - Represents when the user was verified.
      * $this->attributes['password'] - string - contains the encrypted password set by the user.
+     * $this->attributes['role'] - string - Role of the user.
      * $this->attributes['remember_token'] - string - A remember token used for sessions.
      * $this->attributes['updatedAt'] - Date - Represents the date the database entry was updated.
      * $this->attributes['customer'] - Customer - The customer this order is related to.
@@ -43,6 +44,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'role',
     ];
 
     /**
