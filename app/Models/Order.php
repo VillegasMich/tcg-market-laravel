@@ -93,7 +93,8 @@ class Order extends Model
 
     public function setUser(User $user): void
     {
-        $this->user = $user;
+        $this->user()->associate($user);
+        $this->save();
     }
 
     public function getItems(): Collection

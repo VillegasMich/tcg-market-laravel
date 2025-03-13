@@ -4,12 +4,6 @@
   <div class="container mx-auto p-5">
     <h1 class="text-3xl font-semibold mb-4">Your Cart</h1>
     @if (count($viewData['cartProducts']) > 0)
-      <form action="{{ route('cart.remove-all') }}" method="POST">
-        @csrf
-        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition">
-          Remove All Items
-        </button>
-      </form>
       <table class="w-full border-collapse border border-gray-300">
         <thead>
           <tr class="bg-gray-100">
@@ -33,7 +27,21 @@
             </tr>
           @endforeach
         </tbody>
-      </table>
+      </table> 
+      <div class="flex w-full space-x-3 mt-5">
+        <form action="{{ route('cart.remove-all') }}" method="POST">
+          @csrf
+          <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition">
+            Remove All Items
+          </button>
+        </form>
+        <form action="{{ route('order.save-create') }}" method="POST">
+          @csrf
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition">
+            Make an order!
+          </button>
+        </form>
+      </div>
     @else
       <p class="text-gray-500">Your cart is empty.</p>
     @endif

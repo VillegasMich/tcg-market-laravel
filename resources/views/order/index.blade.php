@@ -2,7 +2,7 @@
 @extends('layout.app')
 @section('title', $viewData['title'])
 @section('content')
-  <div class="flex-grow flex flex-col justify-center w-full">
+  <div class="flex-grow flex flex-col w-full">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
       <div class="w-full h-fit p-5 mt-2 ">
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
@@ -27,7 +27,7 @@
             <div class="mt-4 flex justify-between">
               <div class="w-full">
                 <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
-                  <small class="text-sm text-gray-500">5 items</small>
+                  <small class="text-sm text-gray-500">{{$order->items_count}} items</small>
                   <a class="flex justify-center w-full" href="{{ route('order.show', ['id' => $order->getId()]) }}">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     <p class="text-base text-gray-800 font-semibold">Order {{ $order->getId() }}</p>

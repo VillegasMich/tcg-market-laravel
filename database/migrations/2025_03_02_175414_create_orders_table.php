@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('total');
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->nullable()->default(null);
             $table->string('status')->default('pending');
             $table->string('paymentMethod')->default('card');
             $table->timestamps();
