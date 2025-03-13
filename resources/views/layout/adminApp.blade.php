@@ -10,12 +10,11 @@
 </head>
 
 <body>
-  <main class="flex flex-col w-full h-screen bg-gray-700"> {{-- Cambiar por clases de Tailwind --}}
+  <main class="flex flex-col w-full h-screen bg-gray-700">
     <x-sidebar />
     <div class="p-4 sm:ml-64">
       @yield('content')
     </div>
   </main>
 </body>
-
 </html>

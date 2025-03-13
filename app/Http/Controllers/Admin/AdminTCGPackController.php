@@ -90,13 +90,14 @@ class AdminTCGPackController extends Controller
     {
         $request->validate(TCGPackValidator::$rules);
         $tcgPack = TCGPack::findOrFail($id);
-        $tcgPack->update($request->only(['name',]));
+        $tcgPack->update($request->only(['name']));
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
             $imageName = $storeInterface->store($tcgPack->getId(), $request);
             $tcgPack->setImage($imageName);
             $tcgPack->save();
         }
+
         return back()->with('success', 'Successful Update');
     }
 }

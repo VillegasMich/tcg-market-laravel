@@ -78,12 +78,7 @@ class AdminTCGCardController extends Controller
     {
         $validatedData = $request->validate(TCGCardValidator::$rules);
         $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise',  'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
-        if ($request->has('collection')) {
-            foreach ($request->get('collection') as $collection) {
-                $newTcgCard->tcgPacks()->attach($collection);
-            }
-        }
-
+        $newTcgCard->setTcgPacks($request->get('collection'));
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
             $imageName = $storeInterface->store($newTcgCard->getId(), $request);
@@ -99,29 +94,16 @@ class AdminTCGCardController extends Controller
      */
     public function saveUpdate(Request $request, string $id): RedirectResponse
     {
-
         $request->validate(TCGCardValidator::$rules);
         $tcgCard = TCGCard::findOrFail($id);
         $tcgCard->update($request->only(['name', 'description', 'franchise', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
-        if ($request->has('collection')) {
-            foreach ($request->get('collection') as $collection) {
-                if (!in_array($collection, $tcgCard->getTcgPacks()->pluck('id')->toArray())) {
-                    $tcgCard->tcgPacks()->attach($collection);
-                }
-            }
-            foreach ($tcgCard->getTcgPacks() as $pack) {
-                if (!in_array($pack->getId(), $request->get('collection'))) {
-                    $tcgCard->tcgPacks()->detach($pack->getId());
-                }
-            }
-        }
+        $tcgCard->setTcgPacks($request->get('collection'));
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
             $imageName = $storeInterface->store($id, $request);
             $tcgCard->setImage($imageName);
             $tcgCard->save();
         }
-
 
         return back()->with('success', 'Successful Update');
     }
