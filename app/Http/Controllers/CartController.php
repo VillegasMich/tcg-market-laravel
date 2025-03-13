@@ -12,7 +12,7 @@ class CartController extends Controller
     {
         $cartProducts = [];
         $cartProductData = $request->session()->get('cart_product_data');
-        if (!empty($cartProductData)) {
+        if (! empty($cartProductData)) {
             $productIds = array_keys($cartProductData);
             $cartProducts = TCGCard::whereIn('id', $productIds)->get();
             foreach ($cartProducts as $card) {
@@ -24,13 +24,14 @@ class CartController extends Controller
             'viewData' => [
                 'title' => 'Your Cart',
                 'cartProducts' => $cartProducts,
-            ]
+            ],
         ]);
     }
 
     public function removeAll(Request $request): RedirectResponse
     {
         $request->session()->forget('cart_product_data');
+
         return back();
     }
 }

@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class TCGCard extends Model
 {
@@ -184,7 +183,7 @@ class TCGCard extends Model
         return $this->tcgPacks;
     }
 
-    public function setTcgPacks(Collection $tcgPacks): void
+    public function setTcgPacks(array $tcgPacks): void
     {
         $this->tcgPacks()->sync($tcgPacks);
     }
@@ -223,8 +222,8 @@ class TCGCard extends Model
     {
         $query = self::query();
 
-        if ($request->has('keyword') && !empty($request->keyword)) {
-            $query->where('name', 'like', '%' . $request->keyword . '%');
+        if ($request->has('keyword') && ! empty($request->keyword)) {
+            $query->where('name', 'like', '%'.$request->keyword.'%');
         }
 
         if ($request->has('sort')) {

@@ -50,6 +50,7 @@ class TCGCardController extends Controller
             $cartProductData[$tcgCard->getId()] = 1;
         }
         $request->session()->put('cart_product_data', $cartProductData);
+
         return back()->with('success', "{$tcgCard->getName()} has been added to your cart!");
     }
 }

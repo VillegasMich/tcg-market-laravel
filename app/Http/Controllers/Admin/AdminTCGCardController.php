@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\ImageStorage;
 use App\Models\TCGCard;
+use App\Models\TCGPack;
 use App\Validators\TCGCardValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminTCGCardController extends Controller
 {
@@ -31,7 +32,11 @@ class AdminTCGCardController extends Controller
      */
     public function delete(string $id): RedirectResponse
     {
-        $tcgCard = TCGCard::destroy($id);
+        $tcgCard = TCGCard::findOrFail($id);
+        foreach ($tcgCard->getTcgPacks() as $pack) {
+            $pack->tcgCards()->detach($id);
+        }
+        $tcgCard->delete();
 
         return redirect()->route('admin.tcgCard.index');
     }
@@ -41,8 +46,10 @@ class AdminTCGCardController extends Controller
      */
     public function create(): View
     {
+        $collections = TCGPack::all();
         $viewData = [
             'subtitle1' => 'Create a new card',
+            'collections' => $collections,
         ];
 
         return view('admin.tcgCard.create')->with('viewData', $viewData);
@@ -53,10 +60,12 @@ class AdminTCGCardController extends Controller
      */
     public function update(string $id): View
     {
+        $collections = TCGPack::all();
         $tcgCard = TCGCard::findOrFail($id);
         $viewData = [
             'subtitle1' => 'Update a card',
             'tcgCard' => $tcgCard,
+            'collections' => $collections,
         ];
 
         return view('admin.tcgCard.update')->with('viewData', $viewData);
@@ -65,39 +74,37 @@ class AdminTCGCardController extends Controller
     /**
      * Save a new created TCGCard
      */
-    public function saveCreate(Request $request): View
+    public function saveCreate(Request $request): RedirectResponse
     {
-        $viewData = [
-            'subtitle1' => 'Successful Creation',
-        ];
-        $request->validate(TCGCardValidator::$rules);
-        $newTCGCard = TCGCard::create($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
-
+        $validatedData = $request->validate(TCGCardValidator::$rules);
+        $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise',  'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        $newTcgCard->setTcgPacks($request->get('collection'));
         if ($request->hasFile('image')) {
-            $imageName = $newTCGCard->getId().".".$request->file('image')->extension();
-            Storage::disk('public')->put(
-                $imageName,
-                file_get_contents($request->file('image')->getRealPath())
-            );
-            $newTCGCard->setImage($imageName);
-            $newTCGCard->save();
+            $storeInterface = app(ImageStorage::class);
+            $imageName = $storeInterface->store($newTcgCard->getId(), $request);
+            $newTcgCard->setImage($imageName);
+            $newTcgCard->save();
         }
 
-        return view('admin.tcgCard.success')->with('viewData', $viewData);
+        return back()->with('success', 'Successful Creation');
     }
 
     /**
      * Save an updated TCGCard
      */
-    public function saveUpdate(Request $request, string $id): View
+    public function saveUpdate(Request $request, string $id): RedirectResponse
     {
-        $viewData = [
-            'subtitle1' => 'Successful Update',
-        ];
         $request->validate(TCGCardValidator::$rules);
         $tcgCard = TCGCard::findOrFail($id);
-        $tcgCard->update($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'image', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        $tcgCard->update($request->only(['name', 'description', 'franchise', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        $tcgCard->setTcgPacks($request->get('collection'));
+        if ($request->hasFile('image')) {
+            $storeInterface = app(ImageStorage::class);
+            $imageName = $storeInterface->store($id, $request);
+            $tcgCard->setImage($imageName);
+            $tcgCard->save();
+        }
 
-        return view('admin.tcgCard.success')->with('viewData', $viewData);
+        return back()->with('success', 'Successful Update');
     }
 }

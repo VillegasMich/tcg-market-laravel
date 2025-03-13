@@ -8,14 +8,14 @@ class TCGCardValidator
         'name' => 'required|string|max:255',
         'description' => 'required|string',
         'franchise' => 'required|string|max:255',
-        'collection' => 'required|string|max:255',
-        'price' => 'required|numeric|min:0',
+        'collection' => 'required', // TODO: |string|max:255
+        'price' => 'required|numeric|min:1',
         'PSAgrade' => 'required|string|max:10',
-        'image' => 'required|string',
+        'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
         'launchDate' => 'required|date',
-        'rarity' => 'required|in:common,uncommon,rare,mythic',
-        'pullRate' => 'required|string|max:255',
-        'language' => 'required|in:Spanish,English,French',
-        'stock' => 'required|integer|min:0',
+        'rarity' => 'required',
+        'pullRate' => 'required|decimal:2|min:0|max:1',
+        'language' => 'required|in:english,spanish,french,german',
+        'stock' => 'required|integer|min:1',
     ];
 }

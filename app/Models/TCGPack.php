@@ -32,7 +32,7 @@ class TCGPack extends Model
     protected $fillable = [
         'name',
         'image',
-        'franchise'
+        'franchise',
     ];
 
     public function getId(): int
@@ -65,7 +65,7 @@ class TCGPack extends Model
         return $this->tcgCards;
     }
 
-    public function setTcgCards(Collection $tcgCards): void
+    public function setTcgCards(TCGCard $tcgCards): void
     {
         $this->tcgCards()->sync($tcgCards);
     }
@@ -93,8 +93,8 @@ class TCGPack extends Model
     public static function filterAndSort(Request $request): Builder
     {
         $query = TCGPack::query();
-        if ($request->has('keyword') && !empty($request->keyword)) {
-            $query->where('name', 'like', '%' . $request->keyword . '%');
+        if ($request->has('keyword') && ! empty($request->keyword)) {
+            $query->where('name', 'like', '%'.$request->keyword.'%');
         }
         if ($request->has('sort')) {
             if ($request->sort === 'price_asc') {
@@ -107,6 +107,7 @@ class TCGPack extends Model
                 $query->orderBy('created_at', 'asc');
             }
         }
+
         return $query;
     }
 }

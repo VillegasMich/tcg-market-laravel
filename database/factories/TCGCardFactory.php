@@ -40,7 +40,8 @@ class TCGCardFactory extends Factory
                 'Lucario',
                 'Garchomp',
             ]),
-            'description' => $this->faker->text(),
+            'description' => $this->faker->text(20),
+
             'franchise' => 'Pokemon',
             'price' => $this->faker->numberBetween($min = 100, $max = 1000000),
             'PSAgrade' => $this->faker->randomElement(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
