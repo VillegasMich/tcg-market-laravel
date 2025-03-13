@@ -9,12 +9,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-  <main class="flex flex-col w-full h-screen bg-gray-700">
+<body class="bg-gray-700">
+  <main class="flex flex-col w-full ">
     <x-sidebar />
     <div class="p-4 sm:ml-64">
       @yield('content')
     </div>
   </main>
 </body>
+
 </html>
