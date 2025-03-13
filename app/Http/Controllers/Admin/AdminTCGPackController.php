@@ -72,7 +72,7 @@ class AdminTCGPackController extends Controller
     public function saveCreate(Request $request): RedirectResponse
     {
         $validatedData = $request->validate(TCGPackValidator::$rules);
-        $newTcgPack = TCGPack::create($request->only(['name']));
+        $newTcgPack = TCGPack::create($request->only(['name','franchise']));
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
             $imageName = $storeInterface->store($newTcgPack->getId(), $request);
@@ -90,7 +90,7 @@ class AdminTCGPackController extends Controller
     {
         $request->validate(TCGPackValidator::$rules);
         $tcgPack = TCGPack::findOrFail($id);
-        $tcgPack->update($request->only(['name']));
+        $tcgPack->update($request->only(['name','franchise']));
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
             $imageName = $storeInterface->store($tcgPack->getId(), $request);

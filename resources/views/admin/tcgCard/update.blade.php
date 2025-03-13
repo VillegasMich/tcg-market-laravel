@@ -165,8 +165,9 @@
           @foreach ($viewData['collections'] as $collection)
           <li class="border-b border-gray-200 rounded-t-lg dark:border-gray-600">
             <div class="flex items-center ps-3">
-              <input id="{{ $collection->getId() }}" name="collection[]" type="checkbox" {{ $viewData['tcgCard']->getTcgPacks()->contains($collection->getId()) ? 'checked' : '' }}
-                value="{{ $collection->getId() }}" class=" h-4 text-blue-600
+              <input id="{{ $collection->getId() }}" name="collection[]" type="checkbox" {{
+                $viewData['tcgCard']->getTcgPacks()->contains($collection->getId()) ? 'checked' : '' }}
+              value="{{ $collection->getId() }}" class=" h-4 text-blue-600
               bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500
               dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2
               dark:bg-gray-600 dark:border-gray-500">
@@ -188,6 +189,6 @@
   </div>
 
   <button
-    class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+    class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
 </form>
 @endsection
