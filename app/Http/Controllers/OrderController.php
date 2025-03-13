@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index(): View
     {
-        $orders = Order::all();
+        $orders = Order::withCount('items')->get();
 
         $viewData = [
             'title' => 'Orders',

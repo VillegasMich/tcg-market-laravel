@@ -2,9 +2,9 @@
 @extends('layout.app')
 @section('title', $viewData['title'])
 @section('content')
-  <section class="flex-grow flex justify-center w-full pt-6">
-    <div class="flex w-3/5 flex-col">
-      <div class="w-full h-fit p-5 mt-2">
+  <div class="flex-grow flex flex-col justify-center w-full">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
+      <div class="w-full h-fit p-5 mt-2 ">
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
           {{ $viewData['title'] }}
         </h1>
@@ -13,30 +13,31 @@
           one place.
         </p>
       </div>
-      <div class="w-full h-fit p-5 pt-2 pl-0 space-y-2">
+      <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         @foreach ($viewData['orders'] as $order)
-          <article class="w-full rounded-lg h-fit p-5">
-            <div class="flex justify-between">
-              <div class="flex space-x-3 mb-3">
-                <p class="text-3xl font-semibold tracking-tight text-balance text-gray-900">
-                  Order {{ $order->getId() }}
-                </p>
-                <div class="flex justify-center items-center text-base pl-0.5 text-pretty text-gray-500">
-                  {{ ucfirst($order->getStatus()) }}
-                </div>
+          <div class="group relative w-full">
+            <div
+              class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80 p-5">
+              <div class="grid grid-cols-1 gap-x-4 gap-y-10 lg:grid-cols-3">
+                @for ($i = 0; $i < $order->items_count; $i++)
+                  <img class="bg-black w-14 h-20 rounded-sm" src="{{ asset('pokemon_card_backside.png') }}" alt="">
+                @endfor
               </div>
-              <p class="text-base flex justify-center items-center">
-                ${{ $order->getTotal() }}.00
-              </p>
             </div>
-            <a href="{{ route('order.show', ['id' => $order->getId()]) }}"
-              class="py-1 px-3 ml-0.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl">
-              Details
-            </a>
-          </article>
-          <hr>
+            <div class="mt-4 flex justify-between">
+              <div class="w-full">
+                <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
+                  <small class="text-sm text-gray-500">5 items</small>
+                  <a class="flex justify-center w-full" href="{{ route('order.show', ['id' => $order->getId()]) }}">
+                    <span aria-hidden="true" class="absolute inset-0"></span>
+                    <p class="text-base text-gray-800 font-semibold">Order {{ $order->getId() }}</p>
+                  </a>
+                </h3>
+              </div>
+            </div>
+          </div>
         @endforeach
       </div>
     </div>
-  </section>
+  </div>
 @endsection

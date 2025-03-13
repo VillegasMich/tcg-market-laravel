@@ -15,14 +15,22 @@
         </p>
       </div>
       <div class="flex justify-center items-center w-full h-fit mt-5">
-        <form class="w-[70%] flex" action="">
+        <form class="w-[70%] flex" action="{{ route('tcgPack.index') }}" method="GET">
           <div class="w-8 flex justify-center items-center mr-1">
             <i class="fa-solid fa-magnifying-glass fa-lg text-gray-700"></i>
           </div>
+          <select name="sort" class="border border-gray-300 text-gray-700 rounded-md p-1 mx-2">
+            <option value="">Sort by</option>
+            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
+            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
+            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest First</option>
+            <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
+          </select>
           <input class="flex-grow border border-gray-300 text-gray-400 rounded-l-md p-1.5 pl-2" type="text"
-            name="tcgPack" placeholder="Prismatic evolutions" id="">
-          <button class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md">
-            <i class="fa-solid fa-arrow-right fa-lg text-indigo-600 "></i>
+            name="keyword" placeholder="Prismatic evolutions" id="">
+          <button
+            class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors ease-out">
+            <i class="fa-solid fa-arrow-right fa-lg"></i>
           </button>
         </form>
       </div>
@@ -34,8 +42,8 @@
             <div class="mt-4 flex justify-between">
               <div class="w-full">
                 <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
-                  <small class="text-sm text-gray-500">Pokemon</small>
-                  <a class="flex justify-center w-full" href="#">
+                  <small class="text-sm text-gray-500">{{ $tcgPack->getFranchise() }}</small>
+                  <a class="flex justify-center w-full" href="{{ route('tcgPack.show', ['id' => $tcgPack->getId()]) }}">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     <p class="text-base text-gray-800 font-semibold">{{ $tcgPack->getName() }}</p>
                   </a>
@@ -44,6 +52,9 @@
             </div>
           </div>
         @endforeach
+      </div>
+      <div class="mt-5 px-10 mb-5">
+        {{ $viewData['tcgPacks']->links() }}
       </div>
     </div>
   </div>
