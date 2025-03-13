@@ -14,8 +14,8 @@ class TCGCardValidator
         'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
         'launchDate' => 'required|date',
         'rarity' => 'required',
-        'pullRate' => 'required|decimal:1|min:0|max:1',
-        'language' => 'required|in:english,spanish,french, german',
+        'pullRate' => 'required|decimal:2|min:0|max:1',
+        'language' => 'required|in:english,spanish,french,german',
         'stock' => 'required|integer|min:1',
     ];
 }

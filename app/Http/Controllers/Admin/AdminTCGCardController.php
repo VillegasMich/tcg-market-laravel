@@ -60,10 +60,12 @@ class AdminTCGCardController extends Controller
      */
     public function update(string $id): View
     {
+        $collections = TCGPack::all();
         $tcgCard = TCGCard::findOrFail($id);
         $viewData = [
             'subtitle1' => 'Update a card',
             'tcgCard' => $tcgCard,
+            'collections' => $collections,
         ];
 
         return view('admin.tcgCard.update')->with('viewData', $viewData);
@@ -76,7 +78,11 @@ class AdminTCGCardController extends Controller
     {
         $validatedData = $request->validate(TCGCardValidator::$rules);
         $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise',  'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
-        $newTcgCard->setTcgPacks(TCGPack::findOrFail($request->get('collection')));
+        if ($request->has('collection')) {
+            foreach ($request->get('collection') as $collection) {
+                $newTcgCard->tcgPacks()->attach($collection);
+            }
+        }
 
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
@@ -91,15 +97,24 @@ class AdminTCGCardController extends Controller
     /**
      * Save an updated TCGCard
      */
-    public function saveUpdate(Request $request, string $id): View
+    public function saveUpdate(Request $request, string $id): RedirectResponse
     {
-        $viewData = [
-            'subtitle1' => 'Successful Update',
-        ];
+
         $request->validate(TCGCardValidator::$rules);
         $tcgCard = TCGCard::findOrFail($id);
-        $tcgCard->update($request->only(['name', 'description', 'franchise', 'collection', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
-
+        $tcgCard->update($request->only(['name', 'description', 'franchise', 'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
+        if ($request->has('collection')) {
+            foreach ($request->get('collection') as $collection) {
+                if (!in_array($collection, $tcgCard->getTcgPacks()->pluck('id')->toArray())) {
+                    $tcgCard->tcgPacks()->attach($collection);
+                }
+            }
+            foreach ($tcgCard->getTcgPacks() as $pack) {
+                if (!in_array($pack->getId(), $request->get('collection'))) {
+                    $tcgCard->tcgPacks()->detach($pack->getId());
+                }
+            }
+        }
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);
             $imageName = $storeInterface->store($id, $request);
@@ -108,6 +123,6 @@ class AdminTCGCardController extends Controller
         }
 
 
-        return view('admin.tcgCard.success')->with('viewData', $viewData);
+        return back()->with('success', 'Successful Update');
     }
 }

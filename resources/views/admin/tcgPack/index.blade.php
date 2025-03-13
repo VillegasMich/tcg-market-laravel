@@ -16,6 +16,7 @@
               <th scope="col" class="px-6 py-4">Image</th>
               <th scope="col" class="px-6 py-4">ID</th>
               <th scope="col" class="px-6 py-4">Name</th>
+              <th scope="col" class="px-6 py-4">Cards</th>
               <th scope="col" class="px-6 py-4">Delete</th>
               <th scope="col" class="px-6 py-4">Update</th>
             </tr>
@@ -32,6 +33,9 @@
                 {{ $tcgPack->getId() }}</td>
               <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {{ $tcgPack->getName() }}</td>
+
+              <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{ $tcgPack->tcgCards()->count() }}</td>
               <td scope="row" class="px-6 py-4 font-medium text-red-600 whitespace-nowrap dark:text-white">
                 <form action="{{ route('admin.tcgPack.delete', ['id' => $tcgPack->getId()]) }}" method="POST">
                   @csrf

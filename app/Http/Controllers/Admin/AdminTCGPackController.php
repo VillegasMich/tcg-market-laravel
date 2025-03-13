@@ -37,7 +37,7 @@ class AdminTCGPackController extends Controller
         }
         $tcgPack->delete();
 
-        return redirect()->route('tcgPack.index');
+        return redirect()->route('admin.tcgPack.index');
     }
 
     /**
@@ -86,17 +86,17 @@ class AdminTCGPackController extends Controller
     /**
      * Save an updated TCGCard
      */
-    public function saveUpdate(Request $request, string $id): View
+    public function saveUpdate(Request $request, string $id): RedirectResponse
     {
-        $viewData = [
-            'subtitle1' => 'Successful Update',
-        ];
         $request->validate(TCGPackValidator::$rules);
         $tcgPack = TCGPack::findOrFail($id);
-        $tcgPack->update($request->only(['name', 'franchise']));
-
-        $storeInterface = app(ImageStorage::class);
-        $storeInterface->store(tcgPack->getId(), $request);
-        return view('admin.tcgPack.success')->with('viewData', $viewData);
+        $tcgPack->update($request->only(['name',]));
+        if ($request->hasFile('image')) {
+            $storeInterface = app(ImageStorage::class);
+            $imageName = $storeInterface->store($tcgPack->getId(), $request);
+            $tcgPack->setImage($imageName);
+            $tcgPack->save();
+        }
+        return back()->with('success', 'Successful Update');
     }
 }
