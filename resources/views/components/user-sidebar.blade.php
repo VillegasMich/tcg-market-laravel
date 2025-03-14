@@ -7,7 +7,7 @@
     </div>
     <p>My cart</p>
   </a>
-  @if (Auth::check() && Auth::user()->role === 'admin')
+  @if (Auth::check())
     <a href="{{ route('order.index') }}"
       class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold items-center space-x-2.5 hover:bg-slate-100">
       <div class="flex justify-center items-center h-full mt-1 ml-1">
