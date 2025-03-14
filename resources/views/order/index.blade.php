@@ -3,7 +3,7 @@
 @section('title', $viewData['title'])
 @section('content')
   <div class="flex w-full flex-grow">
-    <x-user-sidebar/>
+    <x-user-sidebar />
     <div class="flex-grow flex flex-col w-full">
       <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
         <div class="w-full h-fit p-5 mt-2 ">
@@ -15,9 +15,9 @@
             one place.
           </p>
         </div>
-        <div class="mt-10 ml-6 grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           @foreach ($viewData['orders'] as $order)
-            <div class="group relative w-full">
+            <div class="group relative w-fit">
               <div
                 class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80 p-5">
                 <div class="grid gap-x-4 gap-y-4 grid-cols-3 grid-rows-3 overflow-hidden">
@@ -30,10 +30,10 @@
               <div class="mt-4 flex justify-between">
                 <div class="w-full">
                   <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
-                    <small class="text-sm text-gray-500">{{ $order->items_count }} items</small>
+                    <small class="text-sm text-gray-500">{{$order->items_count}} items</small>
                     <a class="flex justify-center w-full" href="{{ route('order.show', ['id' => $order->getId()]) }}">
                       <span aria-hidden="true" class="absolute inset-0"></span>
-                      <p class="text-base text-gray-800 font-semibold">Order {{ $order->getId() }}</p>
+                      <p class="text-base text-gray-800 font-semibold">Order #{{$order->getId()}}</p>
                     </a>
                   </h3>
                 </div>
