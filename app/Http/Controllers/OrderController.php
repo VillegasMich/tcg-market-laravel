@@ -90,7 +90,7 @@ class OrderController extends Controller
      */
     public function show(int $id): View
     {
-        $order = Order::findOrFail($id);
+        $order = Order::with('items')->where('id', $id)->first();
 
         $viewData = [
             'order' => $order,

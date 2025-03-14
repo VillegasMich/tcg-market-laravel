@@ -8,11 +8,6 @@
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="{{ route('tcgPack.index') }}" :active="request()->is('tcgpacks')">Packs</x-navbar-link>
       </li>
-      {{-- @auth
-        <li class="h-12 flex justify-center items-center">
-          <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('cart')">Cart</x-navbar-link>
-        </li>
-      @endauth --}}
     </ul>
     <div class="flex space-x-6 text-lg mr-5">
       @guest
@@ -28,7 +23,6 @@
           </div>
         @endif
       @else
-       
         <a href="{{ route('user.index') }}">Profile</a>
       @endguest
     </div>
