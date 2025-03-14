@@ -18,7 +18,8 @@
           <div class="w-8 flex justify-center items-center mr-1">
             <i class="fa-solid fa-magnifying-glass fa-lg text-gray-700"></i>
           </div>
-          <select name="sort" class="border border-gray-300 text-gray-700 rounded-md p-1 mx-2">
+          <select name="sort" class="border border-gray-300 text-gray-700 rounded-md p-1 mx-2"
+            onChange="this.form.submit()">
             <option value="">Sort by</option>
             <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
             <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
@@ -28,7 +29,8 @@
             <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
           </select>
           <input class="flex-grow border border-gray-300 text-gray-400 rounded-l-md p-1.5 pl-2" type="text"
-            name="keyword" {{ request('keyword', '') }} placeholder="Charizard ex" id="">
+            name="keyword" {{ request('keyword', '') }} placeholder="Charizard ex" id=""
+            value={{ request('keyword') }}>
           <button
             class="w-9 flex justify-center items-center border border-l-0 border-gray-300 rounded-r-md text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors ease-out"
             type='submit'>
