@@ -15,7 +15,7 @@
           one place.
         </p>
       </div>
-      <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         @foreach ($viewData['order']->getItems() as $items)
           <div class="group relative w-fit">
             <img src="{{ asset('pokemon_card_backside.png') }}"
