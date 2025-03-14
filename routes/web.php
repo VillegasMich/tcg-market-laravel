@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 
 /**
+ * User routes
+ */
+Route::get('/user', 'App\Http\Controllers\userController@index')->name('user.index');
+
+/**
  * Cart routes
  */
 Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.index');

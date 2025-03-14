@@ -2,25 +2,39 @@
 @extends('layout.app')
 @section('title', $viewData['title'])
 @section('content')
-  <section class="flex-grow flex justify-center w-full">
-    <div class="flex w-3/5 flex-col">
-      <div class="w-full h-fit p-5 mt-2 space-y-3">
-        <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900">
-          Order {{ $viewData['order']->getId() }}
+<div class="flex w-full flex-grow">
+  <x-user-sidebar/>
+  <div class="flex-grow flex flex-col w-full">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
+      <div class="w-full h-fit p-5 mt-2 ">
+        <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
+          {{ $viewData['title'] }}
         </h1>
         <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-          We appreciate your order, it is currently <strong>{{ $viewData['order']->getStatus() }}</strong>. So hang tight
-          and well send you confirmation very soon!
-        </p>
-        <hr>
-        <p class="text-sm pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-          A total of <strong>${{ $viewData['order']->getTotal() }} US dollars</strong> paid by
-          <strong>{{ $viewData['order']->getPaymentMethod() }}</strong>.
+          Track and manage your orders effortlessly. View details, shipping status, and transaction history all in
+          one place.
         </p>
       </div>
-      <div class="w-full h-fit p-5 pt-2 pl-0 space-y-2">
-        {{-- Poner los items --}}
+      <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        @foreach ($viewData['order']->getItems() as $items)
+          <div class="group relative w-fit">
+            <img src="{{ asset('pokemon_card_backside.png') }}"
+              class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+            <div class="mt-4 flex justify-between">
+              <div class="w-full">
+                <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
+                  <small class="text-sm text-gray-500">Item #1</small>
+                  <a class="flex justify-center w-full" href="">
+                    <span aria-hidden="true" class="absolute inset-0"></span>
+                    <p class="text-base text-gray-800 font-semibold">Item</p>
+                  </a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        @endforeach
       </div>
     </div>
-  </section>
+  </div>
+</div>
 @endsection

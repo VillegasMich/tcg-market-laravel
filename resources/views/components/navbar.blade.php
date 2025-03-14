@@ -8,15 +8,6 @@
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="{{ route('tcgPack.index') }}" :active="request()->is('tcgpacks')">Packs</x-navbar-link>
       </li>
-      <li class="h-12 flex justify-center items-center">
-        <x-navbar-link href="{{ route('order.index') }}" :active="request()->is('orders')">Orders</x-navbar-link>
-      </li>
-      <li class="h-12 flex justify-center items-center">
-        <x-navbar-link href="#" :active="request()->is('users')">Users</x-navbar-link>
-      </li>
-      <li class="h-12 flex justify-center items-center">
-        <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('cart')">Cart</x-navbar-link>
-      </li>
     </ul>
     <div class="flex space-x-6 text-lg mr-5">
       @guest
@@ -32,10 +23,7 @@
           </div>
         @endif
       @else
-        <form id="logout" action="{{ route('logout') }}" method="POST">
-          <a role="button" class="nav-link active" onclick="document.getElementById('logout').submit();">Logout</a>
-          @csrf
-        </form>
+        <a href="{{ route('user.index') }}">Profile</a>
       @endguest
     </div>
   </div>

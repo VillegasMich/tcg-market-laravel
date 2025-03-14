@@ -4,21 +4,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Order;
+use App\Models\TCGCard;
 use App\Validators\OrderValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     /**
      * Get all orders.
      */
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
-        $orders = Order::withCount('items')->get();
 
+        $user = Auth::user();
+
+        if (! $user) {
+            return redirect()->route('login');
+        }
+
+        $orders = Order::withCount('items')->where('user_id', $user->getId())->get();
         $viewData = [
             'title' => 'Orders',
             'orders' => $orders,
@@ -42,17 +51,38 @@ class OrderController extends Controller
     /**
      * Create an Order.
      */
-    public function saveCreate(Request $request): View
+    public function saveCreate(Request $request): RedirectResponse
     {
-        $request->validate(OrderValidator::$rules);
+        $cartProducts = [];
+        $cartProductData = $request->session()->get('cart_product_data');
+        if (! empty($cartProductData)) {
+            $productIds = array_keys($cartProductData);
+            $cartProducts = TCGCard::whereIn('id', $productIds)->get();
+            foreach ($cartProducts as $card) {
+                $card->quantity = $cartProductData[$card->id];
+            }
+        }
 
-        $viewData = [
-            'title' => 'Successful creation',
-        ];
+        $items = [];
+        $total = 0;
+        foreach ($cartProducts as $tcgCard) {
+            $subtotal = $tcgCard->quantity * $tcgCard->getPrice();
+            $total += $subtotal;
 
-        Order::create($request->only(['total', 'paymentMethod']));
+            $item = Item::create(['quantity' => $tcgCard->quantity, 'subtotal' => $subtotal]);
+            $item->setTCGCard($tcgCard);
+            $items[] = $item;
+        }
 
-        return view('order.success')->with('viewData', $viewData);
+        $user = Auth::user();
+        $order = Order::create(['total' => $total, 'paymentMethod' => 'card']);
+        $order->setUser($user);
+
+        foreach ($items as $item) {
+            $item->setOrder($order);
+        }
+
+        return redirect()->route('order.index');
     }
 
     /**
@@ -60,7 +90,7 @@ class OrderController extends Controller
      */
     public function show(int $id): View
     {
-        $order = Order::findOrFail($id);
+        $order = Order::with('items')->where('id', $id)->first();
 
         $viewData = [
             'order' => $order,

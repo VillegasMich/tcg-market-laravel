@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('subtotal');
             $table->timestamps();
-            $table->foreignIdFor(TCGCard::class);
-            $table->foreignIdFor(Order::class);
+            $table->foreignIdFor(TCGCard::class)->nullable(true)->default(null);
+            $table->foreignIdFor(Order::class)->nullable(true)->default(null);
         });
     }
 
