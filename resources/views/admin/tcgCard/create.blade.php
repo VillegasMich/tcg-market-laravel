@@ -1,34 +1,34 @@
 @extends('layout.adminApp')
 @section('content')
 <h1 class=" m-10 text-5xl font-extrabold dark:text-white text-center">{{ $viewData['subtitle1'] }}</h1>
-@if (session('success'))
-<div class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
-  <p>{{ session('success') }}</p>
-</div>
-@endif
-
-@if ($errors->any())
-<div class="bg-red-100 text-red-700 p-4 rounded-md mb-4">
-  <p><strong>Oops! Errores:</strong></p>
-  <ul class="list-disc list-inside">
-    @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-  </ul>
-</div>
-@endif
 <form class="max-w-screen-md mx-auto " method="POST" action="{{ route('admin.tcgCard.save-create') }}"
   enctype="multipart/form-data">
+  @if (session('success'))
+  <div class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
+    <p>{{ session('success') }}</p>
+  </div>
+  @endif
+
+  @if ($errors->any())
+  <div class="bg-red-100 text-red-700 p-4 rounded-md mb-4">
+    <p><strong>Oops! Errores:</strong></p>
+    <ul class="list-disc list-inside">
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+  @endif
   @csrf <div class="grid grid-cols-2 gap-4">
     <div class="mb-5">
       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-      <input type="text" id="name" name="name"
+      <input type="text" id="name" name="name" value="{{ old('name') }}"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Charizard EX" required />
     </div>
     <div class="mb-5">
       <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-      <input type="text" id="description" name="description"
+      <input type="text" id="description" name="description" value="{{ old('description') }}"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Charizard Card" required />
     </div>
@@ -45,7 +45,7 @@
 
     <div class="mb-5">
       <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-      <input type="number" id="price" name="price" min="0" required
+      <input type="number" id="price" name="price" min="0" required value="{{ old('price') }}"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="1000" required />
     </div>
@@ -68,12 +68,12 @@
     </div>
     <div class="mb-5">
       <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-      <input type="file" id="image" name="image"
+      <input type="file" id="image" name="image" value="{{ old('image') }}"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
     </div>
     <div class="mb-5">
       <label for="launchDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Launch Date</label>
-      <input type="date" id="launchDate" name="launchDate" required
+      <input type="date" id="launchDate" name="launchDate" required value="{{ old('launchDate') }}"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
     </div>
     <div class="mb-5">
@@ -107,7 +107,7 @@
     </div>
     <div class="mb-5">
       <label for="pullRate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pull Rate</label>
-      <input type="number" step="0.01" id="pullRate" name="pullRate" required
+      <input type="number" step="0.01" id="pullRate" name="pullRate" required value="{{ old('pullRate') }}"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
     </div>
     <div class="mb-5">
@@ -149,7 +149,7 @@
     </div>
     <div class="mb-5">
       <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
-      <input type="number" id="stock" name="stock" required
+      <input type="number" id="stock" name="stock" required value="{{ old('stock') }}"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
     </div>
   </div>

@@ -3,21 +3,38 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Item;
+use App\Models\Order;
 use App\Models\TCGCard;
+use App\Models\TCGPack;
+use App\Models\User;
+use App\Models\WishList;
 use Illuminate\Contracts\View\View;
 
 class AdminHomeController extends Controller
 {
     public function index(): View
     {
-        $tcgCards = TCGCard::paginate(10);
-        $viewData = [
-            'title' => 'ADMIN HOME PAGE',
-            'subtitle1' => 'TCG Cards',
-            'subtitle2' => 'TCG Packs',
-            'tcgCards' => $tcgCards,
-        ];
-
-        return view('admin.index')->with('viewData', $viewData);
+        return view('admin.index', [
+            'viewData' => [
+                'title' => 'ADMIN HOME PAGE',
+                'subtitle1' => 'TCG Cards',
+                'subtitle2' => 'TCG Packs',
+                'subtitle3' => 'Items',
+                'subtitle4' => 'Orders',
+                'subtitle5' => 'Wish Lists',
+                'subtitle6' => 'Users',
+                'tcgCards' => TCGCard::limit(7)->get(),
+                'totalTcgCards' => TCGCard::count(),
+                'tcgPacks' => TCGPack::limit(9)->get(),
+                'totalTcgPacks' => TCGPack::count(),
+                'items' => Item::limit(5)->get(),
+                'totalItems' => Item::count(),
+                'orders' => Order::limit(4)->get(),
+                'totalOrders' => Order::count(),
+                'totalWishLists' => WishList::count(),
+                'totalUsers' => User::count(),
+            ],
+        ]);
     }
 }

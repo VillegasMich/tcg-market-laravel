@@ -65,7 +65,7 @@ class TCGPack extends Model
         return $this->tcgCards;
     }
 
-    public function setTcgCards(TCGCard $tcgCards): void
+    public function setTcgCards(array $tcgCards): void
     {
         $this->tcgCards()->sync($tcgCards);
     }

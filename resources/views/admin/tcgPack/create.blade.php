@@ -1,24 +1,24 @@
 @extends('layout.adminApp')
 @section('content')
 <h1 class=" m-10 text-5xl font-extrabold dark:text-white text-center">{{ $viewData['subtitle1'] }}</h1>
-@if (session('success'))
-<div class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
-  <p>{{ session('success') }}</p>
-</div>
-@endif
-@if ($errors->any())
-<div class="bg-red-100 text-red-700 p-4 rounded-md mb-4">
-  <p><strong>Oops! Errores:</strong></p>
-  <ul class="list-disc list-inside">
-    @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-  </ul>
-</div>
-@endif
 <form class="max-w-screen-md mx-auto " method="POST" action="{{ route('admin.tcgPack.save-create') }}"
   enctype="multipart/form-data">
   @csrf
+  @if (session('success'))
+  <div class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
+    <p>{{ session('success') }}</p>
+  </div>
+  @endif
+  @if ($errors->any())
+  <div class="bg-red-100 text-red-700 p-4 rounded-md mb-4">
+    <p><strong>Oops! Errores:</strong></p>
+    <ul class="list-disc list-inside">
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+  @endif
   <div class="grid grid-cols-2 gap-4">
     <div class="mb-5">
       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
