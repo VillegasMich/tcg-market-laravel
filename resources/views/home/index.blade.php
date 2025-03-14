@@ -9,7 +9,7 @@
         Discover rare and coveted cards with ease, your next great find is just a click away.
       </p>
       <div class="flex justify-center items-center space-x-6 mt-8">
-        <a
+        <a href="{{ route('tcgCard.index') }}"
           class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:cursor-pointer">Search
           cards</a>
         <a href="#" class="text-sm/6 font-semibold text-gray-900">Learn more</a>

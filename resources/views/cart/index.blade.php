@@ -30,7 +30,7 @@
                 @foreach ($viewData['cartProducts'] as $card)
                   <tr>
                     <td class="border border-gray-300 px-4 py-2 flex justify-center items-center">
-                      <img src="{{ asset('/storage/' . $card->getImage()) }}" class="h-16 w-16 rounded">
+                      <img src="{{ asset('/storage/' . $card->getImage()) }}" class="h-20 w-16 rounded">
                     </td>
                     <td class="border border-gray-300 px-4 py-2">{{ $card->getName() }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $card->getFranchise() }}</td>
