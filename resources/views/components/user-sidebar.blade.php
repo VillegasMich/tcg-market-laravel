@@ -7,27 +7,30 @@
     </div>
     <p>My cart</p>
   </a>
-  <a href="{{ route('order.index') }}"
-    class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold items-center space-x-2.5 hover:bg-slate-100">
-    <div class="flex justify-center items-center h-full mt-1 ml-1">
-      <i class="fa-solid fa-md fa-bars"></i>
+  @if (Auth::check())
+    <a href="{{ route('order.index') }}"
+      class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold items-center space-x-2.5 hover:bg-slate-100">
+      <div class="flex justify-center items-center h-full mt-1 ml-1">
+        <i class="fa-solid fa-md fa-bars"></i>
+      </div>
+      <p>My orders</p>
+    </a>
+    <a href=""
+      class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold space-x-2 hover:bg-slate-100">
+      <div class="flex justify-center items-center h-full mt-0.5 ml-1">
+        <i class="fa-solid fa-md fa-heart"></i>
+      </div>
+      <p>My wish list</p>
+    </a>
+    <div
+      class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold space-x-2.5 hover:bg-red-500 hover:text-white transition ease-in-out">
+      <div class="flex justify-center items-center h-full mt-0.5 ml-1">
+        <i class="fa-solid fa-right-from-bracket fa-md fa-flip-horizontal"></i>
+      </div>
+      <form id="logout" action="{{ route('logout') }}" method="POST" class="">
+        <a role="button" class="nav-link active" onclick="document.getElementById('logout').submit();">Logout</a>
+        @csrf
+      </form>
     </div>
-    <p>My orders</p>
-  </a>
-  <a href="" class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold space-x-2 hover:bg-slate-100">
-    <div class="flex justify-center items-center h-full mt-0.5 ml-1">
-      <i class="fa-solid fa-md fa-heart"></i>
-    </div>
-    <p>My wish list</p>
-  </a>
-  <div
-    class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold space-x-2.5 hover:bg-red-500 hover:text-white transition ease-in-out">
-    <div class="flex justify-center items-center h-full mt-0.5 ml-1">
-      <i class="fa-solid fa-right-from-bracket fa-md fa-flip-horizontal"></i>
-    </div>
-    <form id="logout" action="{{ route('logout') }}" method="POST" class="">
-      <a role="button" class="nav-link active" onclick="document.getElementById('logout').submit();">Logout</a>
-      @csrf
-    </form>
-  </div>
+  @endif
 </div>

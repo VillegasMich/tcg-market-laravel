@@ -45,7 +45,11 @@ class TCGCardController extends Controller
         $cartProductData = $request->session()->get('cart_product_data');
         $tcgCard = TCGCard::findOrFail($id);
         if (isset($cartProductData[$tcgCard->getId()])) {
-            $cartProductData[$tcgCard->getId()] += 1;
+            if ($cartProductData[$tcgCard->getId()] >= $tcgCard->getStock()) {
+                return back()->with('error', "{$tcgCard->getName()} is out of stock!");
+            } else {
+                $cartProductData[$tcgCard->getId()] += 1;
+            }
         } else {
             $cartProductData[$tcgCard->getId()] = 1;
         }

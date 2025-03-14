@@ -23,10 +23,6 @@ class OrderController extends Controller
 
         $user = Auth::user();
 
-        if (! $user) {
-            return redirect()->route('login');
-        }
-
         $orders = Order::withCount('items')->where('user_id', $user->getId())->get();
         $viewData = [
             'title' => 'Orders',
@@ -53,6 +49,8 @@ class OrderController extends Controller
      */
     public function saveCreate(Request $request): RedirectResponse
     {
+        $user = Auth::user();
+
         $cartProducts = [];
         $cartProductData = $request->session()->get('cart_product_data');
         if (! empty($cartProductData)) {
@@ -74,13 +72,14 @@ class OrderController extends Controller
             $items[] = $item;
         }
 
-        $user = Auth::user();
         $order = Order::create(['total' => $total, 'paymentMethod' => 'card']);
         $order->setUser($user);
 
         foreach ($items as $item) {
             $item->setOrder($order);
         }
+
+        $request->session()->forget('cart_product_data');
 
         return redirect()->route('order.index');
     }

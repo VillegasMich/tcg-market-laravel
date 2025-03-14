@@ -8,6 +8,14 @@
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="{{ route('tcgPack.index') }}" :active="request()->is('tcgpacks')">Packs</x-navbar-link>
       </li>
+      <li class="h-12 flex justify-center items-center">
+        <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('cart')">Cart</x-navbar-link>
+      </li>
+      @if (Auth::check() && Auth::user()->role === 'admin')
+        <li class="h-12 flex justify-center items-center">
+          <x-navbar-link class="nav-link" href="{{ route('admin.index') }}">Admin Dashboard</x-navbar-link>
+        </li>
+      @endif
     </ul>
     <div class="flex space-x-6 text-lg mr-5">
       @guest
