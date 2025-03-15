@@ -15,7 +15,7 @@
       </div>
       <p>My orders</p>
     </a>
-    <a href=""
+    <a href="{{route('wishList.index')}}"
       class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold space-x-2 hover:bg-slate-100">
       <div class="flex justify-center items-center h-full mt-0.5 ml-1">
         <i class="fa-solid fa-md fa-heart"></i>
