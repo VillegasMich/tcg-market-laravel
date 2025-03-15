@@ -12,7 +12,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class OrderController extends Controller
 {
@@ -26,7 +25,6 @@ class OrderController extends Controller
 
         $orders = Order::with(['items.TCGCard'])->where('user_id', $user->getId())->get();
         $viewData = [
-            'title' => 'Orders',
             'orders' => $orders,
         ];
 
@@ -38,11 +36,7 @@ class OrderController extends Controller
      */
     public function create(): View
     {
-        $viewData = [
-            'title' => 'Create',
-        ];
-
-        return view('order.create')->with('viewData', $viewData);
+        return view('order.create');
     }
 
     /**
@@ -94,7 +88,6 @@ class OrderController extends Controller
 
         $viewData = [
             'order' => $order,
-            'title' => 'Order',
         ];
 
         return view('order.show')->with('viewData', $viewData);
