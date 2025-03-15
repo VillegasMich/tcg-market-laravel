@@ -6,7 +6,7 @@
       <div class="w-full md:w-5/12">
         <div class="bg-white shadow rounded-lg overflow-hidden">
           <div class="bg-gray-100 px-6 py-4 border-b">
-            <h2 class="text-xl font-semibold">{{ __('Login') }}</h2>
+            <h2 class="text-xl font-semibold">{{ __('Auth.login') }}</h2>
           </div>
           <div class="p-6">
             <form method="POST" action="{{ route('login') }}">
@@ -14,7 +14,7 @@
               <!-- Email -->
               <div class="flex mb-3">
                 <label for="email" class="w-1/3 text-right pr-4 pt-2">
-                  {{ __('Email Address') }}
+                  {{ __('Auth.email') }}
                 </label>
                 <div class="w-2/3">
                   <input id="email" type="email" name="email" value="{{ old('email') }}" required
@@ -31,7 +31,7 @@
               <!-- Password -->
               <div class="flex mb-3">
                 <label for="password" class="w-1/3 text-right pr-4 pt-2">
-                  {{ __('Password') }}
+                  {{ __('Auth.password') }}
                 </label>
                 <div class="w-2/3">
                   <input id="password" type="password" name="password" required autocomplete="current-password"
@@ -51,7 +51,7 @@
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}
                       class="form-checkbox h-4 w-4 text-blue-600">
                     <label for="remember" class="ml-2 text-gray-700">
-                      {{ __('Remember Me') }}
+                      {{ __('Auth.remember') }}
                     </label>
                   </div>
                 </div>
@@ -61,11 +61,11 @@
               <div class="flex mb-0">
                 <div class="w-full md:w-2/3 ml-1/3">
                   <button type="submit" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700">
-                    {{ __('Login') }}
+                    {{ __('Auth.login') }}
                   </button>
                   @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="text-blue-600 hover:underline ml-4">
-                      {{ __('Forgot Your Password?') }}
+                      {{ __('Auth.forgot') }}
                     </a>
                   @endif
                 </div>

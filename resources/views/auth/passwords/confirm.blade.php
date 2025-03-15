@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">{{ __('Confirm Password') }}</div>
+          <div class="card-header">{{ __('Auth.confirm_password') }}</div>
 
           <div class="card-body">
-            {{ __('Please confirm your password before continuing.') }}
+            {{ __('Auth.confirmation_link_1') }}
 
             <form method="POST" action="{{ route('password.confirm') }}">
               @csrf
@@ -31,12 +31,12 @@
               <div class="row mb-0">
                 <div class="col-md-8 offset-md-4">
                   <button type="submit" class="btn btn-primary">
-                    {{ __('Confirm Password') }}
+                    {{ __('Auth.confirm_password') }}
                   </button>
 
                   @if (Route::has('password.request'))
                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                      {{ __('Forgot Your Password?') }}
+                      {{ __('Auth.forgot') }}
                     </a>
                   @endif
                 </div>

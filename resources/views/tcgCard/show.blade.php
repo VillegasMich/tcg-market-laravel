@@ -8,7 +8,8 @@
         </div>
         <div class="mt-6 sm:mt-8 lg:mt-0">
           <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">
-            {{ $viewData['tcgCard']->getName() }} - PSA: {{ $viewData['tcgCard']->getPSAGrade() }}
+            {{ $viewData['tcgCard']->getName() }} - {{ __('TcgCarc.show_psa') }}
+            {{ $viewData['tcgCard']->getPSAGrade() }}
           </h1>
           <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
             <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl">
@@ -31,7 +32,7 @@
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
                 </svg>
-                Add to wishlist
+                {{ __('TcgCard.show_add_to_wishlist') }}
               </button>
             </form>
             <form action="{{ route('tcgCard.add-to-cart', ['id' => $viewData['tcgCard']->getId()]) }}" method="POST">
@@ -43,7 +44,7 @@
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
                 </svg>
-                Add to cart
+                {{ __('TcgCard.show_add_to_cart') }}
               </button>
             </form>
           </div>
@@ -54,12 +55,14 @@
           </p>
 
           <ul class="list-disc list-inside text-gray-700">
-            <li>PSA: {{ $viewData['tcgCard']->getPSAGrade() }}</li>
-            <li>Price: ${{ number_format($viewData['tcgCard']->getPrice(), 2) }}</li>
-            <li>Rarity: {{ $viewData['tcgCard']->getRarity() }}</li>
-            <li>Launch Date: {{ $viewData['tcgCard']->getLaunchDate() }}</li>
-            <li>Created at: {{ $viewData['tcgCard']->getCreatedAt() }}</li>
-            <li>Updated at: {{ $viewData['tcgCard']->getUpdatedAt() }}</li>
+            <li>{{ __('TcgCard.show_psa') }} {{ $viewData['tcgCard']->getPSAGrade() }}</li>
+            <li>{{ __('TcgCard.show_price') }} ${{ number_format($viewData['tcgCard']->getPrice(), 2) }}</li>
+            <li>{{ __('TcgCard.show_rarity') }} {{ $viewData['tcgCard']->getRarity() }}</li>
+            <li> {{ __('TcgCard.show_franchise') }} {{ $viewData['tcgCard']->getFranchise() }}</li>
+            <li> {{ __('TcgCard.show_stock') }} {{ $viewData['tcgCard']->getStock() }}</li>
+            <li>{{ __('TcgCard.show_launch_date') }} {{ $viewData['tcgCard']->getLaunchDate() }}</li>
+            <li>{{ __('TcgCard.show_created_at') }} {{ $viewData['tcgCard']->getCreatedAt() }}</li>
+            <li>{{ __('TcgCard.show_updated_at') }} {{ $viewData['tcgCard']->getUpdatedAt() }}</li>
           </ul>
 
           @foreach ($viewData['tcgCard']->getTcgPacks() as $tcgPack)
