@@ -43,6 +43,7 @@
           </div>
         @endif
       @else
+        <span class="text-gray-400">Balance: {{ number_format(Auth::user()->getBalance()) }}</span>
         <a href="{{ route('user.index') }}">{{ __('Navbar.profile') }}</a>
       @endguest
     </div>
