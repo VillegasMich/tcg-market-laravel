@@ -22,15 +22,16 @@
       </div>
       <p>My wish list</p>
     </a>
-    <div
-      class="w-full text-lg flex h-fit rounded-lg border p-3 font-semibold space-x-2.5 hover:bg-red-500 hover:text-white transition ease-in-out">
-      <div class="flex justify-center items-center h-full mt-0.5 ml-1">
-        <i class="fa-solid fa-right-from-bracket fa-md fa-flip-horizontal"></i>
-      </div>
-      <form id="logout" action="{{ route('logout') }}" method="POST" class="">
-        <a role="button" class="nav-link active" onclick="document.getElementById('logout').submit();">Logout</a>
-        @csrf
-      </form>
-    </div>
+
+    <form id="logout" action="{{ route('logout') }}" method="POST"
+      class="w-full text-lg flex h-fit rounded-lg border font-semibold space-x-2.5 hover:bg-red-500 hover:text-white transition ease-in-out">
+      <a role="button" class="nav-link active w-full flex space-x-2 p-3" onclick="document.getElementById('logout').submit();">
+        <div class="flex justify-center items-center h-full mt-0.5 mr-2 ml-1">
+          <i class="fa-solid fa-right-from-bracket fa-md fa-flip-horizontal"></i>
+        </div>
+        Logout
+      </a>
+      @csrf
+    </form>
   @endif
 </div>
