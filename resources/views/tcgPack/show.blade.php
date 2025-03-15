@@ -11,14 +11,12 @@
             {{ $viewData['tcgPack']->getName() }}
           </h1>
           <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-            Unleash the thrill of opening brand-new packs and expanding your collection. Whether you're hunting for rare
-            finds, building a powerful deck, or just enjoying the excitement of the unknown, we have the perfect pack for
-            you.
+            {{ __('TcgPack.description') }}
           </p>
         </div>
       </div>
       <div class="flex items-center w-full h-fit mt-5 ml-6">
-        <h3 class="text-3xl pl-0.5 text-pretty text-gray-500">This pack has the following cards: </h3>
+        <h3 class="text-3xl pl-0.5 text-pretty text-gray-500">{{ __('TcgPack.cards_from_pack_title') }} </h3>
       </div>
       <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         @foreach ($viewData['tcgPack']->getTcgCards() as $tcgCard)
