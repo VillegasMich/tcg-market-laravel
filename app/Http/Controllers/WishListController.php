@@ -7,16 +7,20 @@ use App\Validators\WishListValidator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+
 
 class WishListController extends Controller
 {
     public function index(): View
     {
+        $user = Auth::user();
+
         $viewData = [];
         $viewData['title'] = 'WishList - TCG Market';
         $viewData['subtitle'] = 'WishList';
-        $viewData['wishLists'] = WishList::all();
-
+        $viewData['wishList'] = WishList::with('TCGCards')->where('user_id', $user->getId())->first();
+        
         return view('wishList.index')->with('viewData', $viewData);
     }
 

@@ -20,10 +20,17 @@ class CartController extends Controller
             }
         }
 
+        $total = 0;
+        foreach ($cartProducts as $tcgCard) {
+            $subtotal = $tcgCard->quantity * $tcgCard->getPrice();
+            $total += $subtotal;
+        }
+
         return view('cart.index', [
             'viewData' => [
                 'title' => 'Your Cart',
                 'cartProducts' => $cartProducts,
+                'total' => $total,
             ],
         ]);
     }
