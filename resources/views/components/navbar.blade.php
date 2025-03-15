@@ -11,27 +11,28 @@
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('cart')">Cart</x-navbar-link>
       </li>
-      @if (Auth::check() && Auth::user()->role === 'admin')
-        <li class="h-12 flex justify-center items-center">
-          <x-navbar-link class="nav-link" href="{{ route('admin.index') }}">Admin Dashboard</x-navbar-link>
-        </li>
+      @if (Auth::check() && Auth::user()->getRole() === 'admin')
+      <li class="h-12 flex justify-center items-center">
+        <x-navbar-link class="nav-link" href="{{ route('admin.index') }}">Admin Dashboard</x-navbar-link>
+      </li>
       @endif
     </ul>
     <div class="flex space-x-6 text-lg mr-5">
       @guest
-        @if (Route::has('login'))
-          <div class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-          </div>
-        @endif
+      @if (Route::has('login'))
+      <div class="nav-item">
+        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+      </div>
+      @endif
 
-        @if (Route::has('register'))
-          <div class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-          </div>
-        @endif
+      @if (Route::has('register'))
+      <div class="nav-item">
+        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+      </div>
+      @endif
       @else
-        <a href="{{ route('user.index') }}">Profile</a>
+      <span class="text-gray-400">Balance: {{ number_format(Auth::user()->getBalance()) }}</span>
+      <a href="{{ route('user.index') }}">Profile</a>
       @endguest
     </div>
   </div>
