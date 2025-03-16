@@ -8,37 +8,30 @@
       <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
         <div class="w-full h-fit p-5 mt-2 ">
           <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
-            My wishlist
+            {{ __('WishList.title') }}
           </h1>
           <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-            Track and manage your orders effortlessly. View details, shipping status, and transaction history all in
-            one place.
+            {{ __('WishList.description') }}
           </p>
         </div>
-        <div class="bg-red-500 w-full h-fit">
-            @foreach ($viewData['wishList']->getTCGCards() as $tcgCard)
-            <div class="relative">
-                <button class="absolute top-0 right-0 mt-4 mr-3 text-gray-500 hover:text-gray-700">
-                  <i class="fa-solid fa-x fa-xs"></i>
-                </button>
-                <hr>
-                <div class="w-full h-fit flex space-x-4 my-4">
-                  <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}" alt="" class="w-1/4 h-48">
-                  <div class="w-[75%] h-fit flex flex-col space-y-0.5">
-                    <p class="text-lg w-full font-semibold tracking-tight text-balance text-gray-900">
-                      {{ $tcgCard->getName() }}
-                    </p>
-                    <small class="font-semibold tracking-tight text-balance text-gray-400">
-                      {{ $tcgCard->getFranchise() }}
-                    </small>
-                    <p class="font-semibold">
-                      ${{ number_format($tcgCard->getPrice(), 2) }}
-                    </p>
-                  </div>
+        <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          @foreach ($viewData['wishList']->getTCGCards() as $tcgCard)
+            <div class="group relative w-fit">
+              <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}"
+                class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+              <div class="mt-4 flex justify-between">
+                <div class="w-full">
+                  <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
+                    <small class="text-sm text-gray-500">{{ $tcgCard->getFranchise() }}</small>
+                    <a class="flex justify-center w-full" href="{{ route('tcgCard.show', ['id' => $tcgCard->getId()]) }}">
+                      <span aria-hidden="true" class="absolute inset-0"></span>
+                      <p class="text-base text-gray-800 font-semibold">{{ $tcgCard->getName() }}</p>
+                    </a>
+                  </h3>
                 </div>
-                <hr>
               </div>
-            @endforeach
+            </div>
+          @endforeach
         </div>
       </div>
     </div>

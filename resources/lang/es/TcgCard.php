@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'tile' => 'Explora la Colección TCG Definitiva',
+    'title' => 'Explora la Colección TCG Definitiva',
     'description' => 'Descubre una amplia selección de cartas coleccionables de tus franquicias favoritas. Ya sea que busques piezas raras, poderosas adiciones para tu mazo o simplemente expandir tu colección, tenemos la carta perfecta para ti.',
     'sort_by' => 'Ordenar por',
     'price_low_to_high' => 'Precio: Menor a Mayor',

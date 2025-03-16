@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'tile' => 'Descubre los Sobres de Cartas Definitivos',
+    'title' => 'Descubre los Sobres de Cartas Definitivos',
     'description' => 'Disfruta la emoción de abrir sobres nuevos y expandir tu colección. Ya sea que estés buscando cartas raras, construyendo un mazo poderoso o simplemente disfrutando la sorpresa de lo desconocido, tenemos el sobre perfecto para ti.',
     'sort_by' => 'Ordenar por',
     'price_low_to_high' => 'Precio: Menor a Mayor',

@@ -10,6 +10,6 @@ return [
     'shipping_estimate' => 'Estimación de Envío',
     'tax_estimate' => 'Estimación de Impuestos',
     'checkout' => 'Finalizar Compra',
-    'empty_cart' => 'Carrito Vacío',
+    'empty_cart' => 'Vaciar carrito',
     'empty_message' => 'No hay nada en tu carrito',
 ];
