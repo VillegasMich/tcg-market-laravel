@@ -33,7 +33,8 @@
                     <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">
                       <small class="text-sm text-gray-500">{{ __('Order.status') }}: {{ $order->getStatus() }}</small>
                       <small class="text-sm text-gray-500">{{ $order->items->count() }} {{ __('Order.items') }}</small>
-                      <small class="text-sm text-gray-500">{{ __('Order.total') }}: ${{ $order->getTotal() }}</small>
+                      <small class="text-sm text-gray-500">{{ __('Order.total') }}:
+                        ${{ number_format($order->getTotal(), 2) }}</small>
                       <a class="flex justify-center w-full" href="{{ route('order.show', ['id' => $order->getId()]) }}">
                         <span aria-hidden="true" class="absolute inset-0"></span>
                         <p class="text-base text-gray-800 font-semibold">{{ __('Order.order') }} #{{ $order->getId() }}

@@ -34,7 +34,7 @@
           @endforeach
         </div>
         @if ($viewData['order']->getStatus() != 'shipped')
-          <form action="{{ route('order.pay', ['id' => $viewData['order']->getId()]) }}" method="POST">
+          <form action="{{ route('order.pay', ['id' => $viewData['order']->getId()]) }}" method="POST" class="ml-7 mt-6">
             @method('PUT')
             @csrf
             <button

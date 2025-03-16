@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'tile' => 'Explore the Ultimate TCG Collection',
+    'title' => 'Explore the Ultimate TCG Collection',
     'description' => 'Discover a vast selection of trading cards from your favorite franchises. Whether you\'re searching for rare collectibles, powerful deck additions, or simply expanding your collection, we\'ve got the perfect card for you.',
     'sort_by' => 'Sort by',
     'price_low_to_high' => 'Price: Low to High',
@@ -17,6 +17,7 @@ return [
     'show_rarity' => 'Rarity:',
     'show_franchise' => 'Franchise:',
     'show_stock' => 'Stock:',
+    'show_launch_date' => 'Launch date:',
     'show_created_at' => 'Created At:',
     'show_updated_at' => 'Updated At:',
 ];

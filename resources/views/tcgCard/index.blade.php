@@ -9,7 +9,7 @@
           {{ __('TcgCard.title') }}
         </h1>
         <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-          {{ __('TcgCard.decription') }}
+          {{ __('TcgCard.description') }}
         </p>
       </div>
       <div class="flex justify-center items-center w-full h-fit mt-5">
