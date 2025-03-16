@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'name' => 'Nombre',
+    'email' => 'Correo Electrónico',
+    'password' => 'Contraseña',
+    'password_confirmation' => 'Confirmar Contraseña',
+    'address' => 'Dirección',
+    'role' => 'Rol',
+    'role_regular' => 'Regular',
+    'role_admin' => 'Administrador',
+    'remember' => 'Recuérdame',
+    'login' => 'Iniciar Sesión',
+    'register' => 'Registrarse',
+    'forgot' => '¿Olvidaste tu contraseña?',
+    'verify_email' => 'Verifica tu dirección de correo electrónico',
+    'verification_link_1' => 'Se ha enviado un nuevo enlace de verificación a tu correo electrónico.',
+    'verification_link_2' => 'Antes de continuar, revisa tu correo electrónico para ver el enlace de verificación.',
+    'verification_link_3' => 'Si no recibiste el correo',
+    'verification_link_4' => 'haz clic aquí para solicitar otro',
+    'confirm_password' => 'Confirmar Contraseña',
+    'confirmation_link_1' => 'Por favor, confirma tu contraseña antes de continuar.',
+    'reset_password' => 'Restablecer Contraseña',
+    'email_address' => 'Correo Electrónico',
+    'send_password_reset_link' => 'Enviar enlace para restablecer contraseña',
+];

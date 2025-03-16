@@ -27,7 +27,7 @@
         <div id="languageDropdown" class="absolute hidden bg-white shadow-md rounded mt-1">
           <a href="{{ route('language.switch', ['locale' => 'en']) }}"
             class="block px-4 py-2 hover:bg-gray-100">{{ __('Navbar.english') }}</a>
-          <a href="{{ route('language.switch', ['locale' => 'en']) }}"
+          <a href="{{ route('language.switch', ['locale' => 'es']) }}"
             class="block px-4 py-2 hover:bg-gray-100">{{ __('Navbar.spanish') }}</a>
         </div>
       </div>

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('setLocal')->group(function () {
+Route::middleware('setLocale')->group(function () {
     /**
      * Home routes
      */
