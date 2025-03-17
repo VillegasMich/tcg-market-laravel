@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TCGCard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class TCGCardController extends Controller
@@ -56,5 +57,21 @@ class TCGCardController extends Controller
         $request->session()->put('cart_product_data', $cartProductData);
 
         return back()->with('success', "{$tcgCard->getName()} has been added to your cart!");
+    }
+
+
+    /**
+     * Add a TCGCard to the wish list
+     */
+    public function addToWishList(string $id): RedirectResponse
+    {
+        $user = Auth::user();
+        $tcgCard = TCGCard::findOrFail($id);
+
+        $userWishList = $user->getWishlist(); 
+
+        $userWishList->tcgCards()->syncWithoutDetaching([$tcgCard->id]);
+
+        return back()->with('success', "{$tcgCard->getName()} has been added to your wish list!");
     }
 }

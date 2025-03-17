@@ -6,12 +6,10 @@
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
       <div class="w-full h-fit p-5 mt-2 ">
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
-          Discover the Ultimate Card Packs
+          {{ __('TcgPack.title') }}
         </h1>
         <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-          Unleash the thrill of opening brand-new packs and expanding your collection. Whether you're hunting for rare
-          finds, building a powerful deck, or just enjoying the excitement of the unknown, we have the perfect pack for
-          you.
+          {{ __('TcgPack.description') }}
         </p>
       </div>
       <div class="flex justify-center items-center w-full h-fit mt-5">
@@ -20,11 +18,14 @@
             <i class="fa-solid fa-magnifying-glass fa-lg text-gray-700"></i>
           </div>
           <select name="sort" class="border border-gray-300 text-gray-700 rounded-md p-1 mx-2">
-            <option value="">Sort by</option>
-            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
-            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
-            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest First</option>
-            <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
+            <option value="">{{ __('TcgPack.sort_by') }}</option>
+            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>
+              {{ __('TcgPack.price_low_to_high') }}</option>
+            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>
+              {{ __('TcgPack.price_high_to_low') }}</option>
+            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>{{ __('TcgCard.newest') }}</option>
+            <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>{{ __('TcgCard.oldest') }}
+            </option>
           </select>
           <input class="flex-grow border border-gray-300 text-gray-400 rounded-l-md p-1.5 pl-2" type="text"
             name="keyword" placeholder="Prismatic evolutions" id="">

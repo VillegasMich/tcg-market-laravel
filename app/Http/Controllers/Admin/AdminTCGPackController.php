@@ -32,9 +32,7 @@ class AdminTCGPackController extends Controller
     public function delete(string $id): RedirectResponse
     {
         $tcgPack = TCGPack::findOrFail($id);
-        foreach ($tcgPack->getTcgCards() as $pack) {
-            $pack->tcgPacks()->detach($id);
-        }
+        $tcgPack->setTcgCards([]);
         $tcgPack->delete();
 
         return redirect()->route('admin.tcgPack.index');

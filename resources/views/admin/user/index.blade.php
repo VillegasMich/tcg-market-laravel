@@ -8,12 +8,12 @@
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" class="px-6 py-4">ID</th>
-                <th scope="col" class="px-6 py-4">Name</th>
-                <th scope="col" class="px-6 py-4">Email</th>
-                <th scope="col" class="px-6 py-4">Address</th>
-                <th scope="col" class="px-6 py-4">Role</th>
-                <th scope="col" class="px-6 py-4">Balance</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/User.id') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/User.name') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/User.email') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/User.address') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/User.role') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/User.balance') }}</th>
               </tr>
             </thead>
             @foreach ($viewData['users'] as $user)

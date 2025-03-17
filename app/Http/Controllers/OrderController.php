@@ -23,9 +23,8 @@ class OrderController extends Controller
 
         $user = Auth::user();
 
-        $orders = Order::withCount('items')->where('user_id', $user->getId())->get();
+        $orders = Order::with(['items.TCGCard'])->where('user_id', $user->getId())->get();
         $viewData = [
-            'title' => 'Orders',
             'orders' => $orders,
         ];
 
@@ -37,11 +36,7 @@ class OrderController extends Controller
      */
     public function create(): View
     {
-        $viewData = [
-            'title' => 'Create',
-        ];
-
-        return view('order.create')->with('viewData', $viewData);
+        return view('order.create');
     }
 
     /**
@@ -89,11 +84,10 @@ class OrderController extends Controller
      */
     public function show(int $id): View
     {
-        $order = Order::with('items')->where('id', $id)->first();
+        $order = Order::with(['items.TCGCard'])->where('id', $id)->first();
 
         $viewData = [
             'order' => $order,
-            'title' => 'Order',
         ];
 
         return view('order.show')->with('viewData', $viewData);
@@ -138,5 +132,29 @@ class OrderController extends Controller
         ];
 
         return view('order.success')->with('viewData', $viewData);
+    }
+
+    public function pay(int $string): RedirectResponse
+    {
+        $user = Auth::user();
+        $order = Order::with(['items.tcgCard'])->findOrFail($string);
+        $user->setBalance($user->getBalance() - $order->getTotal());
+        if ($user->getBalance() < 0) {
+            return back()->with('error', 'Not enough balance');
+        }
+        foreach ($order->getItems() as $item) {
+            $tcgCard = $item->getTCGCard();
+            $tcgCard->setStock($tcgCard->getStock() - $item->getQuantity());
+            if ($tcgCard->getStock() < 0) {
+                return back()->with('error', 'Not enough stock');
+            } else {
+                $tcgCard->save();
+            }
+        }
+        $order->setStatus('shipped');
+        $order->save();
+        $user->save();
+
+        return redirect()->route('home.index')->with('success', 'Payment successful');
     }
 }

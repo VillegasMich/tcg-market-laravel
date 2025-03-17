@@ -14,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('wish_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->default('My wish list');
             $table->timestamps();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->nullable(true)->default(null);
         });
     }
 

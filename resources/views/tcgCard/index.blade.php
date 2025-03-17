@@ -6,11 +6,10 @@
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
       <div class="w-full h-fit p-5 mt-2 ">
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
-          Explore the Ultimate TCG Collection
+          {{ __('TcgCard.title') }}
         </h1>
         <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-          Discover a vast selection of trading cards from your favorite franchises. Whether you're searching for rare
-          collectibles, powerful deck additions, or simply expanding your collection, we've got the perfect card for you.
+          {{ __('TcgCard.description') }}
         </p>
       </div>
       <div class="flex justify-center items-center w-full h-fit mt-5">
@@ -20,13 +19,19 @@
           </div>
           <select name="sort" class="border border-gray-300 text-gray-700 rounded-md p-1 mx-2"
             onChange="this.form.submit()">
-            <option value="">Sort by</option>
-            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
-            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
-            <option value="psa_desc" {{ request('sort') == 'psa_desc' ? 'selected' : '' }}>PSA: Highest First</option>
-            <option value="psa_asc" {{ request('sort') == 'psa_asc' ? 'selected' : '' }}>PSA: Lowest First</option>
-            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest First</option>
-            <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
+            <option value="">{{ __('TcgCard.sort_by') }}</option>
+            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>
+              {{ __('TcgCard.price_low_to_high') }}</option>
+            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>
+              {{ __('TcgCard.price_high_to_low') }}</option>
+            <option value="psa_desc" {{ request('sort') == 'psa_desc' ? 'selected' : '' }}>{{ __('TcgCard.psa_high') }}
+            </option>
+            <option value="psa_asc" {{ request('sort') == 'psa_asc' ? 'selected' : '' }}>{{ __('TcgCard.psa_low') }}
+            </option>
+            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>{{ __('TcgCard.newest') }}
+            </option>
+            <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>{{ __('TcgCard.oldest') }}
+            </option>
           </select>
           <input class="flex-grow border border-gray-300 text-gray-400 rounded-l-md p-1.5 pl-2" type="text"
             name="keyword" {{ request('keyword', '') }} placeholder="Charizard ex" id=""

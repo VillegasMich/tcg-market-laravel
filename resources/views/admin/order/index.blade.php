@@ -8,10 +8,10 @@
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" class="px-6 py-4">ID</th>
-                <th scope="col" class="px-6 py-4">Total</th>
-                <th scope="col" class="px-6 py-4">Status</th>
-                <th scope="col" class="px-6 py-4">Payment Method</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/Order.id') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/Order.total') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/Order.status') }}</th>
+                <th scope="col" class="px-6 py-4">{{ __('admin/Order.payment_method') }}</th>
               </tr>
             </thead>
             @foreach ($viewData['orders'] as $order)

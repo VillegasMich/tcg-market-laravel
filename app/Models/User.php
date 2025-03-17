@@ -132,7 +132,7 @@ class User extends Authenticatable
         return $this->orders;
     }
 
-    public function getWhishlist(): WishList
+    public function getWishList(): WishList
     {
         return $this->wishlist;
     }
@@ -164,7 +164,7 @@ class User extends Authenticatable
 
     public function setWishlist(WishList $wishlist): void
     {
-        $this->wishlist = $wishlist;
+        $this->wishlist()->save($wishlist);
     }
 
     public function addOrder(Order $order): void
