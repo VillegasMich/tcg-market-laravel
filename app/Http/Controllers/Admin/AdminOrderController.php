@@ -12,7 +12,6 @@ class AdminOrderController extends Controller
     {
         $orders = Order::paginate(10);
         $viewData = [
-            'subtitle1' => 'Orders',
             'orders' => $orders,
         ];
 

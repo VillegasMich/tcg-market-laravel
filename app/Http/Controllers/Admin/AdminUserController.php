@@ -12,7 +12,6 @@ class AdminUserController extends Controller
     {
         $users = User::paginate(10);
         $viewData = [
-            'subtitle1' => 'Users',
             'users' => $users,
         ];
 

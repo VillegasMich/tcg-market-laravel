@@ -4,7 +4,7 @@
     <div>
       <div>
         <div class="flex justify-between">
-          <h1 class=" mb-5 text-xxl text-white">{{ $viewData['subtitle1'] }}</h1>
+          <h1 class=" mb-5 text-xxl text-white">{{ __('admin/TcgPack.title') }}</h1>
           <a href="{{ route('admin.tcgPack.create') }}"
             class="text-white bg-green-800 p-3 mt-5 rounded-lg hover:bg-green-700  ">{{ __('admin/TcgPack.create') }}</a>
         </div>

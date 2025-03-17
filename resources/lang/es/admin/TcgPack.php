@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Paquetes de TCG',
     'image' => 'Imagen',
     'id' => 'ID',
     'name' => 'Nombre',

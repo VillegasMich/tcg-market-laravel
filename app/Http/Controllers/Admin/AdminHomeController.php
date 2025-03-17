@@ -17,13 +17,6 @@ class AdminHomeController extends Controller
     {
         return view('admin.index', [
             'viewData' => [
-                'title' => 'ADMIN HOME PAGE',
-                'subtitle1' => 'TCG Cards',
-                'subtitle2' => 'TCG Packs',
-                'subtitle3' => 'Items',
-                'subtitle4' => 'Orders',
-                'subtitle5' => 'Wish Lists',
-                'subtitle6' => 'Users',
                 'tcgCards' => TCGCard::limit(7)->get(),
                 'totalTcgCards' => TCGCard::count(),
                 'tcgPacks' => TCGPack::limit(9)->get(),

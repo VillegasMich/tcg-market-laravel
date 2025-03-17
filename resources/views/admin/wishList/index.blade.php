@@ -3,7 +3,7 @@
   <div class="p-4">
     <div>
       <div>
-        <h1 class=" mb-5 text-xxl text-white">{{ $viewData['subtitle1'] }}</h1>
+        <h1 class=" mb-5 text-xxl text-white">{{ __('admin/WishList.title') }}</h1>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
