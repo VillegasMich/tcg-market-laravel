@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Tcg Packs',
     'image' => 'Image',
     'id' => 'ID',
     'name' => 'Name',

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Admin Dashboard',
     'total_cards' => 'Total TCG Cards',
     'total_packs' => 'Total TCG Packs',
     'total_users' => 'Total Users',

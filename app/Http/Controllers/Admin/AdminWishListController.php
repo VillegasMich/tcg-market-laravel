@@ -12,7 +12,6 @@ class AdminWishListController extends Controller
     {
         $wishLists = WishList::paginate(10);
         $viewData = [
-            'subtitle1' => 'Wish Lists',
             'wishLists' => $wishLists,
         ];
 

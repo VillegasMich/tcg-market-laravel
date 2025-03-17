@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Orders',
     'id' => 'ID',
     'total' => 'Total',
     'status' => 'Status',

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Tarjetas de TCG',
     'image' => 'Imagen',
     'id' => 'ID',
     'name' => 'Nombre',

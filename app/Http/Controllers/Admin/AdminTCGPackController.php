@@ -19,7 +19,6 @@ class AdminTCGPackController extends Controller
     {
         $tcgPacks = TCGPack::paginate(10);
         $viewData = [
-            'subtitle1' => 'TCG Packs',
             'tcgPacks' => $tcgPacks,
         ];
 

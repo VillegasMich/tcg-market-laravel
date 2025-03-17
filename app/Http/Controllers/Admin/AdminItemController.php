@@ -12,7 +12,6 @@ class AdminItemController extends Controller
     {
         $items = Item::paginate(10);
         $viewData = [
-            'subtitle1' => 'Items',
             'items' => $items,
         ];
 

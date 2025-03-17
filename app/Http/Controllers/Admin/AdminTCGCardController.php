@@ -20,7 +20,6 @@ class AdminTCGCardController extends Controller
     {
         $tcgCards = TCGCard::paginate(10);
         $viewData = [
-            'subtitle1' => 'TCG Cards',
             'tcgCards' => $tcgCards,
         ];
 

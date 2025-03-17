@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
-
 class WishListController extends Controller
 {
     public function index(): View
@@ -20,8 +19,8 @@ class WishListController extends Controller
         $viewData['title'] = 'WishList - TCG Market';
         $viewData['subtitle'] = 'WishList';
         $viewData['wishList'] = WishList::with('TCGCards')->where('user_id', $user->getId())->first();
-        
-        return view('wishList.index')->with('viewData', $viewData);
+
+        return view('wishlist.index')->with('viewData', $viewData);
     }
 
     public function show(string $id): View
