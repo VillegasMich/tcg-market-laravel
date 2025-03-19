@@ -11,6 +11,7 @@ return [
     'newest' => 'Más Recientes Primero',
     'oldest' => 'Más Antiguos Primero',
     'show_add_to_wishlist' => 'Añadir a la Lista de Deseos',
+    'show_remove_from_wishlist' => 'Quitar de la Lista de Deseos',
     'show_add_to_cart' => 'Añadir al Carrito',
     'show_psa' => 'PSA:',
     'show_price' => 'Precio:',
