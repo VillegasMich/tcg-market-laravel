@@ -28,6 +28,7 @@ Route::middleware('setLocale')->group(function () {
     Route::get('/tcgcards/{id}', 'App\Http\Controllers\TCGCardController@show')->name('tcgCard.show');
     Route::post('/cart/add/{id}', 'App\Http\Controllers\TCGCardController@addToCart')->name('tcgCard.add-to-cart');
     Route::post('/wishList/add/{id}', 'App\Http\Controllers\TCGCardController@addToWishList')->name('tcgCard.add-to-wishList');
+    Route::delete('/wishList/remove/{id}', 'App\Http\Controllers\TCGCardController@removeFromWishList')->name('tcgCard.remove-from-wishList');
 
     /**
      * TCGPacks routes
