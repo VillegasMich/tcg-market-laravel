@@ -198,7 +198,7 @@ class TCGCard extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function getWishList(): WishList
+    public function getWishList(): Collection
     {
         return $this->wishList;
     }

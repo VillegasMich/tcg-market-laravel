@@ -17,18 +17,36 @@
             </p>
           </div>
           <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-            <form action="{{ route('tcgCard.add-to-wishList', ['id' => $viewData['tcgCard']->getId()]) }}" method="POST">
-              @csrf
-              <button type="submit"
-                class="text-black mt-4 sm:mt-0 bg-primary-700 hover:bg-gray-200 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center">
-                <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                  height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                </svg>
-                {{ __('TcgCard.show_add_to_wishlist') }}
-              </button>
-            </form>
+            @if (!$viewData['isInWishList'])
+              <form action="{{ route('tcgCard.add-to-wishList', ['id' => $viewData['tcgCard']->getId()]) }}"
+                method="POST">
+                @csrf
+                <button type="submit"
+                  class="text-black mt-4 sm:mt-0 bg-primary-700 hover:bg-gray-200 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center">
+                  <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                  </svg>
+                  {{ __('TcgCard.show_add_to_wishlist') }}
+                </button>
+              </form>
+            @else
+              <form action="{{ route('tcgCard.remove-from-wishList', ['id' => $viewData['tcgCard']->getId()]) }}"
+                method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                  class="text-black mt-4 sm:mt-0 bg-primary-700 hover:bg-gray-200 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center">
+                  <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="red" viewBox="0 0 24 24">
+                    <path stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                  </svg>
+                  {{ __('TcgCard.show_remove_from_wishlist') }}
+                </button>
+              </form>
+            @endif
             <form action="{{ route('tcgCard.add-to-cart', ['id' => $viewData['tcgCard']->getId()]) }}" method="POST">
               @csrf
               <button type="submit"

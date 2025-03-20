@@ -11,6 +11,7 @@ return [
     'newest' => 'Newest First',
     'oldest' => 'Oldest First',
     'show_add_to_wishlist' => 'Add to Wishlist',
+    'show_remove_from_wishlist' => 'Remove from my Wishlist',
     'show_add_to_cart' => 'Add to Cart',
     'show_psa' => 'PSA:',
     'show_price' => 'Price:',
