@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminAuthMiddleware
 {
@@ -19,6 +19,7 @@ class AdminAuthMiddleware
         if (Auth::user() && Auth::user()->getRole() == 'admin') {
             return $next($request);
         }
+
         return redirect()->route('home.index')->withErrors(__('auth.unauthorized'));
     }
 }

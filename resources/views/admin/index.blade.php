@@ -11,7 +11,12 @@
       <p class="text-lg text-gray-400 mt-2">{{ __('admin/Home.total_cards') }}: {{ $viewData['totalTcgCards'] }}</p>
       <div class="flex gap-2 mt-4 overflow-x-auto">
         @foreach ($viewData['tcgCards'] as $tcgCard)
-          <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}" alt="TCG Card" class="h-20 w-auto rounded-lg shadow-md">
+          @if ($tcgCard->getImage() == 'pokemon_card_backside.png')
+            <img src="{{ asset($tcgCard->getImage()) }}" alt="TCG Card" class="h-20 w-auto rounded-lg shadow-md">
+          @else
+            <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}" alt="TCG Card"
+              class="h-20 w-auto rounded-lg shadow-md">
+          @endif
         @endforeach
       </div>
     </a>
@@ -22,8 +27,12 @@
       <p class="text-lg text-gray-400 mt-2">{{ __('admin/Home.total_packs') }}: {{ $viewData['totalTcgPacks'] }}</p>
       <div class="flex gap-2 mt-4 overflow-x-auto">
         @foreach ($viewData['tcgPacks'] as $tcgPack)
-          <img src="{{ asset('/storage/' . $tcgPack->getImage()) }}" alt="TCG Pack"
-            class="h-20 w-auto rounded-lg shadow-md">
+          @if ($tcgPack->getImage() == 'pokemon_tcg_pack_default.png')
+            <img src="{{ asset($tcgPack->getImage()) }}" alt="TCG Pack" class="h-20 w-auto rounded-lg shadow-md">
+          @else
+            <img src="{{ asset('/storage/' . $tcgPack->getImage()) }}" alt="TCG Pack"
+              class="h-20 w-auto rounded-lg shadow-md">
+          @endif
         @endforeach
       </div>
     </a>
