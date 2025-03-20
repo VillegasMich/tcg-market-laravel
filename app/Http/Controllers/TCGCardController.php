@@ -30,11 +30,11 @@ class TCGCardController extends Controller
      */
     public function show(string $id): View|RedirectResponse
     {
-        $tcgCard = TCGCard::with('tcgPacks','wishList')->findOrFail($id);
+        $tcgCard = TCGCard::with('tcgPacks', 'wishList')->findOrFail($id);
         $user = Auth::user();
         $isInWishList = false;
         foreach ($tcgCard->getWishList() as $wishList) {
-            if($wishList->getUser()->getId() == $user->getId()){
+            if ($wishList->getUser()->getId() == $user->getId()) {
                 $isInWishList = true;
             }
         }
@@ -67,7 +67,6 @@ class TCGCardController extends Controller
         return back()->with('success', "{$tcgCard->getName()} has been added to your cart!");
     }
 
-
     /**
      * Add a TCGCard to the wish list
      */
@@ -76,7 +75,7 @@ class TCGCardController extends Controller
         $user = Auth::user();
         $tcgCard = TCGCard::findOrFail($id);
 
-        $userWishList = $user->getWishlist(); 
+        $userWishList = $user->getWishlist();
 
         $userWishList->tcgCards()->syncWithoutDetaching([$tcgCard->id]);
 
@@ -91,12 +90,10 @@ class TCGCardController extends Controller
         $user = Auth::user();
         $tcgCard = TCGCard::findOrFail($id);
 
-        $userWishList = $user->getWishlist(); 
+        $userWishList = $user->getWishlist();
 
         $userWishList->tcgCards()->detach($tcgCard->id);
 
         return back()->with('success', "{$tcgCard->getName()} has been removed from your wish list!");
     }
-
-
 }

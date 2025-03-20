@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'role' => $data['role'],
         ]);
-        
+
         $wishList = WishList::create();
         $user->setWishlist($wishList);
 

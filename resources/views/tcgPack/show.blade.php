@@ -4,7 +4,11 @@
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
       <div class="w-full h-fit p-5 mt-2 ml-4 flex">
         <div class="w-[40%]">
-          <img src="{{ asset('/storage/' . $viewData['tcgPack']->getImage()) }}" class="img-fluid rounded-start h-96">
+          @if ($viewData['tcgPack']->getImage() == 'pokemon_tcg_pack_default.png')
+            <img src="{{ asset($viewData['tcgPack']->getImage()) }}" class="img-fluid rounded-start h-96">
+          @else
+            <img src="{{ asset('/storage/' . $viewData['tcgPack']->getImage()) }}" class="img-fluid rounded-start h-96">
+          @endif
         </div>
         <div class="">
           <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
@@ -21,8 +25,13 @@
       <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         @foreach ($viewData['tcgPack']->getTcgCards() as $tcgCard)
           <div class="group relative w-fit">
-            <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}"
-              class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+            @if ($tcgCard->getImage() == 'pokemon_card_backside.png')
+              <img src="{{ asset($tcgCard->getImage()) }}"
+                class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+            @else
+              <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}"
+                class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+            @endif
             <div class="mt-4 flex justify-between">
               <div class="w-full">
                 <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">

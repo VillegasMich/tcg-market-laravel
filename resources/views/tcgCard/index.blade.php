@@ -46,8 +46,13 @@
       <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         @foreach ($viewData['tcgCards'] as $tcgCard)
           <div class="group relative w-fit">
-            <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}"
-              class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+            @if ($tcgCard->getImage() == 'pokemon_card_backside.png')
+              <img src="{{ asset($tcgCard->getImage()) }}"
+                class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+            @else
+              <img src="{{ asset('/storage/' . $tcgCard->getImage()) }}"
+                class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+            @endif
             <div class="mt-4 flex justify-between">
               <div class="w-full">
                 <h3 class="text-sm w-full text-center text-gray-700 flex flex-col justify-center">

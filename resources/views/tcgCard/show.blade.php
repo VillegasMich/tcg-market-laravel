@@ -4,7 +4,11 @@
     <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
         <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-          <img class="w-full" src="{{ asset('/storage/' . $viewData['tcgCard']->getImage()) }}" alt="" />
+          @if ($viewData['tcgCard']->getImage() == 'pokemon_card_backside.png')
+            <img src="{{ asset($viewData['tcgCard']->getImage()) }}" class="w-full">
+          @else
+            <img src="{{ asset('/storage/' . $viewData['tcgCard']->getImage()) }}" class="w-full">
+          @endif
         </div>
         <div class="mt-6 sm:mt-8 lg:mt-0">
           <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">
@@ -83,7 +87,11 @@
               <div class="grid grid-cols-2 gap-4 mt-4 sm:grid-cols-3 lg:grid-cols-4">
                 <div class="relative">
                   <a href="{{ route('tcgPack.show', $tcgPack->getId()) }}">
-                    <img class="w-full rounded-lg" src="{{ asset($tcgPack->getImage()) }}" alt="" />
+                    @if ($tcgPack->getImage() == 'pokemon_tcg_pack_default.png')
+                      <img src="{{ asset($tcgPack->getImage()) }}" class="w-full rounded-lg">
+                    @else
+                      <img src="{{ asset('/storage/' . $tcgPack->getImage()) }}" class="w-full rounded-lg">
+                    @endif
                   </a>
                 </div>
               </div>

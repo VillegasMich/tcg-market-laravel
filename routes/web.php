@@ -36,7 +36,6 @@ Route::middleware('setLocale')->group(function () {
     Route::get('/tcgpacks', 'App\Http\Controllers\TCGPackController@index')->name('tcgPack.index');
     Route::get('/tcgpacks/{id}', 'App\Http\Controllers\TCGPackController@show')->name('tcgPack.show');
 
-
     Route::middleware('auth')->group(function () {
         /**
          * Order routes
@@ -67,8 +66,6 @@ Route::middleware('setLocale')->group(function () {
         Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListController@show')->name('wishList.show');
 
     });
-
-
 
     /**
      * Admin routes
