@@ -12,6 +12,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpFoundation\RedirectResponse as HttpFoundationRedirectResponse;
 
 class OrderController extends Controller
 {
@@ -56,22 +58,38 @@ class OrderController extends Controller
             }
         }
 
+        foreach ($cartProducts as $tcgCard) {
+            if ($tcgCard->getStock() < $tcgCard->quantity) {
+                echo "No hay";
+                return back()->with('error', 'Not enough stock');
+            }
+        }
+        
         $items = [];
         $total = 0;
         foreach ($cartProducts as $tcgCard) {
             $subtotal = $tcgCard->quantity * $tcgCard->getPrice();
             $total += $subtotal;
+            
+            $newStock = $tcgCard->getStock() - $tcgCard->quantity;
 
             $item = Item::create(['quantity' => $tcgCard->quantity, 'subtotal' => $subtotal]);
+
+            unset($tcgCard->quantity);
+            $tcgCard->setStock($newStock);
+            $tcgCard->save();
+            
             $item->setTCGCard($tcgCard);
             $items[] = $item;
         }
-
+        
         $order = Order::create(['total' => $total, 'paymentMethod' => 'card']);
         $order->setUser($user);
-
+        $order->save();
+        
         foreach ($items as $item) {
             $item->setOrder($order);
+            $item->save();
         }
 
         $request->session()->forget('cart_product_data');
@@ -98,9 +116,10 @@ class OrderController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        Order::destroy($id);
-
-        return redirect()->route('user.index');
+        $order = Order::findOrFail($id);
+        $order->items()->delete();
+        $order->delete();
+        return redirect()->route('order.index');
     }
 
     /**
@@ -141,15 +160,6 @@ class OrderController extends Controller
         $user->setBalance($user->getBalance() - $order->getTotal());
         if ($user->getBalance() < 0) {
             return back()->with('error', 'Not enough balance');
-        }
-        foreach ($order->getItems() as $item) {
-            $tcgCard = $item->getTCGCard();
-            $tcgCard->setStock($tcgCard->getStock() - $item->getQuantity());
-            if ($tcgCard->getStock() < 0) {
-                return back()->with('error', 'Not enough stock');
-            } else {
-                $tcgCard->save();
-            }
         }
         $order->setStatus('shipped');
         $order->save();

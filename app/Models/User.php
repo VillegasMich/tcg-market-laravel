@@ -24,9 +24,9 @@ class User extends Authenticatable
      * $this->attributes['password'] - string - contains the encrypted password set by the user.
      * $this->attributes['role'] - string - Role of the user.
      * $this->attributes['remember_token'] - string - A remember token used for sessions.
-     * $this->attributes['updatedAt'] - Date - Represents the date the database entry was updated.
-     * $this->attributes['customer'] - Customer - The customer this order is related to.
-     * $this->orders - Order[] - Orders related to this Order.
+     * $this->attributes['updated_at'] - Date - Represents the date the database entry was updated.
+     * $this->attributes['created_at'] - Date - Represents the date the database entry was created.
+     * $this->orders - Order[] - Orders related to this user.
      * $this->wishlist - WishList - WishList related to this User.
      */
 
