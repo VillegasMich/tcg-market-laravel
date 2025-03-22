@@ -64,13 +64,13 @@ class OrderController extends Controller
                 return back()->with('error', 'Not enough stock');
             }
         }
-        
+
         $items = [];
         $total = 0;
         foreach ($cartProducts as $tcgCard) {
             $subtotal = $tcgCard->quantity * $tcgCard->getPrice();
             $total += $subtotal;
-            
+
             $newStock = $tcgCard->getStock() - $tcgCard->quantity;
 
             $item = Item::create(['quantity' => $tcgCard->quantity, 'subtotal' => $subtotal]);
@@ -78,15 +78,15 @@ class OrderController extends Controller
             unset($tcgCard->quantity);
             $tcgCard->setStock($newStock);
             $tcgCard->save();
-            
+
             $item->setTCGCard($tcgCard);
             $items[] = $item;
         }
-        
+
         $order = Order::create(['total' => $total, 'paymentMethod' => 'card']);
         $order->setUser($user);
         $order->save();
-        
+
         foreach ($items as $item) {
             $item->setOrder($order);
             $item->save();
@@ -116,7 +116,15 @@ class OrderController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        $order = Order::findOrFail($id);
+        $order = Order::with(['items.TCGCard'])->where('id', $id)->first();
+
+        foreach ($order->getItems() as $item) {
+            $qtToAdd = $item->getQuantity();
+            $tcgCard = $item->getTCGCard();
+            $tcgCard->setStock($tcgCard->getStock() + $qtToAdd);
+            $tcgCard->save();
+        }
+
         $order->items()->delete();
         $order->delete();
         return redirect()->route('order.index');
