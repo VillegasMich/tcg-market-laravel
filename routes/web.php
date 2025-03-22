@@ -47,7 +47,7 @@ Route::middleware('setLocale')->group(function () {
         Route::post('/orders/create', 'App\Http\Controllers\OrderController@saveCreate')->name('order.save-create');
         Route::put('/orders/pay/{id}', 'App\Http\Controllers\OrderController@pay')->name('order.pay');
         Route::put('/orders/{id}', 'App\Http\Controllers\OrderController@saveUpdate')->name('order.save-update');
-        Route::delete('/orders/{id}', 'App\Http\Controllers\OrderController@delete')->name('order.delete');
+        Route::delete('/orders/cancel/{id}', 'App\Http\Controllers\OrderController@delete')->name('order.delete');
         /**
          * Item routes
          */

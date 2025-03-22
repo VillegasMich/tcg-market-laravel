@@ -21,10 +21,10 @@ class Order extends Model
      * $this->attributes['total'] - int - contains the total amount of money for the order.
      * $this->attributes['paymentMethod'] - string - contains the payment method the user selected for this order.
      * $this->attributes['status'] - string - Represents the status of the order.
-     * $this->attributes['createdAt'] - Date - Represents the date the database entry was created.
-     * $this->attributes['updatedAt'] - Date - Represents the date the database entry was updated.
-     * $this->attributes['user'] - User - The user this order is related to. //TODO:
-     * $this->attributes['items'] - Item[] - Items related to this Order. // TODO:
+     * $this->attributes['created_at'] - Date - Represents the date the database entry was created.
+     * $this->attributes['updated_at'] - Date - Represents the date the database entry was updated.
+     * $this->user - User - The user this order is related to.
+     * $this->items - Item[] - Items related to this Order.
      */
     protected $fillable = [
         'total',
@@ -94,7 +94,6 @@ class Order extends Model
     public function setUser(User $user): void
     {
         $this->user()->associate($user);
-        $this->save();
     }
 
     public function getItems(): Collection

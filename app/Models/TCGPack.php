@@ -20,9 +20,9 @@ class TCGPack extends Model
      * $this->attributes['name'] - string - Collection name
      * $this->attributes['image'] - string - Collection image
      * $this->attributes['franchise'] - string - Franchise of the pack
-     * $this->tcgCards - array - Collection of cards
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
+     * $this->tcgCards - array - Collection of cards
      */
     public function tcgCards(): BelongsToMany
     {

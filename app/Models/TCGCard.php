@@ -31,9 +31,9 @@ class TCGCard extends Model
      * $this->attributes['stock'] - int - Product stock
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
-     * $this->attributes['tcgPacks'] - TCGPack[] - Product tcgPacks
-     * $this->attributes['wishList'] - WishList - WishList primary key
-     * $this->attributes['Items'] - Item[] - Items related to this TCGCard
+     * $this->tcgPacks - TCGPack[] - Product tcgPacks
+     * $this->wishList - WishLists - WishLists that have this card
+     * $this->items - Item[] - Items related to this TCGCard
      */
     protected $fillable = [
         'name',

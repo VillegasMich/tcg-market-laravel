@@ -80,12 +80,10 @@ class Item extends Model
     public function setOrder(Order $order): void
     {
         $this->order()->associate($order);
-        $this->save();
     }
 
     public function setTCGCard(TCGCard $TCGCard): void
     {
         $this->TCGCard()->associate($TCGCard);
-        $this->save();
     }
 }
