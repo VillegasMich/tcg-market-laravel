@@ -1,7 +1,8 @@
 @extends('layout.app')
 @section('content')
   <section class="flex-grow w-full flex justify-center items-center">
-    <div class="h-1/2 w-full flex flex-col justify-center items-center p-5">
+    <div class="h-1/2 w-full flex flex-col justify-center items-center p-5 pt-0">
+      <img  class="mb-2" src="{{ asset('logo_tcg_market.png') }}" alt="">
       <h1 class="text-7xl font-semibold tracking-tight text-balance text-gray-900">
         {{ __('Home.title') }}
       </h1>

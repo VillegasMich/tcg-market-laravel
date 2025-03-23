@@ -1,5 +1,7 @@
 <nav class="w-full h-fit flex font-medium shadow-sm">
-  <a class="text-2xl w-1/6 flex justify-center items-center" href="{{ route('home.index') }}">TCG Market</a>
+  <a class="text-2xl w-1/6 flex justify-center items-center" href="{{ route('home.index') }}">
+    <img  class=" h-8 w-7 mr-1 mt-1" src="{{ asset('logo_tcg_market.png') }}" alt=""> TCG Market  
+  </a>
   <div class="w-11/12 flex justify-between items-center h-12" id="navbarSupportedContent">
     <ul class="flex space-x-6 text-lg">
       <li class="h-12 flex justify-center items-center">
