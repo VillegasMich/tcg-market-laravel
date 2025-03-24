@@ -42,11 +42,8 @@ class AdminTCGPackController extends Controller
      */
     public function create(): View
     {
-        $viewData = [
-            'subtitle1' => 'Create a new pack',
-        ];
 
-        return view('admin.tcgPack.create')->with('viewData', $viewData);
+        return view('admin.tcgPack.create');
     }
 
     /**
@@ -56,7 +53,6 @@ class AdminTCGPackController extends Controller
     {
         $tcgPack = TCGPack::findOrFail($id);
         $viewData = [
-            'subtitle1' => 'Update a pack',
             'tcgPack' => $tcgPack,
         ];
 
@@ -68,7 +64,7 @@ class AdminTCGPackController extends Controller
      */
     public function saveCreate(Request $request): RedirectResponse
     {
-        $validatedData = $request->validate(TCGPackValidator::$rules);
+        $request->validate(TCGPackValidator::$rules);
         $newTcgPack = TCGPack::create($request->only(['name', 'franchise']));
         if ($request->hasFile('image')) {
             $storeInterface = app(ImageStorage::class);

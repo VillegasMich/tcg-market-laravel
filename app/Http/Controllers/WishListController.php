@@ -15,44 +15,11 @@ class WishListController extends Controller
     {
         $user = Auth::user();
 
-        $viewData = [];
-        $viewData['title'] = 'WishList - TCG Market';
-        $viewData['subtitle'] = 'WishList';
-        $viewData['wishList'] = WishList::with('TCGCards')->where('user_id', $user->getId())->first();
+        $viewData = [
+            'wishList' =>  WishList::with('TCGCards')->where('user_id', $user->getId())->first()
+        ];
 
         return view('wishlist.index')->with('viewData', $viewData);
     }
 
-    public function show(string $id): View
-    {
-        $viewData = [];
-        $wishList = WishList::findOrFail($id);
-        $viewData['wishList'] = $wishList;
-
-        return view('wishList.show')->with('viewData', $viewData);
-    }
-
-    public function create(): View
-    {
-        $viewData = [];
-        $viewData['title'] = 'Create WishList';
-
-        return view('wishList.create')->with('viewData', $viewData);
-    }
-
-    public function save(Request $request): RedirectResponse
-    {
-        $request->validate(WishListValidator::$creationRules);
-        WishList::create($request->only(['name']));
-
-        return back()->with('success', 'Elemento creado satisfactoriamente');
-    }
-
-    public function delete(string $id): RedirectResponse
-    {
-        $wishList = WishList::findOrFail($id);
-        $wishList->delete();
-
-        return redirect()->route('wishList.index')->with('success', 'Elemento eliminado satisfactoriamente');
-    }
 }

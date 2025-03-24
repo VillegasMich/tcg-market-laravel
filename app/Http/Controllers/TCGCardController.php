@@ -17,8 +17,6 @@ class TCGCardController extends Controller
     {
         $tcgCards = TCGCard::filterAndSort($request)->paginate(16);
         $viewData = [
-            'title' => 'TCGCards - Market',
-            'subtitle' => 'List of cards',
             'tcgCards' => $tcgCards,
         ];
 
@@ -74,9 +72,7 @@ class TCGCardController extends Controller
     {
         $user = Auth::user();
         $tcgCard = TCGCard::findOrFail($id);
-
         $userWishList = $user->getWishlist();
-
         $userWishList->tcgCards()->syncWithoutDetaching([$tcgCard->id]);
 
         return back()->with('success', "{$tcgCard->getName()} has been added to your wish list!");
@@ -89,9 +85,7 @@ class TCGCardController extends Controller
     {
         $user = Auth::user();
         $tcgCard = TCGCard::findOrFail($id);
-
         $userWishList = $user->getWishlist();
-
         $userWishList->tcgCards()->detach($tcgCard->id);
 
         return back()->with('success', "{$tcgCard->getName()} has been removed from your wish list!");

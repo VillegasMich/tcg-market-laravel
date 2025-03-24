@@ -23,4 +23,6 @@ return [
     'error_title' => 'Oops! Error\'s',
     'psa_ungraded' => 'Ungraded',
     'launch_date' => 'Launch Date',
+    'update_title' => 'Update Tcg Card',
+    'create_title' => 'Create Tcg Card',
 ];

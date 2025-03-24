@@ -12,8 +12,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Symfony\Component\HttpFoundation\RedirectResponse as HttpFoundationRedirectResponse;
 
 class OrderController extends Controller
 {
@@ -24,21 +22,12 @@ class OrderController extends Controller
     {
 
         $user = Auth::user();
-
         $orders = Order::with(['items.TCGCard'])->where('user_id', $user->getId())->get();
         $viewData = [
             'orders' => $orders,
         ];
 
         return view('order.index')->with('viewData', $viewData);
-    }
-
-    /**
-     * Create view.
-     */
-    public function create(): View
-    {
-        return view('order.create');
     }
 
     /**
@@ -54,13 +43,12 @@ class OrderController extends Controller
             $productIds = array_keys($cartProductData);
             $cartProducts = TCGCard::whereIn('id', $productIds)->get();
             foreach ($cartProducts as $card) {
-                $card->quantity = $cartProductData[$card->id];
+                $card->quantity = $cartProductData[$card->getId()];
             }
         }
 
         foreach ($cartProducts as $tcgCard) {
             if ($tcgCard->getStock() < $tcgCard->quantity) {
-                echo "No hay";
                 return back()->with('error', 'Not enough stock');
             }
         }

@@ -15,19 +15,18 @@ class AdminHomeController extends Controller
 {
     public function index(): View
     {
-        return view('admin.index', [
-            'viewData' => [
-                'tcgCards' => TCGCard::limit(7)->get(),
-                'totalTcgCards' => TCGCard::count(),
-                'tcgPacks' => TCGPack::limit(9)->get(),
-                'totalTcgPacks' => TCGPack::count(),
-                'items' => Item::limit(5)->get(),
-                'totalItems' => Item::count(),
-                'orders' => Order::limit(4)->get(),
-                'totalOrders' => Order::count(),
-                'totalWishLists' => WishList::count(),
-                'totalUsers' => User::count(),
-            ],
-        ]);
+        $viewData = [
+            'tcgCards' => TCGCard::limit(7)->get(),
+            'totalTcgCards' => TCGCard::count(),
+            'tcgPacks' => TCGPack::limit(9)->get(),
+            'totalTcgPacks' => TCGPack::count(),
+            'items' => Item::limit(5)->get(),
+            'totalItems' => Item::count(),
+            'orders' => Order::limit(4)->get(),
+            'totalOrders' => Order::count(),
+            'totalWishLists' => WishList::count(),
+            'totalUsers' => User::count(),
+        ];
+        return view('admin.index')->with('viewData', $viewData);
     }
 }

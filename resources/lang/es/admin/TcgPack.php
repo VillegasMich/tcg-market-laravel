@@ -11,4 +11,6 @@ return [
     'update' => 'Actualizar',
     'create' => 'Crear',
     'error_title' => '¡Oops! Errores',
+    'update_title' => 'Actualizar paquete de TCG',
+    'create_title' => 'Crear paquete de TCG',
 ];

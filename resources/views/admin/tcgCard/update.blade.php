@@ -1,6 +1,6 @@
 @extends('layout.adminApp')
 @section('content')
-  <h1 class=" m-10 text-5xl font-extrabold dark:text-white text-center">{{ $viewData['subtitle1'] }}</h1>
+  <h1 class=" m-10 text-5xl font-extrabold dark:text-white text-center">{{ __('admin/TcgCard.update_title') }}</h1>
   <form class="max-w-screen-md mx-auto " method="POST"
     action="{{ route('admin.tcgCard.save-update', ['id' => $viewData['tcgCard']->getId()]) }}"
     enctype="multipart/form-data">

@@ -23,4 +23,6 @@ return [
     'error_title' => '¡Oops! Errores',
     'psa_ungraded' => 'Sin graduar',
     'launch_date' => 'Fecha de Lanzamiento',
+    'update_title' => 'Actualizar tarjeta de TCG',
+    'create_title' => 'Crear tarjeta de TCG',
 ];

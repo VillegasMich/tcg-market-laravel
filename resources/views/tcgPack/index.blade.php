@@ -1,6 +1,4 @@
 @extends('layout.app')
-@section('title', $viewData['title'])
-@section('subtitle', $viewData['subtitle'])
 @section('content')
   <div class="flex-grow flex w-full">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">

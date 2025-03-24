@@ -1,6 +1,5 @@
 {{-- Author: Miguel Vasquez Bojanini. --}}
 @extends('layout.app')
-@section('title', $viewData['title'])
 @section('content')
   <div class="flex w-full flex-grow">
     <x-user-sidebar />
