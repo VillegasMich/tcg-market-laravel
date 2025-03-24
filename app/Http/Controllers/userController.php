@@ -12,12 +12,7 @@ class userController extends Controller
     {
         $user = Auth::user();
 
-        if (! $user) {
-            return redirect()->route('login');
-        }
-
         $viewData = [
-            'title' => 'Profile',
             'user' => $user,
         ];
 

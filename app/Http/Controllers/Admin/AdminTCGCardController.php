@@ -60,7 +60,6 @@ class AdminTCGCardController extends Controller
         $collections = TCGPack::all();
         $tcgCard = TCGCard::findOrFail($id);
         $viewData = [
-            'subtitle1' => 'Update a card',
             'tcgCard' => $tcgCard,
             'collections' => $collections,
         ];
@@ -73,7 +72,7 @@ class AdminTCGCardController extends Controller
      */
     public function saveCreate(Request $request): RedirectResponse
     {
-        $validatedData = $request->validate(TCGCardValidator::$rules);
+        $request->validate(TCGCardValidator::$rules);
         $newTcgCard = TCGCard::create($request->only(['name', 'description', 'franchise',  'price', 'PSAgrade', 'launchDate', 'rarity', 'pullRate', 'language', 'stock']));
         $newTcgCard->setTcgPacks($request->get('collection'));
         if ($request->hasFile('image')) {

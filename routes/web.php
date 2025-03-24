@@ -11,11 +11,6 @@ Route::middleware('setLocale')->group(function () {
     Route::get('/language/{locale}', 'App\Http\Controllers\HomeController@switchLanguage')->name('language.switch');
 
     /**
-     * User routes
-     */
-    Route::get('/user', 'App\Http\Controllers\userController@index')->name('user.index');
-
-    /**
      * Cart routes
      */
     Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.index');
@@ -38,6 +33,11 @@ Route::middleware('setLocale')->group(function () {
 
     Route::middleware('auth')->group(function () {
         /**
+         * User routes
+         */
+        Route::get('/user', 'App\Http\Controllers\userController@index')->name('user.index');
+
+        /**
          * Order routes
          */
         Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('order.index');
@@ -49,14 +49,6 @@ Route::middleware('setLocale')->group(function () {
         Route::put('/orders/{id}', 'App\Http\Controllers\OrderController@saveUpdate')->name('order.save-update');
         Route::delete('/orders/cancel/{id}', 'App\Http\Controllers\OrderController@delete')->name('order.delete');
         /**
-         * Item routes
-         */
-        Route::get('/items', 'App\Http\Controllers\ItemController@index')->name('item.index');
-        Route::get('/items/create', 'App\Http\Controllers\ItemController@create')->name('item.create');
-        Route::post('/items', 'App\Http\Controllers\ItemController@save')->name('item.save');
-        Route::delete('/items/{id}', 'App\Http\Controllers\ItemController@delete')->name('item.delete');
-        Route::get('/items/{id}', 'App\Http\Controllers\ItemController@show')->name('item.show');
-        /**
          * WishList routes
          */
         Route::get('/wishLists', 'App\Http\Controllers\WishListController@index')->name('wishList.index');
@@ -64,7 +56,6 @@ Route::middleware('setLocale')->group(function () {
         Route::post('/wishLists', 'App\Http\Controllers\WishListController@save')->name('wishList.save');
         Route::delete('/wishLists/{id}', 'App\Http\Controllers\WishListController@delete')->name('wishList.delete');
         Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListController@show')->name('wishList.show');
-
     });
 
     /**

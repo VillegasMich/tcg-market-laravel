@@ -17,8 +17,6 @@ class TCGPackController extends Controller
 
         $tcgPacks = TCGPack::filterAndSort($request)->paginate(16);
         $viewData = [
-            'title' => 'TCGPacks - Market',
-            'subtitle' => 'List of packs',
             'tcgPacks' => $tcgPacks,
         ];
 
@@ -32,8 +30,6 @@ class TCGPackController extends Controller
     {
         $tcgPack = TCGPack::findOrFail($id);
         $viewData = [
-            'title' => $tcgPack['name'].' - Market',
-            'subtitle' => $tcgPack['name'].' - Pack information',
             'tcgPack' => $tcgPack,
         ];
 

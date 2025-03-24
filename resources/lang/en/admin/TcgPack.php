@@ -11,4 +11,6 @@ return [
     'update' => 'Update',
     'create' => 'Create',
     'error_title' => 'Oops! Error\'s',
+    'update_title' => 'Update Tcg Pack',
+    'create_title' => 'Create Tcg Pack',
 ];

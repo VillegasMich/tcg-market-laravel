@@ -22,7 +22,7 @@ class TCGPack extends Model
      * $this->attributes['franchise'] - string - Franchise of the pack
      * $this->attributes['created_at'] - timestamp - date of creation
      * $this->attributes['updated_at'] - timestamp - date of last update
-     * $this->tcgCards - array - Collection of cards
+     * $this->tcgCards - TCGCard[] - Collection of cards
      */
     public function tcgCards(): BelongsToMany
     {
