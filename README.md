@@ -1,4 +1,5 @@
 # TCG Market
+![image](https://github.com/user-attachments/assets/f98d9eaa-f9ef-4cc3-8f5b-c8ac7f0daccb)
 
 # Laravel Project
 
