@@ -1,0 +1,39 @@
+name: Run Laravel Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  pint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Copy .env and set APP_KEY
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Configure test environment
+        run: |
+          echo "DB_CONNECTION=sqlite" >> .env
+          echo "DB_DATABASE=:memory:" >> .env
+
+      - name: Run migrations
+        run: php artisan migrate --env=testing --force
+
+      - name: Run PHPUnit tests
+        run: php artisan test
