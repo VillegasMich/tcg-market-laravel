@@ -27,6 +27,7 @@ class AdminHomeController extends Controller
             'totalWishLists' => WishList::count(),
             'totalUsers' => User::count(),
         ];
+
         return view('admin.index')->with('viewData', $viewData);
     }
 }

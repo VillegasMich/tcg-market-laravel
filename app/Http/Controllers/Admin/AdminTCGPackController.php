@@ -42,7 +42,6 @@ class AdminTCGPackController extends Controller
      */
     public function create(): View
     {
-
         return view('admin.tcgPack.create');
     }
 

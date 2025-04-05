@@ -10,5 +10,5 @@ return [
     'order' => 'Pedido',
     'quantity' => 'Cantidad',
     'pay' => 'Pagar',
-    'empty' => 'No tienes ordenes!'
+    'empty' => 'No tienes ordenes!',
 ];
