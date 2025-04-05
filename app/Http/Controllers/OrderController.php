@@ -20,7 +20,6 @@ class OrderController extends Controller
      */
     public function index(): View|RedirectResponse
     {
-
         $user = Auth::user();
         $orders = Order::with(['items.TCGCard'])->where('user_id', $user->getId())->get();
         $viewData = [
@@ -115,6 +114,7 @@ class OrderController extends Controller
 
         $order->items()->delete();
         $order->delete();
+
         return redirect()->route('order.index');
     }
 
