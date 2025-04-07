@@ -1,7 +1,5 @@
 <?php
 
-// Author: Miguel Vasquez Bojanini.
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -19,8 +17,8 @@ class Order extends Model
      * ORDER ATTRIBUTES
      * $this->attributes['id'] - int - contains the product primary key (id).
      * $this->attributes['total'] - int - contains the total amount of money for the order.
-     * $this->attributes['paymentMethod'] - string - contains the payment method the user selected for this order.
      * $this->attributes['status'] - string - Represents the status of the order.
+     * $this->attributes['paymentMethod'] - string - contains the payment method the user selected for this order.
      * $this->attributes['created_at'] - Date - Represents the date the database entry was created.
      * $this->attributes['updated_at'] - Date - Represents the date the database entry was updated.
      * $this->user - User - The user this order is related to.
@@ -30,16 +28,6 @@ class Order extends Model
         'total',
         'paymentMethod',
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function items(): HasMany
-    {
-        return $this->hasMany(Item::class);
-    }
 
     public function getId(): int
     {
@@ -86,6 +74,11 @@ class Order extends Model
         return $this->attributes['updated_at'];
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function getUser(): User
     {
         return $this->user;
@@ -94,6 +87,11 @@ class Order extends Model
     public function setUser(User $user): void
     {
         $this->user()->associate($user);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
     }
 
     public function getItems(): Collection

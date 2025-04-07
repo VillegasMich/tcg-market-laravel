@@ -35,7 +35,7 @@ Route::middleware('setLocale')->group(function () {
         /**
          * User routes
          */
-        Route::get('/user', 'App\Http\Controllers\userController@index')->name('user.index');
+        Route::get('/user', 'App\Http\Controllers\UserController@index')->name('user.index');
 
         /**
          * Order routes

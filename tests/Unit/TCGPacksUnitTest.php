@@ -15,7 +15,7 @@ class TCGPacksUnitTest extends TestCase
     {
         $name = 'Sun and Moon';
 
-        $tcgPack = new TCGPack();
+        $tcgPack = new TCGPack;
         $tcgPack->setName($name);
 
         $this->assertEquals($name, $tcgPack->getName());
