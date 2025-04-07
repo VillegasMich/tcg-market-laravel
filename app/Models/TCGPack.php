@@ -53,8 +53,6 @@ class TCGPack extends Model
         $this->attributes['image'] = $image;
     }
 
-
-
     public function getFranchise(): string
     {
         return $this->attributes['franchise'];
