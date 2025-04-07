@@ -8,7 +8,7 @@ class TCGCardValidator
         'name' => 'required|string|max:255',
         'description' => 'required|string',
         'franchise' => 'required|string|max:255',
-        'collection' => 'required', // TODO: |string|max:255
+        'collection' => 'required',
         'price' => 'required|numeric|min:1',
         'PSAgrade' => 'required|string|max:10',
         'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',

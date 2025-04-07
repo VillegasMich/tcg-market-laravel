@@ -1,7 +1,5 @@
 <?php
 
-// AUTHOR: Manuel Villegas Michel
-
 namespace App\Models;
 
 use Illuminate\Contracts\Database\Query\Builder;
@@ -47,21 +45,6 @@ class TCGCard extends Model
         'language',
         'stock',
     ];
-
-    public function tcgPacks(): BelongsToMany
-    {
-        return $this->belongsToMany(TCGPack::class);
-    }
-
-    public function wishList(): BelongsToMany
-    {
-        return $this->belongsToMany(WishList::class);
-    }
-
-    public function items(): HasMany
-    {
-        return $this->hasMany(Item::class);
-    }
 
     public function getId(): int
     {
@@ -178,6 +161,11 @@ class TCGCard extends Model
         $this->attributes['stock'] = $stock;
     }
 
+    public function tcgPacks(): BelongsToMany
+    {
+        return $this->belongsToMany(TCGPack::class);
+    }
+
     public function getTcgPacks(): Collection
     {
         return $this->tcgPacks;
@@ -198,6 +186,11 @@ class TCGCard extends Model
         return $this->attributes['updated_at'];
     }
 
+    public function wishList(): BelongsToMany
+    {
+        return $this->belongsToMany(WishList::class);
+    }
+
     public function getWishList(): Collection
     {
         return $this->wishList;
@@ -206,6 +199,11 @@ class TCGCard extends Model
     public function setWishList(WishList $wishList): void
     {
         $this->wishList = $wishList;
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
     }
 
     public function getItems(): Collection

@@ -21,16 +21,6 @@ class WishList extends Model
      * this->TCGCards - TCGCard[] - associated cards
      * this->user - User - associated user
      */
-    public function TCGCards(): BelongsToMany
-    {
-        return $this->belongsToMany(TCGCard::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->BelongsTo(User::class);
-    }
-
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -56,14 +46,14 @@ class WishList extends Model
         return $this->TCGCards;
     }
 
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
     public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
+    }
+
+    public function TCGCards(): BelongsToMany
+    {
+        return $this->belongsToMany(TCGCard::class);
     }
 
     public function setTCGCards(Collection $TCGCards): void
@@ -71,13 +61,23 @@ class WishList extends Model
         $this->TCGCards = $TCGCards;
     }
 
-    public function setUser(User $user): void
-    {
-        $this->user = $user;
-    }
-
     public function addTCGCard(TCGCard $TCGCard): void
     {
         $this->TCGCards->add($TCGCard);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->BelongsTo(User::class);
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 }

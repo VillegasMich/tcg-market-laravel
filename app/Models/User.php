@@ -1,10 +1,7 @@
 <?php
 
-// Modified by Miguel Vasquez Bojanini
-
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,22 +54,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    /**
-     *  User's Orders.
-     */
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    /**
-     * User's wishList.
-     */
-    public function wishlist(): HasOne
-    {
-        return $this->hasOne(WishList::class);
-    }
 
     /**
      * Get the attributes that should be cast.
@@ -162,9 +143,19 @@ class User extends Authenticatable
         $this->attributes['balance'] = $balance;
     }
 
+    public function wishlist(): HasOne
+    {
+        return $this->hasOne(WishList::class);
+    }
+
     public function setWishlist(WishList $wishlist): void
     {
         $this->wishlist()->save($wishlist);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function addOrder(Order $order): void

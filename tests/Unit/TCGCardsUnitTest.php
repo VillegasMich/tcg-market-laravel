@@ -15,7 +15,7 @@ class TCGCardsUnitTest extends TestCase
     {
         $name = 'Charizar Ex';
 
-        $tcgCard = new TCGCard();
+        $tcgCard = new TCGCard;
         $tcgCard->setName($name);
 
         $this->assertEquals($name, $tcgCard->getName());

@@ -1,7 +1,5 @@
 <?php
 
-// AUTHOR: Manuel Villegas Michel
-
 namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -24,11 +22,6 @@ class TCGPack extends Model
      * $this->attributes['updated_at'] - timestamp - date of last update
      * $this->tcgCards - TCGCard[] - Collection of cards
      */
-    public function tcgCards(): BelongsToMany
-    {
-        return $this->belongsToMany(TCGCard::class);
-    }
-
     protected $fillable = [
         'name',
         'image',
@@ -60,16 +53,6 @@ class TCGPack extends Model
         $this->attributes['image'] = $image;
     }
 
-    public function getTcgCards(): Collection
-    {
-        return $this->tcgCards;
-    }
-
-    public function setTcgCards(array $tcgCards): void
-    {
-        $this->tcgCards()->sync($tcgCards);
-    }
-
     public function getFranchise(): string
     {
         return $this->attributes['franchise'];
@@ -88,6 +71,21 @@ class TCGPack extends Model
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
+    }
+
+    public function tcgCards(): BelongsToMany
+    {
+        return $this->belongsToMany(TCGCard::class);
+    }
+
+    public function getTcgCards(): Collection
+    {
+        return $this->tcgCards;
+    }
+
+    public function setTcgCards(array $tcgCards): void
+    {
+        $this->tcgCards()->sync($tcgCards);
     }
 
     public static function filterAndSort(Request $request): Builder

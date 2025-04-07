@@ -22,16 +22,6 @@ class Item extends Model
      */
     protected $fillable = ['quantity', 'subtotal'];
 
-    public function order(): BelongsTo
-    {
-        return $this->belongsTo(Order::class);
-    }
-
-    public function TCGCard(): BelongsTo
-    {
-        return $this->belongsTo(TCGCard::class);
-    }
-
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -67,9 +57,24 @@ class Item extends Model
         return $this->attributes['updated_at'];
     }
 
+    public function TCGCard(): BelongsTo
+    {
+        return $this->belongsTo(TCGCard::class);
+    }
+
     public function getTCGCard(): TCGCard
     {
         return $this->TCGCard;
+    }
+
+    public function setTCGCard(TCGCard $TCGCard): void
+    {
+        $this->TCGCard()->associate($TCGCard);
+    }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
 
     public function getOrder(): Order
@@ -80,10 +85,5 @@ class Item extends Model
     public function setOrder(Order $order): void
     {
         $this->order()->associate($order);
-    }
-
-    public function setTCGCard(TCGCard $TCGCard): void
-    {
-        $this->TCGCard()->associate($TCGCard);
     }
 }
