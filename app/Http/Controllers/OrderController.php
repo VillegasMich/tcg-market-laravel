@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\PDFGenerator;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\TCGCard;
@@ -11,6 +12,7 @@ use App\Validators\OrderValidator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -149,7 +151,7 @@ class OrderController extends Controller
         return view('order.success')->with('viewData', $viewData);
     }
 
-    public function pay(int $string): RedirectResponse
+    public function pay(int $string): Response
     {
         $user = Auth::user();
         $order = Order::with(['items.tcgCard'])->findOrFail($string);
@@ -161,6 +163,13 @@ class OrderController extends Controller
         $order->save();
         $user->save();
 
-        return redirect()->route('home.index')->with('success', 'Payment successful');
+        $PDFGeneratorInterface = app(PDFGenerator::class);
+
+        $data = [
+            'order' => $order,
+        ];
+
+        return $PDFGeneratorInterface->generate('order.invoice',$data,'invoice.pdf');
+        // redirect()->route('home.index')->with('success', 'Payment successful'); Check how to do the redirect!!!!
     }
 }
