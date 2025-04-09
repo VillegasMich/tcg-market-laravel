@@ -5,9 +5,7 @@ namespace App\Util;
 use App\Interfaces\PDFGenerator;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
-use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
-
 
 class OrderReceiptPDFGenerator implements PDFGenerator
 {
@@ -23,7 +21,7 @@ class OrderReceiptPDFGenerator implements PDFGenerator
 
         return response()->json([
             'mensaje' => 'PDF guardado localmente',
-            'ruta'    => $filename,
+            'ruta' => $filename,
         ]);
     }
 }

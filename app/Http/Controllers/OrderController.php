@@ -4,7 +4,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\PDFGenerator;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\TCGCard;
@@ -151,7 +150,7 @@ class OrderController extends Controller
         return view('order.success')->with('viewData', $viewData);
     }
 
-    public function pay(int $string): Response | RedirectResponse
+    public function pay(int $string): Response|RedirectResponse
     {
         $user = Auth::user();
         $order = Order::with(['items.tcgCard'])->findOrFail($string);
@@ -172,7 +171,7 @@ class OrderController extends Controller
 
         $PDFGeneratorReceiptInterface->generate('order.invoice', $data, 'receipt.pdf');
 
-        return $PDFGeneratorInterface->generate('order.invoice',$data,'invoice.pdf');
+        return $PDFGeneratorInterface->generate('order.invoice', $data, 'invoice.pdf');
         // redirect()->route('home.index')->with('success', 'Payment successful'); Check how to do the redirect!!!!
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Interfaces\PDFGenerator;
 use App\Util\OrderPDFGenerator;
 use App\Util\OrderReceiptPDFGenerator;
 use Illuminate\Support\ServiceProvider;
