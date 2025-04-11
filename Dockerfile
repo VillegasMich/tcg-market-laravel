@@ -48,7 +48,8 @@ RUN composer install \
     --no-interaction \
     --no-plugins \
     --no-scripts \
-    --prefer-dist
+    --prefer-dist \
+    || (echo "Composer failed" && exit 1)
 
 # Laravel setup
 RUN php artisan key:generate \
