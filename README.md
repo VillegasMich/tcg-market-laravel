@@ -134,6 +134,8 @@ Make sure you have the following installed on your system:
     sudo docker ps
     ```
 
+    Access the store with the next domain `tcg-merket.shop`
+
 ## Notes
 
 - If you have permission issues with storage, run:
