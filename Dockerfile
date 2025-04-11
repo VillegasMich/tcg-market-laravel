@@ -17,4 +17,5 @@ RUN php artisan migrate
 RUN php artisan db:seed
 RUN chmod -R 777 storage
 RUN a2enmod rewrite
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
 RUN service apache2 restart
