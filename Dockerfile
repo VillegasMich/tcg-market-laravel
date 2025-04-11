@@ -13,7 +13,7 @@ RUN composer install \
     --prefer-dist
 
 RUN php artisan key:generate
-RUN php artisan migrate
+RUN php artisan migrate:fresh
 RUN php artisan db:seed
 RUN chmod -R 777 storage
 RUN a2enmod rewrite
