@@ -169,7 +169,7 @@ class OrderController extends Controller
             'order' => $order,
         ];
 
-        $PDFGeneratorReceiptInterface->generate('order.invoice', $data, 'receipt.pdf');
+        $PDFGeneratorReceiptInterface->generate('order.receipt', $data, 'receipt.pdf');
 
         return $PDFGeneratorInterface->generate('order.invoice', $data, 'invoice.pdf');
         // redirect()->route('home.index')->with('success', 'Payment successful'); Check how to do the redirect!!!!
