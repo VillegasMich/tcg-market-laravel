@@ -56,6 +56,13 @@ Route::middleware('setLocale')->group(function () {
         Route::post('/wishLists', 'App\Http\Controllers\WishListController@save')->name('wishList.save');
         Route::delete('/wishLists/{id}', 'App\Http\Controllers\WishListController@delete')->name('wishList.delete');
         Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListController@show')->name('wishList.show');
+
+        /**
+         * PayPal routes
+         */
+        Route::get('/paypal', 'App\Http\Controllers\PayPalController@index')->name('paypal.index');
+        Route::get('/paypal/create/{amount}', 'App\Http\Controllers\PayPalController@create')->name('paypal.create');
+        Route::post('/paypal/complete', 'App\Http\Controllers\PayPalController@complete')->name('paypal.complete');
     });
 
     /**
