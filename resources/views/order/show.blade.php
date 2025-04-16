@@ -16,6 +16,9 @@
         <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
           {{ __('Order.description') }}
         </p>
+        <div class="p-4 text-sm text-green-800 rounded-lg bg-green-50 hidden" id="success-alert" role="alert">
+          <span class="font-medium">{{ __('Order.paid') }}</span>
+        </div>
       </div>
       <div class="mt-10 ml-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         @foreach ($viewData['order']->getItems() as $item)
@@ -66,20 +69,21 @@
     </div>
   </div>
 </div>
-
+@if ($viewData['order']->getStatus() != 'shipped')
 <script>
   paypal.Buttons({
   createOrder: function() {
-      return fetch('/paypal/create/{{$viewData['order']->getTotal()}}')
+      return fetch('{{ route('paypal.create', ['amount' => $viewData['order']->getTotal()]) }}')
       .then((response) => response.text())
       .then((id) => {return id;});
   },
   onApprove: function () {
-    return fetch("/paypal/complete", {method: "post", headers: {"X-CSRF-Token": '{{csrf_token()}}'}})
+    return fetch("{{ route('paypal.complete') }}", {method: "post", headers: {"X-CSRF-Token": '{{csrf_token()}}'}})
       .then((response) => response.json())
       .then((order_details) => {
         console.log(order_details);
         document.getElementById('pay_button').click();
+        document.getElementById('success-alert').classList.remove('hidden');
       })
       .catch((error) => {
         console.log(error);
@@ -97,4 +101,5 @@
   
 }).render('#payment_options');
 </script>
+@endif
 @endsection
