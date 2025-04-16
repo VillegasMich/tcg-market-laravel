@@ -60,7 +60,6 @@ Route::middleware('setLocale')->group(function () {
         /**
          * PayPal routes
          */
-        Route::get('/paypal', 'App\Http\Controllers\PayPalController@index')->name('paypal.index');
         Route::get('/paypal/create/{amount}', 'App\Http\Controllers\PayPalController@create')->name('paypal.create');
         Route::post('/paypal/complete', 'App\Http\Controllers\PayPalController@complete')->name('paypal.complete');
     });
