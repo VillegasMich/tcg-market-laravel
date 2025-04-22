@@ -43,7 +43,7 @@ class TCGCardFactory extends Factory
             'description' => $this->faker->text(20),
 
             'franchise' => 'Pokemon',
-            'price' => $this->faker->numberBetween($min = 100, $max = 1000000),
+            'price' => $this->faker->numberBetween($min = 1, $max = 999),
             'PSAgrade' => $this->faker->randomElement(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
             'image' => 'pokemon_card_backside.png',
             'launchDate' => $this->faker->date(),
