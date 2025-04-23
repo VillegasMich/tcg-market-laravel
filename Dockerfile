@@ -16,6 +16,9 @@ RUN composer install \
 
 RUN php artisan key:generate
 RUN php artisan migrate:fresh
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 RUN php artisan db:seed
 RUN chmod -R 777 storage
 RUN a2enmod rewrite
