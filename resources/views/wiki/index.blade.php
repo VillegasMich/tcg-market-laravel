@@ -4,10 +4,10 @@
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pt-6 ">
       <div class="w-full h-fit p-5 mt-2 ">
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 mb-2">
-          {{ __('TcgCard.title') }}
+          {{ __('Wiki.title') }}
         </h1>
         <p class="text-lg pl-0.5 text-pretty text-gray-500 sm:text-xl/8">
-          {{ __('TcgCard.description') }}
+          {{ __('Wiki.description') }}
         </p>
       </div>
       <div class="flex justify-center items-center w-full h-fit mt-5">
