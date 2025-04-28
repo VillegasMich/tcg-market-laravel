@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Session;
 
-class userController extends Controller
+class UserController extends Controller
 {
     public function index(): View|RedirectResponse
     {

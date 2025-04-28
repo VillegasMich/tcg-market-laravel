@@ -1,6 +1,6 @@
 <nav class="w-full h-fit flex font-medium shadow-sm">
   <a class="text-2xl w-1/6 flex justify-center items-center" href="{{ route('home.index') }}">
-    <img  class=" h-8 w-7 mr-1 mt-1" src="{{ asset('logo_tcg_market.png') }}" alt=""> TCG Market  
+    <img class=" h-8 w-7 mr-1 mt-1" src="{{ asset('logo_tcg_market.png') }}" alt=""> TCG Market
   </a>
   <div class="w-11/12 flex justify-between items-center h-12" id="navbarSupportedContent">
     <ul class="flex space-x-6 text-lg">
@@ -12,6 +12,9 @@
       </li>
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="{{ route('cart.index') }}" :active="request()->is('cart')">{{ __('Navbar.cart') }}</x-navbar-link>
+      </li>
+      <li class="h-12 flex justify-center items-center">
+        <x-navbar-link href="{{ route('wiki.index') }}" :active="request()->is('wiki')">Wiki</x-navbar-link>
       </li>
       @if (Auth::check() && Auth::user()->role === 'admin')
         <li class="h-12 flex justify-center items-center">
@@ -45,9 +48,10 @@
             <a class="nav-link" href="{{ route('register') }}">{{ __('Navbar.register') }}</a>
           </div>
         @endif
-      @else 
-          <span class="text-gray-400 flex justify-center items-center">Balance: {{ number_format(Auth::user()->getBalance()) }}</span>
-          <a href="{{ route('user.index') }}" class="flex justify-center items-center">{{ __('Navbar.profile') }}</a>
+      @else
+        <span class="text-gray-400 flex justify-center items-center">Balance:
+          {{ number_format(Auth::user()->getBalance()) }}</span>
+        <a href="{{ route('user.index') }}" class="flex justify-center items-center">{{ __('Navbar.profile') }}</a>
       @endguest
     </div>
   </div>
