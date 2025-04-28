@@ -10,9 +10,6 @@ use Illuminate\View\View;
 
 class TCGCardController extends Controller
 {
-    /**
-     * Get all TCGCards
-     */
     public function index(Request $request): View
     {
         $tcgCards = TCGCard::filterAndSort($request)->paginate(16);
@@ -23,9 +20,6 @@ class TCGCardController extends Controller
         return view('tcgCard.index')->with('viewData', $viewData);
     }
 
-    /**
-     * Get a TCGCard by id
-     */
     public function show(string $id): View|RedirectResponse
     {
         $tcgCard = TCGCard::with('tcgPacks', 'wishList')->findOrFail($id);
@@ -44,9 +38,6 @@ class TCGCardController extends Controller
         return view('tcgCard.show')->with('viewData', $viewData);
     }
 
-    /**
-     * Add a TCGCard to the cart
-     */
     public function addToCart(string $id, Request $request): RedirectResponse
     {
         $cartProductData = $request->session()->get('cart_product_data');
@@ -65,9 +56,6 @@ class TCGCardController extends Controller
         return back()->with('success', "{$tcgCard->getName()} has been added to your cart!");
     }
 
-    /**
-     * Add a TCGCard to the wish list
-     */
     public function addToWishList(string $id): RedirectResponse
     {
         $user = Auth::user();
@@ -78,9 +66,6 @@ class TCGCardController extends Controller
         return back()->with('success', "{$tcgCard->getName()} has been added to your wish list!");
     }
 
-    /**
-     * Remove a TCGCard from the wish list
-     */
     public function removeFromWishList(string $id): RedirectResponse
     {
         $user = Auth::user();
