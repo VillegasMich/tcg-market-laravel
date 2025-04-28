@@ -51,11 +51,11 @@ Route::middleware('setLocale')->group(function () {
         /**
          * WishList routes
          */
-        Route::get('/wishLists', 'App\Http\Controllers\WishListController@index')->name('wishList.index');
-        Route::get('/wishLists/create', 'App\Http\Controllers\WishListController@create')->name('wishList.create');
-        Route::post('/wishLists', 'App\Http\Controllers\WishListController@save')->name('wishList.save');
-        Route::delete('/wishLists/{id}', 'App\Http\Controllers\WishListController@delete')->name('wishList.delete');
-        Route::get('/wishLists/{id}', 'App\Http\Controllers\WishListController@show')->name('wishList.show');
+        Route::get('/wishList', 'App\Http\Controllers\WishListController@index')->name('wishList.index');
+        Route::get('/wishList/create', 'App\Http\Controllers\WishListController@create')->name('wishList.create');
+        Route::post('/wishList', 'App\Http\Controllers\WishListController@save')->name('wishList.save');
+        Route::delete('/wishList/{id}', 'App\Http\Controllers\WishListController@delete')->name('wishList.delete');
+        Route::get('/wishList/{id}', 'App\Http\Controllers\WishListController@show')->name('wishList.show');
 
         /**
          * PayPal routes
@@ -83,7 +83,7 @@ Route::middleware('setLocale')->group(function () {
         Route::delete('/admin/tcgpacks/{id}', 'App\Http\Controllers\Admin\AdminTCGPackController@delete')->name('admin.tcgPack.delete');
         Route::get('/admin/items', 'App\Http\Controllers\Admin\AdminItemController@index')->name('admin.item.index');
         Route::get('/admin/orders', 'App\Http\Controllers\Admin\AdminOrderController@index')->name('admin.order.index');
-        Route::get('/admin/wishLists', 'App\Http\Controllers\Admin\AdminWishListController@index')->name('admin.wishList.index');
+        Route::get('/admin/wishList', 'App\Http\Controllers\Admin\AdminWishListController@index')->name('admin.wishList.index');
         Route::get('/admin/users', 'App\Http\Controllers\Admin\AdminUserController@index')->name('admin.user.index');
     });
 

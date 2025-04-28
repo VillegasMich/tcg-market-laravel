@@ -6,6 +6,7 @@ use App\Models\TCGPack;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Session;
 
 class TCGPackController extends Controller
 {
@@ -16,6 +17,10 @@ class TCGPackController extends Controller
     {
 
         $tcgPacks = TCGPack::filterAndSort($request)->paginate(16);
+        // $path = request()->path();
+        // $newBreadCrumb = explode('/', trim($path, '/'));
+        // array_unshift($newBreadCrumb, 'Home');
+        // Session::put('breadCrumb', $newBreadCrumb);
         $viewData = [
             'tcgPacks' => $tcgPacks,
         ];

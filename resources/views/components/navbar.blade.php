@@ -20,6 +20,7 @@
         </li>
       @endif
     </ul>
+    <x-breadcrumb />
     <div class="flex space-x-6 text-lg mr-5 justify-center">
       <!-- Language Dropdown -->
       <div class="relative">

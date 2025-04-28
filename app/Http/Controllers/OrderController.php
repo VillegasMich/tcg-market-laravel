@@ -13,6 +13,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class OrderController extends Controller
 {
@@ -23,6 +25,10 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $orders = Order::with(['items.TCGCard'])->where('user_id', $user->getId())->get();
+        // $path = request()->path();
+        // $newBreadCrumb = explode('/', trim($path, '/'));
+        // array_unshift($newBreadCrumb, 'Home');
+        // Session::put('breadCrumb', $newBreadCrumb);
         $viewData = [
             'orders' => $orders,
         ];

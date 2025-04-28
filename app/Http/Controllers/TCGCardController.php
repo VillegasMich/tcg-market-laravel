@@ -6,6 +6,7 @@ use App\Models\TCGCard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class TCGCardController extends Controller
@@ -16,6 +17,11 @@ class TCGCardController extends Controller
     public function index(Request $request): View
     {
         $tcgCards = TCGCard::filterAndSort($request)->paginate(16);
+        // $path = request()->path();
+        // $newBreadCrumb = explode('/', trim($path, '/'));
+        // array_unshift($newBreadCrumb, 'Home');
+        // Session::put('breadCrumb', $newBreadCrumb);
+        
         $viewData = [
             'tcgCards' => $tcgCards,
         ];
