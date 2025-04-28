@@ -31,6 +31,11 @@ Route::middleware('setLocale')->group(function () {
     Route::get('/tcgpacks', 'App\Http\Controllers\TCGPackController@index')->name('tcgPack.index');
     Route::get('/tcgpacks/{id}', 'App\Http\Controllers\TCGPackController@show')->name('tcgPack.show');
 
+    /**
+     * Wiki routes
+     */
+    Route::get('/wiki', 'App\Http\Controllers\WikiController@index')->name('wiki.index');
+
     Route::middleware('auth')->group(function () {
         /**
          * User routes
