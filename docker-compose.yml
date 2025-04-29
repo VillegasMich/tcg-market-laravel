@@ -23,8 +23,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: tcgmarket
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
     volumes:
       - dbdata:/var/lib/mysql
     ports:
