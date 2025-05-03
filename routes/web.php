@@ -37,6 +37,10 @@ Route::middleware('setLocale')->group(function () {
     Route::get('/wiki', 'App\Http\Controllers\WikiController@index')->name('wiki.index');
     Route::get('/wiki/{id}', 'App\Http\Controllers\WikiController@show')->name('wiki.show');
 
+    /**
+     * FutbolTrading routes
+     */
+    Route::get('/futbolTrading', 'App\Http\Controllers\FutbolTradingController@index')->name('futbolTrading.index');
 
     Route::middleware('auth')->group(function () {
         /**

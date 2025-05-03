@@ -59,6 +59,7 @@ class WikiController extends Controller
         $viewData = [
             'tcgCard' => $card,
         ];
+
         return view('wiki.show')->with('viewData', $viewData);
     }
 }

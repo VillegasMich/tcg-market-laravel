@@ -16,6 +16,9 @@
       <li class="h-12 flex justify-center items-center">
         <x-navbar-link href="{{ route('wiki.index') }}" :active="request()->is('wiki')">Wiki</x-navbar-link>
       </li>
+      <li class="h-12 flex justify-center items-center">
+        <x-navbar-link href="{{ route('futbolTrading.index') }}" :active="request()->is('futboltrading')">Futbol Trading</x-navbar-link>
+      </li>
       @if (Auth::check() && Auth::user()->role === 'admin')
         <li class="h-12 flex justify-center items-center">
           <x-navbar-link class="nav-link"
