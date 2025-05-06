@@ -1,0 +1,8 @@
+services:
+    app:
+        build: .
+        ports:
+            - "80:80"
+        volumes:
+            - ./storage:/var/www/html/storage
+            - ./public/storage:/var/www/html/public/storage
