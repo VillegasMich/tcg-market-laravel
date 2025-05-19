@@ -96,7 +96,7 @@
   },
 
   onError: function (err) {
-    console.log('Error');
+    console.log(err);
   }
   
 }).render('#payment_options');
