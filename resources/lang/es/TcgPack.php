@@ -9,4 +9,5 @@ return [
     'newest' => 'Más Recientes Primero',
     'oldest' => 'Más Antiguos Primero',
     'cards_from_pack_title' => 'Este sobre contiene las siguientes cartas:',
+    
 ];

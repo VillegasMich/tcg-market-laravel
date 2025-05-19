@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'base_url' => 'http://127.0.0.1:8001/api/cards',
+    'base_url' => 'http://44.194.99.117/api/cards',
 ];
